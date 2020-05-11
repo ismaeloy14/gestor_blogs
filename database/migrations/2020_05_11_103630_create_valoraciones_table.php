@@ -15,7 +15,7 @@ class CreateValoracionesTable extends Migration
     {
         Schema::create('valoraciones', function (Blueprint $table) {
             $table->id();
-            $table->integer('id_noticia')->unsigned();
+            $table->unsignedBigInteger('id_noticia');
             $table->foreign('id_noticia')->references('id')->on('noticias');
             $table->integer('valoraciones_totales')->nullable();
             $table->decimal('media_valoraciones')->nullable();

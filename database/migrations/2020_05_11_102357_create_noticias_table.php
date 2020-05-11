@@ -19,7 +19,7 @@ class CreateNoticiasTable extends Migration
             $table->text('cuerpo_noticia');
             $table->date('fecha_noticia');
             $table->binary('imagen_noticia')->nullable();
-            $table->integer('id_blog')->unsigned();
+            $table->unsignedBigInteger('id_blog');
             $table->foreign('id_blog')->references('id')->on('blogs');
             $table->boolean('noticia_publica');
             //$table->timestamps();

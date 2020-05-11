@@ -17,7 +17,7 @@ class CreateNotificacionesTable extends Migration
             $table->id();
             $table->string('mensaje');
             $table->date('fecha_notificacion');
-            $table->integer('id_usuario')->unsigned();
+            $table->unsignedBigInteger('id_usuario');
             $table->foreign('id_usuario')->references('id')->on('users');
             //$table->timestamps();
         });
