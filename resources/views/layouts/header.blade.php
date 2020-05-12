@@ -1,13 +1,15 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestor Blogs</title>
-</head>
-<body>
-    <header id="header_gestor_blogs">
+
+<header id="header_gestor_blogs">
+    <h1>Gestor de Blogs</h1>
+
+    <div id="div_login_registro">
+        <form method="GET" action="/login">
+            <button id="boton_login">Login</button>
+        </form>
+        <form method="GET" action="/registro">
+            <button id="boton_registro">Registro</button>
+        </form>
         
-    </header>
-</body>
-</html>
+    </div>
+</header>
+

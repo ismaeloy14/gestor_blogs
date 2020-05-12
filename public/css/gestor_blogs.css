@@ -1,0 +1,40 @@
+#header_gestor_blogs{
+    width: 100%;
+    text-align: center;
+}
+
+#header_gestor_blogs h1{
+    width: 100%;
+    float: left;
+    height: auto;
+}
+
+#div_login_registro{
+    width: 20%;
+    float: left;
+    height: auto;
+    margin: 21.44px 0;
+    text-align: right;
+    position: fixed;
+    right: 0px;
+}
+
+#div_login_registro form{
+    width: 30%;
+    float: left;
+    height: auto;
+    padding: 5px 5px 5px 2em;
+}
+
+#div_principal{
+    width: 100%;
+    height: auto;
+    text-align: center;
+    float: left;
+}
+
+footer{
+    position: absolute;
+    bottom: 0;
+    text-align: center;
+}
