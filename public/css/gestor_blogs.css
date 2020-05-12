@@ -1,30 +1,53 @@
+#container{
+    height: 100%;
+}
+
+body{
+    margin: 0px !important;
+}
+
+
+/* Header */
 #header_gestor_blogs{
     width: 100%;
     text-align: center;
+    background: #6695ff91;
+    display: flex;
 }
 
 #header_gestor_blogs h1{
-    width: 100%;
+    width: 79%;
     float: left;
     height: auto;
+    font-size: 4em;
+    margin-left: 10%;
+    margin-right: -4%;
+    margin-top: 21.44px !important;
+    margin-bottom: 21.44px !important;
 }
 
 #div_login_registro{
-    width: 20%;
+    width: 15%;
     float: left;
     height: auto;
     margin: 21.44px 0;
     text-align: right;
-    position: fixed;
-    right: 0px;
 }
 
 #div_login_registro form{
     width: 30%;
     float: left;
     height: auto;
-    padding: 5px 5px 5px 2em;
+    padding: 5px 5px 5px 0;
+    text-align: right;
+    margin-top: 1.2em;
 }
+
+#div_login_registro form button{
+    font-size: 1em;
+    float: left;
+}
+/* END header */
 
 #div_principal{
     width: 100%;
@@ -33,8 +56,77 @@
     float: left;
 }
 
+
 footer{
     position: absolute;
     bottom: 0;
     text-align: center;
+    width: 99%;
+    height: 5%;
+    margin-top: 10%;
 }
+
+
+/* Vista login */
+
+#div_login{
+    border: 2px solid #6695ff91;
+    border-radius: 5px;
+    background-color: #6695ff91;
+    width: 30%;
+    float: left;
+    margin: 2.5em 35%;
+}
+
+#div_login h2{
+    width: 100%;
+    height: auto;
+    text-align: center;
+    float: left;
+    font-size: 2em;
+}
+
+#div_login form{
+    width: 100%;
+    height: auto;
+    float: left;
+    padding-bottom: 3em;
+}
+
+
+#div_login form>label{
+    width: 100%;
+    height: auto;
+    float: left;
+    padding-bottom: 10px;
+    font-size: 1.3em;
+}
+
+#div_login form>label span{
+    width: 20%;
+    height: auto;
+    float: left;
+    text-align: right;
+    padding-right: 0.5em;
+}
+
+#div_login form>label input{
+    width: 75%;
+    height: auto;
+    float: left;
+    text-align: left;
+}
+
+#div_login form>div{
+    width: 100%;
+    height: auto;
+    float: left;
+    text-align: center;
+    padding-top: 3em;
+}
+
+#div_login form>div button{
+    font-size: 1.2em;
+}
+
+/* END vista login */

@@ -9,12 +9,13 @@
 </head>
 <body>
 
-    @include('layouts.header')
+    <div id="container">
+        @include('layouts.header')
 
-    @yield('body')
+        @yield('body')
 
-    @include('layouts.footer')
-
+        @include('layouts.footer')
+    </div>
 </body>
 </html>
 
