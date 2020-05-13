@@ -8,14 +8,14 @@
             Login
         </h2>
         <form method="POST" action="">
-            <label id="login_usuario">
+            <label>
                 <span>Usuario</span>
-                <input type="text">
+                <input type="text" name="usuario">
             </label>
 
             <label>
                 <span>Contraseña</span>
-                <input type="password">
+                <input type="password" name="password">
             </label>
             <div>
                 <button type="submit">Login</button>
