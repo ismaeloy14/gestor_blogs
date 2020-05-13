@@ -22,3 +22,6 @@ Route::get('/', 'IndexController@index');
 Route::get('/login', 'AuthController@index_login');
 Route::get('/registro', 'AuthController@index_registro');
 
+
+Route::post('/registro/createUsuario', 'AuthController@post_create_usuario');
+

@@ -7,7 +7,15 @@
         <h2>
             Registrate
         </h2>
-        <form method="POST" action="">
+        <form method="POST" action="{{url('/registro/createUsuario')}}" id="formulario_registro_usuarios">
+
+            {{ csrf_field() }}
+
+            @if ($errors->any())
+                <h4>{{$errors->first()}}</h4>
+            @endif
+                
+
             <label>
                 <span>Usuario</span>
                 <input type="text" name="usuario" required>
@@ -15,12 +23,12 @@
 
             <label>
                 <span>Contraseña</span>
-                <input type="password" name="password" required>
+                <input type="password" name="password" id="registro_U_password" required>
             </label>
 
             <label>
                 <span>Repite contraseña</span>
-                <input type="password" name="password2" required>
+                <input type="password" name="password2" id="registro_U_password2" required>
             </label>
 
             <label>
@@ -35,7 +43,7 @@
 
             <label>
                 <span>Email</span>
-                <input type="email" name="email" required>
+                <input type="email" name="email" id="registro_U_email" required>
             </label>
 
             <label>

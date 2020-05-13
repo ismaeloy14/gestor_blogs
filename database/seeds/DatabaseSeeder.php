@@ -33,8 +33,8 @@ class DatabaseSeeder extends Seeder
         DB::table('users')->delete();
         foreach($this->arrayUsers as $users){
             $u = new User;
-            $u->nombre_usuario = $users['nombre_usuario'];
-            $u->email_usuario = $users['email_usuario'];
+            $u->usuario = $users['usuario'];
+            $u->email = $users['email'];
             $u->password = bcrypt($users['password']);
             $u->nombre = $users['nombre'];
             $u->apellidos = $users['apellidos'];
@@ -58,16 +58,16 @@ class DatabaseSeeder extends Seeder
 
     private $arrayUsers = array (
         array(
-            'nombre_usuario'    =>  'admin',
-            'email_usuario'     =>  'admin@gmail.com',
+            'usuario'    =>  'admin',
+            'email'     =>  'admin@gmail.com',
             'password'          =>  'admin',
             'nombre'            =>  'user_admin',
             'apellidos'         =>  'superadmin',
             'rol'               =>  'admin'
         ),
         array(
-            'nombre_usuario'    =>  'user1',
-            'email_usuario'     =>  'user1@gmail.com',
+            'usuario'    =>  'user1',
+            'email'     =>  'user1@gmail.com',
             'password'          =>  'user1',
             'nombre'            =>  'user_user1',
             'apellidos'         =>  'user1 user1',
