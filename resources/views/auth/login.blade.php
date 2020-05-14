@@ -7,15 +7,22 @@
         <h2>
             Login
         </h2>
-        <form method="POST" action="">
+    <form method="POST" action="{{url('/login/verificando')}}">
+
+        {{ csrf_field() }}
+        
+            @if ($errors->any())
+                <h4>{{$errors->first()}}</h4>
+            @endif
+
             <label>
                 <span>Usuario</span>
-                <input type="text" name="usuario">
+                <input type="text" name="usuario" required>
             </label>
 
             <label>
                 <span>Contraseña</span>
-                <input type="password" name="password">
+                <input type="password" name="password" required>
             </label>
             <div>
                 <button type="submit">Login</button>

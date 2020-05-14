@@ -20,7 +20,7 @@ class CreateComentariosTable extends Migration
             $table->unsignedBigInteger('id_noticia');
             $table->foreign('id_noticia')->references('id')->on('noticias');
             $table->text('comentario');
-            //$table->timestamps();
+            $table->timestamps();
         });
     }
 

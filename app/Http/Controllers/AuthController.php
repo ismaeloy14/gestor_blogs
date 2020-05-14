@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Hash;
 use App\User;
 use App\Usuari;
 use App\Rol;
+use App\Blog;
+use Auth;
 
 
 class AuthController extends Controller
@@ -26,6 +28,26 @@ class AuthController extends Controller
         return view('auth.registro');
     }
 
+    public function index_logout()
+    {
+        Auth::logout();
+        session()->forget('usuario');
+        return redirect('/');
+    }
+
+    public function index_crudUsuarios(){
+        $users = new Usuari;
+        $blogs = new Blog;
+        $usuarios_sql = $users->todosUsuarios();
+        $blog_sql = $blogs->todosBlogs();
+
+
+        return view('admin.crudUsuarios', array('usuarios' => $usuarios_sql), array('blogs' => $blog_sql));
+    }
+
+
+
+
     // Esta funcion es del registro de usuarios
     public function post_create_usuario(Request $request)
     {
@@ -37,12 +59,11 @@ class AuthController extends Controller
 
             $usuario = new Usuari;
             $usuarios = $usuario->todosNombresUsuarios();
-            $pass = $usuario->todasPasswUsuarios();
+            
             $email = $usuario->todosEmailUsuarios();
 
 
             $nombre_usuario_repetido = false;
-            $password_usuario_repetido = false;
             $email_usuario_repetido = false;
 
 
@@ -54,12 +75,6 @@ class AuthController extends Controller
                 }
             }
 
-            foreach($pass as $p){ // Para las passwords de usuarios
-                if(Hash::check($p->password,  $request->input('password'))){
-                    $password_usuario_repetido = true;
-                }
-            }
-
             foreach($email as $e){ // Para los emails de usuarios
                 if($e->email === $request->input('email')){
                     $email_usuario_repetido = true;
@@ -67,7 +82,7 @@ class AuthController extends Controller
             }
 
             if ($nombre_usuario_repetido == false){
-                if ($password_usuario_repetido == false){
+                
                     if ($email_usuario_repetido == false){
 
                         $this->validate(request(), [
@@ -97,10 +112,6 @@ class AuthController extends Controller
                     } else {
                         return back()->withErrors(['El email ya existe']);
                     }
-
-                } else {
-                    return back()->withErrors(['La contraseña ya existe, escribe otra']);
-                }
             
             } else {
                 return back()->withErrors(['El usuario ya esxiste']);
@@ -111,6 +122,45 @@ class AuthController extends Controller
         }
 
     }
+
+    public function post_login_usuario(Request $request)
+    {
+        $usuario = new Usuari;
+
+        $existeUsuario = $usuario->comprobarNombreUsuario($request->input('usuario'));
+
+        $this->validate($request, [
+            'usuario' => 'required',
+            'password' => 'required'
+        ]);
+        
+        
+
+        if ($existeUsuario != null) {
+
+            $array_datos_usuarios = array(
+                'usuario' => $request->input('usuario'),
+                'password' => $request->input('password')
+            );
+
+            if (Auth::attempt($array_datos_usuarios)) {
+                $rolUsuario = $usuario->comprobarRol($request->input('usuario'));
+
+                session(['usuario' => $rolUsuario]);
+                return redirect('/');
+
+            } else {
+                return back()->withErrors(['Contraseña incorrectos']);
+            }
+
+        } else {
+            return back()->withErrors(['Este usuario no existe']);
+        }
+
+
+    }
+
+
 
     /**
      * Store a newly created resource in storage.

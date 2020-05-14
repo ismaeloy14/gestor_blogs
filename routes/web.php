@@ -21,7 +21,13 @@ Route::get('/', 'IndexController@index');
 
 Route::get('/login', 'AuthController@index_login');
 Route::get('/registro', 'AuthController@index_registro');
+Route::get('/logout', 'AuthController@index_logout');
 
 
 Route::post('/registro/createUsuario', 'AuthController@post_create_usuario');
+
+Route::get('/crudUsuarios', 'AuthController@index_crudUsuarios');
+
+Route::post('/login/verificando', 'AuthController@post_login_usuario');
+
 

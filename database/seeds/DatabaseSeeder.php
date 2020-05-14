@@ -3,6 +3,8 @@
 use Illuminate\Database\Seeder;
 use App\Rol;
 use App\User;
+use App\Categoria;
+use App\Blog;
 
 
 class DatabaseSeeder extends Seeder
@@ -18,6 +20,8 @@ class DatabaseSeeder extends Seeder
 
         self::seedRoles();
         self::seedUsers();
+        self::seedCategorias();
+        self::seedBlogs();
     }
 
     private function seedRoles(){
@@ -43,6 +47,28 @@ class DatabaseSeeder extends Seeder
         }
 
     }
+
+    private function seedCategorias(){
+        DB::table('categorias')->delete();
+        foreach($this->arrayCategorias as $categorias) {
+            $c = new Categoria;
+            $c->categoria = $categorias['categoria'];
+            $c->save();
+        }
+    }
+
+    private function seedBlogs(){
+        DB::table('blogs')->delete();
+        foreach($this->arrayBlogs as $blogs){
+            $b = new Blog;
+            $b->titulo_blog = $blogs['titulo_blog'];
+            $b->id_usuario = $blogs['id_usuario'];
+            $b->blog_publico = $blogs['blog_publico'];
+            $b->categoria = $blogs['categoria'];
+            $b->save();
+        }
+    }
+
 
     //// Variables para rellenar la BBDD ////
 
@@ -72,6 +98,27 @@ class DatabaseSeeder extends Seeder
             'nombre'            =>  'user_user1',
             'apellidos'         =>  'user1 user1',
             'rol'               =>  'basico'
+        )
+    );
+
+    private $arrayCategorias = array(
+        array(
+            'categoria' =>  'Tecnologia'
+        ),
+        array(
+            'categoria' =>  'Moda'
+        ),
+        array(
+            'categoria' =>  'Arqueologia'
+        )
+    );
+
+    private $arrayBlogs = array(
+        array(
+            'titulo_blog'   =>  'Blog1',
+            'id_usuario'    =>  1,
+            'blog_publico'  =>  1,
+            'categoria'     =>  'Tecnologia'
         )
     );
 

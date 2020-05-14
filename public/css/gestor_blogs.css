@@ -8,22 +8,76 @@ body{
 
 
 /* Header */
+
+
 #header_gestor_blogs{
     width: 100%;
-    text-align: center;
     background: #6695ff91;
     display: flex;
+    float: left;
 }
 
-#header_gestor_blogs h1{
-    width: 79%;
+#header_gestor_blogs > a h1{
+    width: 100%;
     float: left;
     height: auto;
     font-size: 4em;
-    margin-left: 10%;
-    margin-right: -4%;
+    text-indent: 5%;
+    
+    /*margin-left: -10%;
+    /*margin-right: -4%;
     margin-top: 21.44px !important;
-    margin-bottom: 21.44px !important;
+    margin-bottom: 21.44px !important;*/
+}
+
+#header_gestor_blogs > a{
+    width: 70%;
+    float: left;
+    height: auto;
+    text-align: center;
+    
+    /*margin-left: -10%;*/
+    /*margin-right: -4%;*/
+    /*margin-top: 21.44px !important;
+    margin-bottom: 21.44px !important;*/
+    
+    padding-top: 21.44px;
+    padding-bottom: 21.44px;
+
+}
+
+#header_gestor_blogs > a:hover{
+    color:#007bff;
+}
+
+#div_cruds {
+    width: 25%;
+    height: auto;
+    float: left;
+}
+
+#div_cruds div {
+    width: 100%;
+    float: left;
+    padding: 10px 0;
+    text-align: center;
+}
+
+#div_cruds div a{
+    width: 40%;
+}
+
+#crea_blog_usuarioNormal{
+    width: 100%;
+    height: auto;
+    float: left;
+    padding: 0 !important;
+    margin-top: 2.5em !important;
+    text-align: center;
+}
+
+#crea_blog_usuarioNormal a {
+    width: 40%;
 }
 
 #div_login_registro{
@@ -54,16 +108,19 @@ body{
     height: auto;
     text-align: center;
     float: left;
+    margin-top: 5%;
+    margin-bottom: 10%;
 }
 
 
 footer{
-    position: absolute;
-    bottom: 0;
+    /*position: absolute;
+    bottom: 0;*/
     text-align: center;
-    width: 99%;
-    height: 5%;
-    margin-top: 10%;
+    width: 100%;
+    height: auto;
+    background-color: grey;
+    float: left;
 }
 
 
@@ -83,7 +140,8 @@ footer{
     height: auto;
     text-align: center;
     float: left;
-    font-size: 2em;
+    font-size: 3em;
+    margin: 0.5em 0 !important;
 }
 
 #div_login form{
@@ -147,7 +205,8 @@ footer{
     height: auto;
     text-align: center;
     float: left;
-    font-size: 2em;
+    font-size: 3em;
+    margin: 0.5em 0 !important;
 }
 
 #div_registro form{
