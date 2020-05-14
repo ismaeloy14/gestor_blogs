@@ -24,9 +24,16 @@ Route::get('/registro', 'AuthController@index_registro');
 Route::get('/logout', 'AuthController@index_logout');
 
 
+Route::get('/creacionBlog', 'BlogController@index_creacion');
+Route::post('/creacionBlog/validando', 'BlogController@post_createBlog');
+
+
+
 Route::post('/registro/createUsuario', 'AuthController@post_create_usuario');
 
 Route::get('/crudUsuarios', 'AuthController@index_crudUsuarios');
+
+
 
 Route::post('/login/verificando', 'AuthController@post_login_usuario');
 

@@ -15,10 +15,10 @@ class CreateValoracionesTable extends Migration
     {
         Schema::create('valoraciones', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('id_noticia');
-            $table->foreign('id_noticia')->references('id')->on('noticias');
-            $table->integer('valoraciones_totales')->nullable();
-            $table->decimal('media_valoraciones')->nullable();
+            $table->unsignedBigInteger('idNoticia');
+            $table->foreign('idNoticia')->references('id')->on('noticias');
+            $table->integer('valoracionesTotales')->nullable();
+            $table->decimal('mediaValoraciones')->nullable();
             //$table->timestamps();
         });
     }

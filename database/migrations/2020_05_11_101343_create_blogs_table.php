@@ -15,12 +15,12 @@ class CreateBlogsTable extends Migration
     {
         Schema::create('blogs', function (Blueprint $table) {
             $table->id();
-            $table->string('titulo_blog');
+            $table->string('tituloBlog');
             //$table->date('creacion_blog');
-            $table->binary('imagen_blog')->nullable();
-            $table->unsignedBigInteger('id_usuario');
-            $table->foreign('id_usuario')->references('id')->on('users');
-            $table->boolean('blog_publico');
+            $table->binary('imagenBlog')->nullable();
+            $table->unsignedBigInteger('idUsuario');
+            $table->foreign('idUsuario')->references('id')->on('users');
+            $table->boolean('blogPublico');
             $table->string('categoria');
             $table->foreign('categoria')->references('categoria')->on('categorias');
             $table->timestamps();

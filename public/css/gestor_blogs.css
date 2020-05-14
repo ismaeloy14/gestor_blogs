@@ -144,7 +144,7 @@ footer{
     margin: 0.5em 0 !important;
 }
 
-#div_login form{
+#div_login form, #div_creacion_blog form{ /* + vista creacion del blog */
     width: 100%;
     height: auto;
     float: left;
@@ -152,7 +152,7 @@ footer{
 }
 
 
-#div_login form>label{
+#div_login form>label, #div_creacion_blog form>label{ /* + vista creacion del blog */
     width: 100%;
     height: auto;
     float: left;
@@ -160,7 +160,7 @@ footer{
     font-size: 1.3em;
 }
 
-#div_login form>label span{
+#div_login form>label span, #div_creacion_blog form>label span{ /* + vista creacion del blog */
     width: 30%;
     height: auto;
     float: left;
@@ -168,7 +168,7 @@ footer{
     padding-right: 0.5em;
 }
 
-#div_login form>label input{
+#div_login form>label input, #div_creacion_blog form>label input { /* + vista creacion del blog */
     width: 60%;
     height: auto;
     float: left;
@@ -246,16 +246,8 @@ footer{
     text-align: center;
     padding-top: 3em;
 }
-/*
-#label_input_image{
-    
-}*/
 
-#label_input_image>input{
-    width: 100% !important;
-    text-align: center !important;
-    margin-left: 31%;
-}
+
 
 
 #div_registro form>div button{
@@ -263,3 +255,44 @@ footer{
 }
 
 /* END vistra registro */
+
+/* Vista creacion blog */
+
+#div_creacion_blog{
+    width: 60%;
+    height: auto;
+    background-color: #6695ff91;
+    border-color: 6695ff91;
+    border-radius: 5px;
+    margin: 0px 20%;
+    float: left;
+}
+
+#div_creacion_blog > h2{
+    width: 100%;
+    height: auto;
+    padding: 1em 0;
+    float: left;
+}
+
+#div_creacion_blog form> label select{
+    float: left;
+    width: 60%;
+}
+
+#div_creacion_blog form>button {
+    margin-top: 2em;
+}
+
+
+/* END vista creacion blog */
+
+/* CSS especifico */
+
+#label_input_image>input{
+    width: 40% !important;
+    text-align: center !important;
+    margin-left: 31%;
+}
+
+/* END CSS especifico */

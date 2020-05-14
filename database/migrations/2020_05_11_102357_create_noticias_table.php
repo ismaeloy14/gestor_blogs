@@ -15,13 +15,13 @@ class CreateNoticiasTable extends Migration
     {
         Schema::create('noticias', function (Blueprint $table) {
             $table->id();
-            $table->string('titulo_noticia');
-            $table->text('cuerpo_noticia');
-            $table->date('fecha_noticia');
-            $table->binary('imagen_noticia')->nullable();
-            $table->unsignedBigInteger('id_blog');
-            $table->foreign('id_blog')->references('id')->on('blogs');
-            $table->boolean('noticia_publica');
+            $table->string('tituloNoticia');
+            $table->text('cuerpoNoticia');
+            $table->date('fechaNoticia');
+            $table->binary('imagenNoticia')->nullable();
+            $table->unsignedBigInteger('idBlog');
+            $table->foreign('idBlog')->references('id')->on('blogs');
+            $table->boolean('noticiaPublica');
             //$table->timestamps();
         });
     }

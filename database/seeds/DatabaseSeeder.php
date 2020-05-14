@@ -61,9 +61,9 @@ class DatabaseSeeder extends Seeder
         DB::table('blogs')->delete();
         foreach($this->arrayBlogs as $blogs){
             $b = new Blog;
-            $b->titulo_blog = $blogs['titulo_blog'];
-            $b->id_usuario = $blogs['id_usuario'];
-            $b->blog_publico = $blogs['blog_publico'];
+            $b->tituloBlog = $blogs['tituloBlog'];
+            $b->idUsuario = $blogs['idUsuario'];
+            $b->blogPublico = $blogs['blogPublico'];
             $b->categoria = $blogs['categoria'];
             $b->save();
         }
@@ -115,9 +115,9 @@ class DatabaseSeeder extends Seeder
 
     private $arrayBlogs = array(
         array(
-            'titulo_blog'   =>  'Blog1',
-            'id_usuario'    =>  1,
-            'blog_publico'  =>  1,
+            'tituloBlog'   =>  'Blog1',
+            'idUsuario'    =>  1,
+            'blogPublico'  =>  1,
             'categoria'     =>  'Tecnologia'
         )
     );

@@ -1,5 +1,6 @@
 $(function(){
-    $('#formulario_registro_usuarios').on('submit', formulario_registro_usuarios);
+    $('#formulario_registro_usuarios').on('submit', formulario_registro_usuarios);// Formulario de registros
+    $('#formulario_creacion_blog').on('submit', formulario_creacion_blog); // Formulario de creacion del blog
 });
 
 
@@ -24,5 +25,19 @@ function formulario_registro_usuarios(e){
 
     
 
+}
+
+function formulario_creacion_blog(e){
+    var titulo_blog = $('#titulo_blog').val();
+
+    if (titulo_blog.length > 20) {
+        alert('Tu titulo es demasiado largo.');
+        e.preventDefault();
+    } else if (titulo_blog.length < 3) {
+        alert('Tu titulo es demasiado corto.');
+        e.preventDefault();
+    }
+
+    
 }
 
