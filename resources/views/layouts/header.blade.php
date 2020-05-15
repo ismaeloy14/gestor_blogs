@@ -4,17 +4,17 @@
     <div id="header_gestor_blogs">
 
         <div id="div_cruds">
-            @if (session()->get('usuario') == 'admin')
+            @if (session()->get('rol') == 'admin')
 
             <div>
                 <a class="btn btn-info" href="{{url('/creacionBlog')}}">Crea tu blog</a>
             </div>
             
             <div>
-                <a class="btn btn-warning" href="{{url('/crudUsuarios')}}">Crud Usuarios</a> 
+                <a class="btn btn-warning" href="{{url('/crudUsuarios')}}">Gestionar Usuarios</a> 
             </div>
 
-            @elseif (session()->get('usuario') == 'basico')
+            @elseif (session()->get('rol') == 'basico')
 
             <div id="crea_blog_usuarioNormal">
                 <a class="btn btn-info" href="{{url('/creacionBlog')}}">Crea tu blog</a>
@@ -29,7 +29,7 @@
 
         
 
-        @if (session()->get('usuario') == 'admin')
+        @if (session()->get('rol') == 'admin')
 
             <div id="div_login_registro">
                 <span>Hola {{Auth::user()->usuario}}</span>
@@ -37,7 +37,7 @@
                 
             </div>
             
-        @elseif (session()->get('usuario') == 'basico')
+        @elseif (session()->get('rol') == 'basico')
             
             <div id="div_login_registro">
                 <span>Hola {{Auth::user()->usuario}}</span>

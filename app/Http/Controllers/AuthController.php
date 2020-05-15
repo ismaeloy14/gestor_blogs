@@ -31,7 +31,10 @@ class AuthController extends Controller
     public function index_logout()
     {
         Auth::logout();
+        session()->forget('rol');
         session()->forget('usuario');
+        session()->forget('idUsuario');
+        
         return redirect('/');
     }
 
@@ -41,8 +44,15 @@ class AuthController extends Controller
         $usuarios_sql = $users->todosUsuarios();
         $blog_sql = $blogs->todosBlogs();
 
+        if(session()->get('rol') == 'admin') {
+            return view('admin.crudUsuarios', compact('usuarios_sql', 'blog_sql'));
+            //return view('admin.crudUsuarios', array('usuarios' => $usuarios_sql), array('blogs' => $blog_sql));
+        } else {
+            return redirect('/');
+        }
 
-        return view('admin.crudUsuarios', array('usuarios' => $usuarios_sql), array('blogs' => $blog_sql));
+
+        
     }
 
 
@@ -114,7 +124,7 @@ class AuthController extends Controller
                     }
             
             } else {
-                return back()->withErrors(['El usuario ya esxiste']);
+                return back()->withErrors(['El usuario ya existe']);
             }
 
         } else {
@@ -128,6 +138,9 @@ class AuthController extends Controller
         $usuario = new Usuari;
 
         $existeUsuario = $usuario->comprobarNombreUsuario($request->input('usuario'));
+        $id_usuario = $usuario->soloUnUsuario($request->input('usuario'));
+
+        $id_usuer; // Aqui guardara la id del usuario
 
         $this->validate($request, [
             'usuario' => 'required',
@@ -143,10 +156,21 @@ class AuthController extends Controller
                 'password' => $request->input('password')
             );
 
+            foreach($id_usuario as $id) {
+                $id_usuer = $id->id;
+            }
+
+
             if (Auth::attempt($array_datos_usuarios)) {
                 $rolUsuario = $usuario->comprobarRol($request->input('usuario'));
 
-                session(['usuario' => $rolUsuario]);
+                session()->put('rol', $rolUsuario);
+                session()->put('usuario', $request->input('usuario'));
+                session()->put('idUsuario', $id_usuer);
+
+
+                //session(['rol' => $rolUsuario]);
+                //session(['usuario' => $request->input('usuario')]);
                 return redirect('/');
 
             } else {
@@ -159,6 +183,13 @@ class AuthController extends Controller
 
 
     }
+
+
+
+
+
+
+
 
 
 
@@ -217,4 +248,6 @@ class AuthController extends Controller
     {
         //
     }
+
+
 }

@@ -24,17 +24,43 @@ Route::get('/registro', 'AuthController@index_registro');
 Route::get('/logout', 'AuthController@index_logout');
 
 
+
+// Formulario de registro de usuarios
+Route::post('/registro/createUsuario', 'AuthController@post_create_usuario');
+
+// Verificando el login
+Route::post('/login/verificando', 'AuthController@post_login_usuario');
+
+// Creacion y verificación del blog
 Route::get('/creacionBlog', 'BlogController@index_creacion');
 Route::post('/creacionBlog/validando', 'BlogController@post_createBlog');
 
 
+// Páginas para usuarios
 
-Route::post('/registro/createUsuario', 'AuthController@post_create_usuario');
+Route::get('/editarUsuario/{usuario}', 'UsuarioController@index_UsuarioEdit');
 
-Route::get('/crudUsuarios', 'AuthController@index_crudUsuarios');
+Route::put('/editarUsuario/{usuario}', 'UsuarioController@put_UsuarioEdit');
 
 
 
-Route::post('/login/verificando', 'AuthController@post_login_usuario');
+// Páginas de admin
+Route::get('/crudUsuarios', 'AuthController@index_crudUsuarios'); // Para ir al crud principal
+
+/* Crud de usuarios */
+Route::get('/crudUsuarios/verUsuario/{usuario}', 'UsuarioController@index_UsuarioShow');
+Route::get('/crudUsuarios/editarUsuario/{usuario}', 'UsuarioController@index_UsuarioEdit');
+Route::get('/crudUsuarios/eliminarUsuario/{id}', 'UsuarioController@index_UsuarioDelete');
+
+
+Route::put('/crudUsuarios/editarUsuario/{usuario}', 'UsuarioController@put_UsuarioEdit');
+
+/* Crud de blogs */
+Route::get('/crudUsuarios/infoBlog/{id}', 'BlogController@index_BlogInfo');
+Route::get('/crudUsuarios/editarBlog/{id}', 'BlogController@index_BlogEdit');
+Route::get('/crudUsuarios/eliminarBlog/{id}', 'BlogController@index_BlogDelete');
+
+
+
 
 

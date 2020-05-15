@@ -9,31 +9,34 @@
 
     <table id="tabla_crud_Usuarios">
         <tr>
-            <td>Usuario</td>
-            <td>Crud Usuario</td>
-            <td>Crud Blogs Usuario</td>
+            <th>Usuario</th>
+            <th>Rol Usuario</th>
+            <th>Crud Usuario</th>
+            <th>Crud Blogs Usuario</th>
         </tr>
 
-        @foreach ($usuarios as $users)
+        @foreach ($usuarios_sql as $users)
         <tr>
             <td>
                 {{$users->usuario}}
             </td>
             <td>
-                <a class="btn btn-info" href="{{url('/crudUsuarios/verUsuario/' . $users->id)}}">Ver Perfil</a>
-                <a class="btn btn-primary" href="{{url('/crudUsuarios/editarUsuario/' . $users->id)}}">Editar</a>
+                {{$users->rol}}
+            </td>
+            <td>
+                <a class="btn btn-info" href="{{url('/crudUsuarios/verUsuario/' . $users->usuario)}}">Ver Perfil</a>
+                <a class="btn btn-primary" href="{{url('/crudUsuarios/editarUsuario/' . $users->usuario)}}">Editar</a>
                 <a class="btn btn-danger" href="{{url('/crudUsuarios/eliminarUsuario/' . $users->id)}}">Eliminar</a>
             </td>
             <td>
-                @foreach ($blogs as $blog)
-                    @if ($users->id == $blogs->id_usuario)
-                        <a class="btn btn-info" href="{{url('/crudUsuarios/verBlog/' . $blogs->id)}}">Ver información</a>
-                        <a class="btn btn-primary" href="{{url('/crudUsuarios/editarBlog/' . $blogs->id)}}">Editar</a>
-                        <a class="btn btn-danger" href="{{url('/crudUsuarios/eliminarBlog/' . $blogs->id)}}">Eliminar</a>
+                @foreach ($blog_sql as $blog)
+                    @if ($users->id == $blog->idUsuario)
+                        <a class="btn btn-info" href="{{url('/crudUsuarios/infoBlog/' . $blog->id)}}">Ver información</a>
+                        <a class="btn btn-primary" href="{{url('/crudUsuarios/editarBlog/' . $blog->id)}}">Editar</a>
+                        <a class="btn btn-danger" href="{{url('/crudUsuarios/eliminarBlog/' . $blog->id)}}">Eliminar</a>
                     @endif
                 @endforeach
                 
-
             </td>
         </tr>
         @endforeach
