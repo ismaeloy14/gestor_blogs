@@ -1,3 +1,16 @@
+/* bootstrap */
+
+* {
+    /*box-sizing: content-box !important;*/
+}
+
+.row {
+    margin-left: 0px !important;
+    margin-right: 0px !important;
+}
+
+/* end Bootstrap */
+
 #container{
     height: 100%;
 }

@@ -7,15 +7,22 @@
 
 
 
-    <table id="tabla_crud_Usuarios">
-        <tr>
-            <th>Usuario</th>
-            <th>Rol Usuario</th>
-            <th>Crud Usuario</th>
-            <th>Crud Blogs Usuario</th>
-        </tr>
+    <table id="tabla_crud_Usuarios" class="table">
+        <thead>
+            <tr>
+                <th>Usuario</th>
+                <th>Rol Usuario</th>
+                <th>Crud Usuario</th>
+                <th>Crud Blogs Usuario</th>
 
-        @foreach ($usuarios_sql as $users)
+            </tr>
+        </thead>
+        
+        {{--<tbody>
+
+        
+
+        {{--@foreach ($usuarios_sql as $users)
         <tr>
             <td>
                 {{$users->usuario}}
@@ -38,11 +45,63 @@
                 @endforeach
                 
             </td>
+        </tr>--}}
+
+        {{-- Pruebas del datatable --}}
+
+        @foreach ($users as $u)
+        
+        <tr>
+            <td>{{$u->usuario}}</td>
+            <td>{{$u->rol}}</td>
+            <td>
+                <button class="btn btn-info" form="{{$u->id}}">Ver Perfil</button>
+                <button class="btn btn-primary">Editar</button>
+                <button class="btn btn-danger">Eliminar</button>
+            </td>
+                
+            <td>
+                @foreach ($blogs as $blog)
+                    @if ($u->id == $blog->idUsuario)
+                    
+                        <button class="btn btn-info">Ver información</button>
+                        <button class="btn btn-primary">Editar</button>
+                        <button class="btn btn-danger">Eliminar</button>
+                    
+                        
+                    @endif
+                @endforeach
+                
+            </td>
         </tr>
+
+
+
+
         @endforeach
+        </tbody>
+
+
     </table>
 
 </div>
+
+{{--
+<script>
+    //$('#tabla_crud_Usuarios').ready(function() {
+        $('#tabla_crud_Usuarios').DataTable({
+            "serverSide": true, // Procesa la consulta php del lado servidor
+            "ajax": {{ url('api/crudUsuarios')}},
+            "columns": [
+                {data: 'usuario'},
+                {data: 'rol'},
+            ]
+        });
+    //} );
+</script>--}}
+
+
+
 
 
 

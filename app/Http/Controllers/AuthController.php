@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Yajra\Datatables\Facades\Datatables;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\User;
@@ -39,7 +40,7 @@ class AuthController extends Controller
     }
 
     public function index_crudUsuarios(){
-        $users = new Usuari;
+        /*$users = new Usuari;
         $blogs = new Blog;
         $usuarios_sql = $users->todosUsuarios();
         $blog_sql = $blogs->todosBlogs();
@@ -49,11 +50,30 @@ class AuthController extends Controller
             //return view('admin.crudUsuarios', array('usuarios' => $usuarios_sql), array('blogs' => $blog_sql));
         } else {
             return redirect('/');
+        }*/
+
+        
+        $users = Usuari::all();
+        $blogs = Blog::all();
+
+        if(session()->get('rol') == 'admin') {
+            return view('admin.crudUsuarios', compact('users', 'blogs'));
+        } else {
+            return redirect('/');
         }
 
 
-        
+        //return view('admin.crudUsuarios');
+
     }
+
+    /*public function ajax_index_crudUsuarios() {
+        //echo 'hola';
+        return datatables()
+            ->eloquent(App\User::query())
+            ->toJson();
+
+    }*/
 
 
 

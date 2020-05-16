@@ -3,6 +3,10 @@ $(function(){
     $('#formulario_creacion_blog').on('submit', formulario_creacion_blog); // Formulario de creacion del blog
 });
 
+$('#tabla_crud_Usuarios').ready(function() {
+    $('#tabla_crud_Usuarios').DataTable();
+});
+
 
 function formulario_registro_usuarios(e){
     var password = $('#registro_U_password').val();
