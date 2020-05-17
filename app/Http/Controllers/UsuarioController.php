@@ -26,8 +26,9 @@ class UsuarioController extends Controller
 
     }
 
+
     // Devuelve la vista del modficar perfild del usuario seleccionado
-    public function index_UsuarioEdit($usuario_retornado){
+    /*public function index_UsuarioEdit($usuario_retornado){
         $usuario = new Usuari;
 
         $user = $usuario->soloUnUsuario($usuario_retornado);
@@ -51,9 +52,25 @@ class UsuarioController extends Controller
             return redirect('/');
         }
 
+    }*/
+
+    public function modal_show_Usuario() {
+
+        $idUsuario = filter_input(INPUT_GET, 'id');
+
+        $usuario = soloUnUsuarioID($idUsuario);
+
+        return [$usuario];
+
     }
 
-    public function put_UsuarioEdit(Request $request, $usuario_retornado) {
+
+
+
+
+
+
+    public function put_UsuarioEdit(Request $request, $usuario_retornado) { // Actualizar usuario
         $usuario = new Usuari;
 
         $todosUsuarios = $usuario->todosUsuarios();

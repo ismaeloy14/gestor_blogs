@@ -47,6 +47,12 @@ Route::put('/editarUsuario/{usuario}', 'UsuarioController@put_UsuarioEdit');
 // Páginas de admin
 Route::get('/crudUsuarios', 'AuthController@index_crudUsuarios'); // Para ir al crud principal
 
+
+// Ventanas modales
+
+Route::get('/crudUsuarios/showUsuario', 'UsuarioController@modal_show_Usuario');
+
+
 /* Crud de usuarios */
 Route::get('/crudUsuarios/verUsuario/{usuario}', 'UsuarioController@index_UsuarioShow');
 Route::get('/crudUsuarios/editarUsuario/{usuario}', 'UsuarioController@index_UsuarioEdit');

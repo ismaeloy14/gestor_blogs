@@ -1,6 +1,10 @@
 $(function(){
     $('#formulario_registro_usuarios').on('submit', formulario_registro_usuarios);// Formulario de registros
     $('#formulario_creacion_blog').on('submit', formulario_creacion_blog); // Formulario de creacion del blog
+
+
+
+
 });
 
 $('#tabla_crud_Usuarios').ready(function() {
@@ -44,4 +48,5 @@ function formulario_creacion_blog(e){
 
     
 }
+
 
