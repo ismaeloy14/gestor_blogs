@@ -61,6 +61,26 @@
                 </select>
             </label>
 
+            <label>
+                <span>Twitter</span>
+                <input type="text" name="twitter">
+            </label>
+
+            <label>
+                <span>Facebook</span>
+                <input type="text" name="facebook">
+            </label>
+
+            <label>
+                <span>Instagram</span>
+                <input type="text" name="instagram">
+            </label>
+
+            <label>
+                <span>Tu página web</span>
+                <input type="text" name="paginaWeb">
+            </label>
+
             <label id="label_input_image">
                 <input type="file" name="imagen_usuario" accept="image/*">
             </label>

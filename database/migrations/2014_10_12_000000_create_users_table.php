@@ -23,6 +23,10 @@ class CreateUsersTable extends Migration
             $table->date('fechaNacimiento')->nullable();
             $table->string('pais')->nullable();
             $table->binary('imagenPerfil')->nullable();
+            $table->string('twitter')->nullable();
+            $table->string('facebook')->nullable();
+            $table->string('instagram')->nullable();
+            $table->string('paginaWeb')->nullable();
             $table->string('rol');
             $table->foreign('rol')->references('rol')->on('roles');
             //$table->rememberToken();

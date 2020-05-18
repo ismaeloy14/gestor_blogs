@@ -123,6 +123,10 @@ class AuthController extends Controller
                             'apellidos' => 'required',
                             'fechaNacimiento' => 'nullable|date',
                             'pais' => 'nullable|string',
+                            'twitter' => 'nullable|string',
+                            'facebook' => 'nullable|string',
+                            'instagram' => 'nullable|string',
+                            'paginaWeb' => 'nullable|string',
                             'imagenPerfil' => 'image'
                         ]);
 
@@ -133,6 +137,10 @@ class AuthController extends Controller
                         $usuario->email = $request->input('email');
                         $usuario->fechaNacimiento = $request->input('fecha_nacimiento');
                         $usuario->pais = $request->input('pais');
+                        $usuario->twitter = $request->input('twitter');
+                        $usuario->facebook = $request->input('facebook');
+                        $usuario->instagram = $request->input('instagram');
+                        $usuario->paginaWeb = $request->input('paginaWeb');
                         $usuario->imagenPerfil = $request->input('imagen_usuario');
                         $usuario->rol = $rol->rol;
                         $usuario->save();
