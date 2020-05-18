@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Blog;
 use App\Categoria;
+use App\Noticia;
+use App\Usuari;
 use Auth;
 
 class BlogController extends Controller
@@ -20,6 +22,29 @@ class BlogController extends Controller
         $categoria = $categorias->todasCategorias();
         return view('blogs.crearBlog', array('categorias' => $categoria));
     }
+
+    public function index_blog($tituloblog) {
+        $consexionblog = new Blog;
+        $consexionUsuario = new Usuari;
+        $conexionNoticia = new Noticia;
+
+        $blog = $consexionblog->blogNombre($tituloblog);
+
+        foreach ($blog as $b) {
+            $usuarioBlogID = $b->idUsuario;
+            $blogID = $b->id;
+        }
+        
+        $usuario = $consexionUsuario->soloUnUsuarioID($usuarioBlogID);
+        $noticias = $conexionNoticia->noticiaIDblog($blogID);
+
+        return view('indexBlogs', compact('blog', 'usuario', 'noticias'));
+
+
+    }
+
+
+
 
     /**
      * Show the form for creating a new resource.

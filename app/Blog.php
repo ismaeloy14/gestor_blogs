@@ -13,4 +13,8 @@ class Blog extends Model
     public function todosBlogs(){
         return DB::table('blogs')->get();
     }
+
+    public function blogNombre($tituloBlog){
+        return DB::table('blogs')->where('tituloBlog', $tituloBlog)->get();
+    }
 }
