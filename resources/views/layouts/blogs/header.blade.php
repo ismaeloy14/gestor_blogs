@@ -3,8 +3,9 @@
     
     <div id="header_blog">
 
-
-        <a href="{{url('/')}}"><h1>Gestor de Blogs</h1></a>
+        @foreach ($blog as $b)
+            <a href="{{url('/'.$b->tituloBlog)}}"><h1>{{$b->tituloBlog}}</h1></a>            
+        @endforeach
 
         
 

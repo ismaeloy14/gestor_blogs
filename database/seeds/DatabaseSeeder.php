@@ -42,6 +42,10 @@ class DatabaseSeeder extends Seeder
             $u->password = bcrypt($users['password']);
             $u->nombre = $users['nombre'];
             $u->apellidos = $users['apellidos'];
+            $u->twitter = $users['twitter'];
+            $u->facebook = $users['facebook'];
+            $u->instagram = $users['instagram'];
+            $u->paginaWeb = $users['paginaWeb'];
             $u->rol = $users['rol'];
             $u->save();
         }
@@ -89,6 +93,10 @@ class DatabaseSeeder extends Seeder
             'password'          =>  'admin',
             'nombre'            =>  'user_admin',
             'apellidos'         =>  'superadmin',
+            'twitter'           =>  'https://twitter.com/Ismaeloy14',
+            'facebook'          =>  'https://www.facebook.com/prototype.angulo',
+            'instagram'         =>  'https://www.instagram.com/ismaeloy14/?hl=es',
+            'paginaWeb'         =>  'https://www.youtube.com/user/Ismaeloy',
             'rol'               =>  'admin'
         ),
         array(
@@ -97,6 +105,10 @@ class DatabaseSeeder extends Seeder
             'password'          =>  'user1',
             'nombre'            =>  'user_user1',
             'apellidos'         =>  'user1 user1',
+            'twitter'           =>  null,
+            'facebook'          =>  null,
+            'instagram'         =>  null,
+            'paginaWeb'         =>  null,
             'rol'               =>  'basico'
         )
     );

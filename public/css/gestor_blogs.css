@@ -77,7 +77,8 @@ body{
 }
 
 #div_cruds div a{
-    width: 40%;
+    margin-left: 1em;
+    width: 90%;
 }
 
 #crea_blog_usuarioNormal{
@@ -299,6 +300,29 @@ footer{
 
 
 /* END vista creacion blog */
+
+
+/* CSS vista del blog */
+
+footer div{
+    float: left;
+    width: 33%;
+    padding: 1em 0px;
+}
+
+footer #div_footer_blog_autor span{
+    float: left;
+    width: 100%;
+    text-align: left;
+    margin-left: 1.5em;
+}
+
+footer > #div_footer_blog_redes > a img {
+    width: 50px;
+    height: 50px;
+}
+
+/* END vista blog */
 
 /* CSS especifico */
 

@@ -1,8 +1,14 @@
 @extends('layouts.blogs.masterBlog')
 
 @section('body')
-    <div id="div_principal">
-        <h2>Hola blog</h2>
+    <div id="div_noticias">
+
+        
+
+    </div>
+
+    <div id="div_menu_lateral">
+
     </div>
 
 @include('layouts.blogs.footer')
