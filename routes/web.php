@@ -37,7 +37,7 @@ Route::post('/creacionBlog/validando', 'BlogController@post_createBlog');
 
 
 // Páginas para usuarios
-
+Route::get('/usuario/{usuario}', 'UsuarioController@show_Usuario');
 Route::get('/editarUsuario/{usuario}', 'UsuarioController@index_UsuarioEdit');
 
 Route::put('/editarUsuario/{usuario}', 'UsuarioController@put_UsuarioEdit');

@@ -431,6 +431,7 @@ footer{
     width: 70%;
     height: auto;
     margin: 1% 2%;
+    background-color: #f2f2f2;
     
     /* Sombra */
     -webkit-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
@@ -442,8 +443,8 @@ footer{
     float: left;
     width: 40%;
     margin: 5%;
-
     transition: transform .5s;
+    background-color: white;
     
 
     /* Sombra */
@@ -458,13 +459,23 @@ footer{
     transform: scale(1.1);
 }
 
-.noticiasDivs img, h4, span{
+.noticiasDivs > h4{
     float: left;
     width: 96%;
     margin: 2% 2%;
 }
 
+.noticiasDivs > img {
+    float: left;
+    width: 96%;
+    margin: 2% 2%;
+}
 
+.noticiasDivs > span {
+    float: left;
+    width: 96%;
+    margin: 2% 2%;
+}
 
 
 footer div{
@@ -515,6 +526,57 @@ footer > #div_footer_blog_redes > a img {
 }
 
 /* END show noticias */
+
+
+
+/* Vistas usuarios */
+
+/* Show usuario */
+
+#div_showUsuario {
+    width: 40%;
+    margin: 2% 30%;
+    float: left;
+    background-color: lightblue;
+    border-radius: 10px;
+
+    /* Sombra */
+    -webkit-box-shadow: 0px 0px 10px 3px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 10px 3px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 10px 3px rgba(0,0,0,0.75);
+}
+
+#div_showUsuario > div {
+    float: left;
+    width: 90%;
+    margin: 2% 5%;
+}
+
+#div_showUsuario > div > img{
+    width: 4em;
+}
+
+#div_showUsuario > span {
+    float: left;
+    width: 40%;
+    margin: 2% 5%;
+}
+
+#botonEditarPerfilImagen {
+    float: left;
+}
+
+#botonEditarPerfilImagen > div {
+    float: left;
+    width: 50%;
+    text-align: center;
+}
+
+/* END Show usuario */
+
+/* END Vistas usuarios */
+
+
 
 /* CSS especifico */
 

@@ -54,7 +54,19 @@ class UsuarioController extends Controller
 
     }*/
 
-    public function modal_show_Usuario() {
+
+    public function show_Usuario($nombreUsuario) {
+
+        $usuario = new Usuari;
+
+        $user = $usuario->soloUnUsuario($nombreUsuario);
+
+        return view('usuarios.showUsuario', compact('user'));
+    }
+
+
+
+    public function modal_show_Usuario() { // Esto es para el admin
 
         $idUsuario = filter_input(INPUT_GET, 'id');
 
