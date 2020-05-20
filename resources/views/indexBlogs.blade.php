@@ -6,8 +6,17 @@
         @foreach ($noticias as $noticia)
 
             @if ($noticia->noticiaPublica == 1)
-                <a href="" class="noticiasDivs">
-                    <img src="" alt="">
+
+                @foreach ($blog as $b)
+                <a href="{{url('/'.$b->tituloBlog.'/'.$noticia->tituloNoticia)}}" class="noticiasDivs">
+                @endforeach
+                    
+                    <img src="{{asset('imagenes/noticia/'.$noticia->imagenNoticia)}}" alt="Imagen de la noticia">
+                    <h4>{{$noticia->tituloNoticia}}</h4>
+                    
+                    @php
+                        echo '<span>'. mb_strimwidth($noticia->cuerpoNoticia, 0, 200, '...') .'</span>'; // Es para cortar la cadena de texto que saldra en los divs
+                    @endphp
                 </a>
             @endif
 

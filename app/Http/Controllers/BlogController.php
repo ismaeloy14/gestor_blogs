@@ -36,7 +36,7 @@ class BlogController extends Controller
         }
         
         $usuario = $consexionUsuario->soloUnUsuarioID($usuarioBlogID);
-        $noticias = $conexionNoticia->noticiaIDblog($blogID);
+        $noticias = $conexionNoticia->noticiaIDblog($blogID); // Viene en formato descendiente, asi las noticias nuevas estaran siempre arriba.
 
         return view('indexBlogs', compact('blog', 'usuario', 'noticias'));
 
@@ -128,6 +128,33 @@ class BlogController extends Controller
 
 
     }
+
+
+
+
+    public function show_Noticia_Completa($tituloBlog, $tituloNoticia) {
+
+        $conexionBlog = new Blog;
+        $conexionNoticia = new Noticia;
+        $conexionUsuario = new Usuari;
+
+        $blog = $conexionBlog->blogNombre($tituloBlog);
+
+        foreach($blog as $b) {
+            $idBlog = $b->id;
+       }
+
+
+        $usuario = $conexionUsuario->soloUnUsuarioID($idBlog);
+        $noticia = $conexionNoticia->soloUnaNoticia($idBlog, $tituloNoticia);
+
+
+        return view('blogs.noticias.showNoticia', compact('blog', 'noticia', 'usuario'));
+
+    }
+
+
+
 
     /**
      * Store a newly created resource in storage.

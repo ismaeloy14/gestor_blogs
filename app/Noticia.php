@@ -11,11 +11,13 @@ class Noticia extends Model
     public $timestamps = false;
 
 
-    public function noticiaIDblog($idBlog){
-        return DB::table('noticias')->where('idBlog', $idBlog)->get();
+    public function noticiaIDblog($idBlog){ // Con ordenacion descendiente
+        return DB::table('noticias')->where('idBlog', $idBlog)->orderBy('fechaNoticia', 'desc')->get();
     }
 
-
+    public function soloUnaNoticia($idBlog, $tituloNoticia){
+        return DB::table('noticias')->where('idBlog', $idBlog)->where('tituloNoticia', $tituloNoticia)->get();
+    }
 
 
 

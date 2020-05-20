@@ -69,6 +69,7 @@ Route::get('/crudUsuarios/eliminarBlog/{id}', 'BlogController@index_BlogDelete')
 // Rutas de blogs
 
 Route::get('/{tituloBlog}', 'BlogController@index_blog');
+Route::get('/{tituloBlog}/{tituloNoticia}', 'BlogController@show_Noticia_Completa' );
 
 
 
