@@ -32,16 +32,16 @@
         @if (session()->get('rol') == 'admin')
 
             <div id="div_login_registro">
-                <span>Hola {{Auth::user()->usuario}}</span>
-                <a href="{{url('/logout')}}"><button>Logout</button></a>
+                <a href="#" id="nombrePerfilHeader"><img src="{{asset('imagenes/perfil/'.session()->get('imagenPerfil')) }}" alt="icono perfil" id="fotoPerfilHeader"> {{Auth::user()->usuario}}</a>
+                <a href="{{url('/logout')}}" class="btn btn-info">Logout</a>
                 
             </div>
             
         @elseif (session()->get('rol') == 'basico')
             
             <div id="div_login_registro">
-                <span>Hola {{Auth::user()->usuario}}</span>
-                <a href="{{url('/logout')}}"><button>Logout</button></a>
+                <a href="#"><img src="{{asset('imagenes/perfil/'.session()->get('imagenPerfil')) }}" alt="icono perfil" id="fotoPerfilHeader"> {{Auth::user()->usuario}}</a>
+                <a href="{{url('/logout')}}" class="btn btn-info">Logout</a>
             </div>
 
         @else

@@ -3,7 +3,16 @@
 @section('body')
     <div id="div_noticias">
 
-        
+        @foreach ($noticias as $noticia)
+
+            @if ($noticia->noticiaPublica == 1)
+                <a href="" class="noticiasDivs">
+                    <img src="" alt="">
+                </a>
+            @endif
+
+            
+        @endforeach
 
     </div>
 

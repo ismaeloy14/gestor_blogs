@@ -62,6 +62,7 @@ class BlogController extends Controller
         $longitud_titulo = strlen($titulo);
 
         $existeUsuario = false;
+        $nombreImagen = null;
 
         foreach($todosBlogs as $b){ // Para los nombres de usuarios
             if($b->idUsuario === $usuario_logueado->id){
@@ -92,11 +93,21 @@ class BlogController extends Controller
                     $this->validate(request(), [
                         'tituloBlog' => 'required|string',
                         'categoria' => 'required|string',
-                        'imagenBlog' => 'image'
+                        'imagenBlog' => 'string|image'
                     ]);
+
+                    // En este IF se crea el fichero en la carpeta publica de imagenes/blog y se guarda el nombre del fichero para luego integrarlo a la base de datos.
+                    if ($request->file('imagen_blog') != null){ 
+                        $iBlog = $request->file('imagen_blog');
+                        $iExtension = $request->file('imagen_blog')->getClientOriginalExtension();
+                        $nombreFichero = time() . '.' . $iExtension; // getClientOriginalExtension pilla la extension del fichero subido
+                        Image::make($iBlog)->resize(250,100)->save(public_path('/imagenes/blog/'.$nombreFichero));
+            
+                        $nombreImagen = $nombreFichero;
+                    }
         
                     $blog->tituloBlog = $titulo;
-                    $blog->imagenBlog = $request->input('imagen_blog');
+                    $blog->imagenBlog = $nombreImagen;
                     $blog->idUsuario = $usuario_logueado->id;
                     $blog->blogPublico = $request->input('publico');
                     $blog->categoria = $request->input('categoria');

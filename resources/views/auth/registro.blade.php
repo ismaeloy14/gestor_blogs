@@ -7,7 +7,7 @@
         <h2>
             Registrate
         </h2>
-        <form method="POST" action="{{url('/registro/createUsuario')}}" id="formulario_registro_usuarios">
+        <form method="POST" action="{{url('/registro/createUsuario')}}" id="formulario_registro_usuarios" enctype="multipart/form-data">
 
             {{ csrf_field() }}
 

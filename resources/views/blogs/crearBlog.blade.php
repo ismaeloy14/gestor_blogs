@@ -7,7 +7,7 @@
     <div id="div_creacion_blog">
         <h2>Crea tu Blog</h2>
 
-        <form method="post" action="{{url('/creacionBlog/validando')}}" id="formulario_creacion_blog">
+        <form method="post" action="{{url('/creacionBlog/validando')}}" id="formulario_creacion_blog" enctype="multipart/form-data">
 
             {{ csrf_field() }}
 

@@ -5,6 +5,7 @@ use App\Rol;
 use App\User;
 use App\Categoria;
 use App\Blog;
+use App\Noticia;
 
 
 class DatabaseSeeder extends Seeder
@@ -22,6 +23,7 @@ class DatabaseSeeder extends Seeder
         self::seedUsers();
         self::seedCategorias();
         self::seedBlogs();
+        self::seedNoticias();
     }
 
     private function seedRoles(){
@@ -42,6 +44,8 @@ class DatabaseSeeder extends Seeder
             $u->password = bcrypt($users['password']);
             $u->nombre = $users['nombre'];
             $u->apellidos = $users['apellidos'];
+            $u->fechaNacimiento = $users['fechaNacimiento'];
+            $u->imagenPerfil = $users['imagenPerfil'];
             $u->twitter = $users['twitter'];
             $u->facebook = $users['facebook'];
             $u->instagram = $users['instagram'];
@@ -73,6 +77,19 @@ class DatabaseSeeder extends Seeder
         }
     }
 
+    private function seedNoticias(){
+        DB::table('noticias')->delete();
+        foreach($this->arrayNoticias as $noticias){
+            $n = new Noticia;
+            $n->tituloNoticia = $noticias['tituloNoticia'];
+            $n->cuerpoNoticia = $noticias['cuerpoNoticia'];
+            $n->fechaNoticia = $noticias['fechaNoticia'];
+            $n->idBlog = $noticias['idBlog'];
+            $n->noticiaPublica = $noticias['noticiaPublica'];
+            $n->save();
+        }
+    }
+
 
     //// Variables para rellenar la BBDD ////
 
@@ -93,6 +110,8 @@ class DatabaseSeeder extends Seeder
             'password'          =>  'admin',
             'nombre'            =>  'user_admin',
             'apellidos'         =>  'superadmin',
+            'fechaNacimiento'   =>  '1998-01-01',
+            'imagenPerfil'      =>  'yo-ornn-grande.png',
             'twitter'           =>  'https://twitter.com/Ismaeloy14',
             'facebook'          =>  'https://www.facebook.com/prototype.angulo',
             'instagram'         =>  'https://www.instagram.com/ismaeloy14/?hl=es',
@@ -105,6 +124,8 @@ class DatabaseSeeder extends Seeder
             'password'          =>  'user1',
             'nombre'            =>  'user_user1',
             'apellidos'         =>  'user1 user1',
+            'fechaNacimiento'   =>  '1998-05-14',
+            'imagenPerfil'      =>  null,
             'twitter'           =>  null,
             'facebook'          =>  null,
             'instagram'         =>  null,
@@ -131,6 +152,37 @@ class DatabaseSeeder extends Seeder
             'idUsuario'    =>  1,
             'blogPublico'  =>  1,
             'categoria'     =>  'Tecnologia'
+        )
+    );
+
+    private $arrayNoticias = array(
+        array(
+            'tituloNoticia'     =>  'Noticia1',
+            'cuerpoNoticia'     =>  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi fringilla aliquam turpis. Nullam odio erat, sollicitudin eget orci quis, dapibus suscipit libero. Donec volutpat magna quis ipsum porta porta. Sed nulla velit, iaculis at imperdiet sit amet, sagittis a magna. Integer malesuada lectus sed nisl fringilla, ut porta erat eleifend. In blandit malesuada aliquet. Nunc eget mi urna. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam elementum eget sapien mattis sollicitudin. Aliquam commodo nunc sapien, sed feugiat mi elementum et. Praesent laoreet quam urna, at auctor sapien eleifend et. Aenean elit nulla, lacinia nec diam eget, dignissim lacinia urna. Vivamus dolor magna, porta a eleifend sed, iaculis sed neque.',
+            'fechaNoticia'      =>  '2020-02-25',
+            'idBlog'            =>  1,
+            'noticiaPublica'    =>  1
+        ),
+        array(
+            'tituloNoticia'     =>  'Noticia2',
+            'cuerpoNoticia'     =>  'Noticia de marzo.',
+            'fechaNoticia'      =>  '2020-03-08',
+            'idBlog'            =>  1,
+            'noticiaPublica'    =>  0
+        ),
+        array(
+            'tituloNoticia'     =>  'Noticia3',
+            'cuerpoNoticia'     =>  'Noticia de abril.',
+            'fechaNoticia'      =>  '2020-04-18',
+            'idBlog'            =>  1,
+            'noticiaPublica'    =>  1
+        ),
+        array(
+            'tituloNoticia'     =>  'Noticia4',
+            'cuerpoNoticia'     =>  'Noticia de mayo.',
+            'fechaNoticia'      =>  '2020-05-01',
+            'idBlog'            =>  1,
+            'noticiaPublica'    =>  1
         )
     );
 

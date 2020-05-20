@@ -18,7 +18,7 @@ class CreateNoticiasTable extends Migration
             $table->string('tituloNoticia');
             $table->text('cuerpoNoticia');
             $table->date('fechaNoticia');
-            $table->binary('imagenNoticia')->nullable();
+            $table->string('imagenNoticia')->nullable();
             $table->unsignedBigInteger('idBlog');
             $table->foreign('idBlog')->references('id')->on('blogs');
             $table->boolean('noticiaPublica');

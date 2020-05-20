@@ -23,19 +23,30 @@ body{
 /* Header */
 
 
-#header_gestor_blogs{
+#header_gestor_blogs{ /* HEADER */
     width: 100%;
-    background: #6695ff91;
+    /*background: #6695ff91;*/
     display: flex;
     float: left;
+
+    /* Degradado */
+    background: rgba(10,10,10,1);
+    background: -moz-linear-gradient(top, rgba(10,10,10,1) 0%, rgba(10,10,10,1) 23%, rgba(69,69,69,1) 100%);
+    background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(10,10,10,1)), color-stop(23%, rgba(10,10,10,1)), color-stop(100%, rgba(69,69,69,1)));
+    background: -webkit-linear-gradient(top, rgba(10,10,10,1) 0%, rgba(10,10,10,1) 23%, rgba(69,69,69,1) 100%);
+    background: -o-linear-gradient(top, rgba(10,10,10,1) 0%, rgba(10,10,10,1) 23%, rgba(69,69,69,1) 100%);
+    background: -ms-linear-gradient(top, rgba(10,10,10,1) 0%, rgba(10,10,10,1) 23%, rgba(69,69,69,1) 100%);
+    background: linear-gradient(to bottom, rgba(10,10,10,1) 0%, rgba(10,10,10,1) 23%, rgba(69,69,69,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0a0a0a', endColorstr='#454545', GradientType=0 );
 }
 
-#header_gestor_blogs > a h1{
+#header_gestor_blogs > a h1{ /* Titulo */
     width: 100%;
     float: left;
     height: auto;
     font-size: 4em;
-    text-indent: 5%;
+    color: white;
+    /*text-indent: 5%;*/
     
     /*margin-left: -10%;
     /*margin-right: -4%;
@@ -59,12 +70,14 @@ body{
 
 }
 
+
+
 #header_gestor_blogs > a:hover{
     color:#007bff;
 }
 
 #div_cruds {
-    width: 25%;
+    width: 15%;
     height: auto;
     float: left;
 }
@@ -100,8 +113,30 @@ body{
     height: auto;
     margin: 21.44px 0;
     text-align: right;
+    
 }
 
+#fotoPerfilHeader {
+    width: 2em;
+    height: 2em;
+    border-radius: 50%;
+    border: solid black 1px;
+}
+
+#div_login_registro > a{
+    text-decoration: none;
+    color: white;
+    width: 30%;
+    float: left;
+}
+
+#nombrePerfilHeader{
+    width: 60% !important;
+    padding-right: 9%;
+    font-size: 1.2em;
+}
+
+/* Antiguos botones
 #div_login_registro form{
     width: 30%;
     float: left;
@@ -114,7 +149,9 @@ body{
 #div_login_registro form button{
     font-size: 1em;
     float: left;
-}
+}*/
+
+
 /* END header */
 
 #div_principal{
@@ -133,8 +170,18 @@ footer{
     text-align: center;
     width: 100%;
     height: auto;
-    background-color: grey;
+    /*background-color: grey;*/
     float: left;
+
+    /* degradado */
+    background: rgba(255,255,255,1);
+    background: -moz-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(199,239,255,1) 19%, rgba(20,134,255,1) 100%);
+    background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(255,255,255,1)), color-stop(19%, rgba(199,239,255,1)), color-stop(100%, rgba(20,134,255,1)));
+    background: -webkit-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(199,239,255,1) 19%, rgba(20,134,255,1) 100%);
+    background: -o-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(199,239,255,1) 19%, rgba(20,134,255,1) 100%);
+    background: -ms-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(199,239,255,1) 19%, rgba(20,134,255,1) 100%);
+    background: linear-gradient(to bottom, rgba(255,255,255,1) 0%, rgba(199,239,255,1) 19%, rgba(20,134,255,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#1486ff', GradientType=0 );
 }
 
 

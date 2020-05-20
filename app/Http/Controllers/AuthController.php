@@ -5,11 +5,14 @@ namespace App\Http\Controllers;
 use Yajra\Datatables\Facades\Datatables;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+//use Symfony\Component\Console\Input\Input;
 use App\User;
 use App\Usuari;
 use App\Rol;
 use App\Blog;
 use Auth;
+use Image;
+
 
 
 class AuthController extends Controller
@@ -35,6 +38,7 @@ class AuthController extends Controller
         session()->forget('rol');
         session()->forget('usuario');
         session()->forget('idUsuario');
+        session()->forget('imagenPerfil');
         
         return redirect('/');
     }
@@ -85,12 +89,12 @@ class AuthController extends Controller
 
         if ($request->input('password') === $request->input('password2')){
 
-            
-
             $usuario = new Usuari;
             $usuarios = $usuario->todosNombresUsuarios();
             
             $email = $usuario->todosEmailUsuarios();
+
+            $nombreImagen = null;
 
 
             $nombre_usuario_repetido = false;
@@ -127,8 +131,21 @@ class AuthController extends Controller
                             'facebook' => 'nullable|string',
                             'instagram' => 'nullable|string',
                             'paginaWeb' => 'nullable|string',
-                            'imagenPerfil' => 'image'
+                            'imagenPerfil' => 'nullable|string'
                         ]);
+
+
+                        // En este IF se crea el fichero en la carpeta publica de imagenes/perfil y se guarda el nombre del fichero para luego integrarlo a la base de datos.
+                        if ($request->file('imagen_usuario') != null){ 
+                            $iPerfil = $request->file('imagen_usuario');
+                            $iExtension = $request->file('imagen_usuario')->getClientOriginalExtension();
+                            $nombreFichero = time() . '.' . $iExtension; // getClientOriginalExtension pilla la extension del fichero subido
+                            Image::make($iPerfil)->resize(100,100)->save(public_path('/imagenes/perfil/'.$nombreFichero));
+                
+                            $nombreImagen = $nombreFichero;
+                        }
+
+
 
                         $usuario->usuario = $request->input('usuario');
                         $usuario->password = bcrypt($request->input('password'));
@@ -141,7 +158,8 @@ class AuthController extends Controller
                         $usuario->facebook = $request->input('facebook');
                         $usuario->instagram = $request->input('instagram');
                         $usuario->paginaWeb = $request->input('paginaWeb');
-                        $usuario->imagenPerfil = $request->input('imagen_usuario');
+                        //$usuario->imagenPerfil = $request->input('imagen_usuario');
+                        $usuario->imagenPerfil = $nombreImagen;
                         $usuario->rol = $rol->rol;
                         $usuario->save();
 
@@ -161,6 +179,9 @@ class AuthController extends Controller
 
     }
 
+
+
+
     public function post_login_usuario(Request $request)
     {
         $usuario = new Usuari;
@@ -169,6 +190,7 @@ class AuthController extends Controller
         $id_usuario = $usuario->soloUnUsuario($request->input('usuario'));
 
         $id_usuer; // Aqui guardara la id del usuario
+        $imagenPerfil; // Aqui se guardara el nombre del fichero para la imagen del perfil
 
         $this->validate($request, [
             'usuario' => 'required',
@@ -186,6 +208,7 @@ class AuthController extends Controller
 
             foreach($id_usuario as $id) {
                 $id_usuer = $id->id;
+                $imagenPerfil = $id->imagenPerfil;
             }
 
 
@@ -195,6 +218,7 @@ class AuthController extends Controller
                 session()->put('rol', $rolUsuario);
                 session()->put('usuario', $request->input('usuario'));
                 session()->put('idUsuario', $id_usuer);
+                session()->put('imagenPerfil', $imagenPerfil);
 
 
                 //session(['rol' => $rolUsuario]);

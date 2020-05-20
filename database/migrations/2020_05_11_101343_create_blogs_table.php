@@ -17,7 +17,7 @@ class CreateBlogsTable extends Migration
             $table->id();
             $table->string('tituloBlog');
             //$table->date('creacion_blog');
-            $table->binary('imagenBlog')->nullable();
+            $table->string('imagenBlog')->nullable();
             $table->unsignedBigInteger('idUsuario');
             $table->foreign('idUsuario')->references('id')->on('users');
             $table->boolean('blogPublico');
