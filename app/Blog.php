@@ -17,4 +17,15 @@ class Blog extends Model
     public function blogNombre($tituloBlog){
         return DB::table('blogs')->where('tituloBlog', $tituloBlog)->get();
     }
+
+    public function blogIDUsuario($id) {
+        $consulta = DB::table('blogs')->where('idUsuario', $id)->first();
+
+        if ($consulta == null){
+            return null;
+        } else {
+            return $consulta;
+        }
+
+    }
 }

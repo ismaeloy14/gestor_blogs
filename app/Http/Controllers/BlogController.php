@@ -8,6 +8,7 @@ use App\Categoria;
 use App\Noticia;
 use App\Usuari;
 use Auth;
+use Image;
 
 class BlogController extends Controller
 {

@@ -24,12 +24,21 @@ class AuthController extends Controller
      */
     public function index_login()
     {
-        return view('auth.login');
+        if (session()->get('idUsuario') == null) {
+            return view('auth.login');
+        } else {
+            return back();
+        }
+        
     }
 
     public function index_registro()
     {
-        return view('auth.registro');
+        if (session()->get('idUsuario') == null) {
+            return view('auth.registro');
+        } else {
+            return back();
+        }
     }
 
     public function index_logout()
@@ -40,7 +49,8 @@ class AuthController extends Controller
         session()->forget('idUsuario');
         session()->forget('imagenPerfil');
         
-        return redirect('/');
+        //return redirect('/');
+        return back();
     }
 
     public function index_crudUsuarios(){
@@ -53,7 +63,8 @@ class AuthController extends Controller
             return view('admin.crudUsuarios', compact('usuarios_sql', 'blog_sql'));
             //return view('admin.crudUsuarios', array('usuarios' => $usuarios_sql), array('blogs' => $blog_sql));
         } else {
-            return redirect('/');
+            //return redirect('/');
+            return back();
         }*/
 
         
@@ -63,13 +74,13 @@ class AuthController extends Controller
         if(session()->get('rol') == 'admin') {
             return view('admin.crudUsuarios', compact('users', 'blogs'));
         } else {
-            return redirect('/');
+            //return redirect('/');
+            return back();
         }
 
-
-        //return view('admin.crudUsuarios');
-
     }
+
+    /////// ESTO ES AJAX DE YAJRA \\\\\\\
 
     /*public function ajax_index_crudUsuarios() {
         //echo 'hola';

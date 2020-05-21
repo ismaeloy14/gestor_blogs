@@ -194,12 +194,18 @@ footer{
 /* Vista login */
 
 #div_login{
-    border: 2px solid #6695ff91;
+    /*border: 2px solid #6695ff91;*/
     border-radius: 5px;
-    background-color: #6695ff91;
+    /*background-color: #6695ff91;*/
+    background-color: lightblue;
     width: 50%;
     float: left;
     margin: 2.5em 25%;
+
+    /* Sombra */
+    -webkit-box-shadow: 0px 0px 10px 3px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 10px 3px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 10px 3px rgba(0,0,0,0.75);
 }
 
 #div_login h2{
@@ -259,12 +265,18 @@ footer{
 /* Vista Registro */
 
 #div_registro{
-    border: 2px solid #6695ff91;
+    /*border: 2px solid #6695ff91;*/
     border-radius: 5px;
-    background-color: #6695ff91;
+    /*background-color: #6695ff91;*/
+    background-color: lightblue;
     width: 50%;
     float: left;
     margin: 2.5em 25%;
+
+    /* Sombra */
+    -webkit-box-shadow: 0px 0px 10px 3px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 10px 3px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 10px 3px rgba(0,0,0,0.75);
 }
 
 #div_registro h2{
@@ -328,11 +340,17 @@ footer{
 #div_creacion_blog{
     width: 60%;
     height: auto;
-    background-color: #6695ff91;
+    /*background-color: #6695ff91;*/
+    background-color: lightblue;
     border-color: 6695ff91;
     border-radius: 5px;
     margin: 0px 20%;
     float: left;
+
+    /* Sombra */
+    -webkit-box-shadow: 0px 0px 10px 3px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 10px 3px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 10px 3px rgba(0,0,0,0.75);
 }
 
 #div_creacion_blog > h2{
@@ -353,6 +371,64 @@ footer{
 
 
 /* END vista creacion blog */
+
+/* Index divs blog */
+
+#div_indexBlogs {
+    float: left;
+    width: 96%;
+    height: auto;
+    margin: 3% 2%;
+    background-color: lightblue;
+    
+    /* Sombra */
+    -webkit-box-shadow: 0px 0px 10px 3px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 10px 3px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 10px 3px rgba(0,0,0,0.75);
+}
+
+.blogsDivs {
+    float: left;
+    width: 40%;
+    margin: 5%;
+    transition: transform .5s;
+    background-color: white;
+    color: black;
+    
+
+    /* Sombra */
+    -webkit-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
+    box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
+}
+
+
+.blogsDivs:hover{
+    -webkit-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+    transform: scale(1.1);
+    color: black;
+}
+
+.blogsDivs > h4{
+    float: left;
+    width: 96%;
+    margin: 2% 2%;
+}
+
+.blogsDivs > img {
+    float: left;
+    width: 96%;
+    margin: 2% 2%;
+}
+
+.blogsDivs > span {
+    float: left;
+    width: 96%;
+    margin: 2% 2%;
+}
+
+/* END Index divs blog */
 
 
 /* CSS vista del blog */

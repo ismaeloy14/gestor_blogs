@@ -51,7 +51,11 @@ Route::get('/crudUsuarios', 'AuthController@index_crudUsuarios'); // Para ir al 
 // Ventanas modales
 
 Route::get('/crudUsuarios/showUsuario', 'UsuarioController@modal_show_Usuario');
+Route::get('/crudUsuarios/editUsuario', 'UsuarioController@modal_edit_usuario');
+Route::get('/crudUsuarios/deleteUsuario', 'UsuarioController@modal_show_Usuario');
 
+Route::put('/crudUsuarios/editUsuario/{id}', 'UsuarioController@modal_UsuarioEdit'); // modificar usuario
+Route::post('/crudUsuarios/deleteUsuario/{id}', 'UsuarioController@modal_UsuarioDelete'); // eliminar usuario
 
 /* Crud de usuarios */
 Route::get('/crudUsuarios/verUsuario/{usuario}', 'UsuarioController@index_UsuarioShow');

@@ -1,12 +1,7 @@
 
 <header>
-    
+    {{-- HEADER DE BLOGS --}}
     <div id="header_blog">
-
-
-        
-
-
 
         @foreach ($blog as $b)
 

@@ -6,6 +6,12 @@ use Illuminate\Http\Request;
 use App\Usuari;
 use App\User;
 use App\Blog;
+use App\Rol;
+use App\Comentario;
+use App\Noticia;
+use App\Valoracion;
+use App\Notificacion;
+
 use Auth;
 
 class UsuarioController extends Controller
@@ -27,7 +33,7 @@ class UsuarioController extends Controller
     }
 
 
-    // Devuelve la vista del modficar perfild del usuario seleccionado
+    // Devuelve la vista del modficar perfil del usuario seleccionado
     /*public function index_UsuarioEdit($usuario_retornado){
         $usuario = new Usuari;
 
@@ -58,6 +64,7 @@ class UsuarioController extends Controller
     public function show_Usuario($nombreUsuario) {
 
         $usuario = new Usuari;
+        
 
         $user = $usuario->soloUnUsuario($nombreUsuario);
 
@@ -66,19 +73,180 @@ class UsuarioController extends Controller
 
 
 
-    public function modal_show_Usuario() { // Esto es para el admin
+    public function modal_show_Usuario() { // carga modal para ver el usuario (tambien para el modal delete)
+        $user = new Usuari;
+        //$rol = Rol::all();
 
         $idUsuario = filter_input(INPUT_GET, 'id');
 
-        $usuario = soloUnUsuarioID($idUsuario);
+        $usuario = $user->soloUnUsuarioID($idUsuario);
 
         return [$usuario];
 
     }
 
+    public function modal_edit_usuario() { // carga el modal de editar usuario
+        $user = new Usuari;
+        $rol = Rol::all();
+
+        $idUsuario = filter_input(INPUT_GET, 'id');
+
+        $usuario = $user->soloUnUsuarioID($idUsuario);
+
+        return [$usuario,$rol];
+
+    }
+
+    /*public function modal_delete_Usuario() { // carga el modal para eliminar el usuario
+        $user = new Usuari;
+
+        $idUsuario = filter_input(INPUT_GET, 'id');
+
+        $usuario = $user->soloUnUsuarioID($idUsuario);
+
+        return [$usuario];
+
+    }*/ 
 
 
+    public function modal_UsuarioEdit(Request $request, $id_retornado) {
+        $conexionUsuario = new Usuari;
 
+        $todosUsuarios = $conexionUsuario->todosUsuarios();
+        $busquedaUsuario = $conexionUsuario->soloUnUsuarioID($id_retornado);
+
+        $usuarioRepetido = true;
+        $emailRepetido = true;
+
+        $users = Usuari::findOrFail($id_retornado);
+
+        $variable = $request->input('usuario');
+
+        // Comprueba si el email y usuario se repiten en la base de datos.
+        foreach($todosUsuarios as $todosU){
+            if ($todosU->usuario === $request->input('usuario')) {
+
+                if ($users->usuario == $request->input('usuario')) {
+                    $usuarioRepetido = true;
+
+                } else {
+                    $usuarioRepetido = false; // Esto marca que el nombre de usuario pasado es de otro usuario y esta repetido
+                }
+            }
+            if ($todosU->email === $request->input('email')) {
+
+                if ($users->email == $request->input('email')) {
+                    $emailRepetido = true;
+
+                } else {
+                    $emailRepetido = false; // Esto marca que el email pasado es de otro usuario y esta repetido
+                }
+            }
+        }
+
+        if (session()->get('rol') == 'admin') {
+            if ($usuarioRepetido == true) {
+                if ($emailRepetido == true) {
+
+                    $this->validate(request(), [
+                        'usuario' => 'string|required',
+                        'email' => 'required|email',
+                        'nombre' => 'string|required',
+                        'apellidos' => 'string|required',
+                        'fechaNacimiento' => 'nullable|date',
+                        'pais' => 'nullable|string',
+                        'twitter'  =>  'nullable|string',
+                        'facebook'  =>  'nullable|string',
+                        'instagram' =>  'nullable|string',
+                        'paginaWeb' =>  'nullable|string'
+                    ]);
+
+                    $users->usuario = $request->input('usuario');
+                    $users->email = $request->input('email');
+                    $users->nombre = $request->input('nombre');
+                    $users->apellidos = $request->input('apellidos');
+                    $users->fechaNacimiento = $request->input('fechaNacimiento');
+                    $users->pais = $request->input('pais');
+                    $users->twitter = $request->input('twitter');
+                    $users->facebook = $request->input('facebook');
+                    $users->instagram = $request->input('instagram');
+                    $users->paginaWeb = $request->input('paginaWeb');
+                    $users->save();
+
+                    return redirect('/crudUsuarios');
+                    
+
+                } else {
+                    return back()->withErrors(['El email ya existe']);
+                }
+
+            } else {
+                return back()->withErrors(['El usuario ya existe']);
+            }
+
+        } else {
+            return back();
+        }
+
+    }
+
+    public function modal_UsuarioDelete($id_retornado) {
+
+        $conexionUsuario = new Usuari;
+        $conexionBlog = new Blog;
+        $conexionNoticia = new Noticia;
+
+        $idBlog;
+
+        if (session()->get('rol') == 'admin') {
+            $blogUsuario = $conexionBlog->blogIDUsuario($id_retornado);
+
+        
+            if ($blogUsuario != null) {
+                foreach ($blogUsuario as $blog) {
+                    $idBlog = $blog->id;
+                }
+
+            
+                $noticiasUsuario = $conexionNoticia->noticiaIDblogNormal($idBlog);
+            
+                if ($noticiasUsuario != null) {
+                    
+
+                    foreach ($noticiasUsuario as $noticia) { // No elimina las noticias
+                        Valoracion::eliminarValoracionesIDNoticia($noticia->id);
+                        Comentario::eliminarComentariosIDNoticia($noticia->id);
+                    }
+        
+                    foreach ($noticiasUsuario as $eliminaNoticia) { // Elimina la noticia
+                        Noticia::findOrFail($eliminaNoticia->id)->delete();
+                    }
+
+                    $noticiasUsuario = null;
+
+                }
+
+                if ($noticiasUsuario == null) {
+                    Blog::findOrFail($idBlog)->delete();
+    
+                }
+
+            }
+
+            Notificacion::eliminarNotificacionesIDUsuario($id_retornado); // Como no se obtiene la id de la notificación, llamo a una función creada por mi.
+
+            Usuari::findOrFail($id_retornado)->delete();            
+            
+
+            return redirect('/crudUsuarios');
+
+        } else {
+            return back();
+        }
+
+        
+
+    }
 
 
 
@@ -104,9 +272,6 @@ class UsuarioController extends Controller
         }
 
         $users = Usuari::findOrFail($id); // Busco el usuario por su id
-
-
-
 
 
         // Comprueba si el email y usuario se repiten en la base de datos.
