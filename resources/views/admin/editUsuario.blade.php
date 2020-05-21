@@ -82,8 +82,8 @@
                 </div>
 
                 <div class="modal-footer">
-                    <button type="submit">Guardar cambios</button>
                     <button name="cerrar" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-primary">Guardar cambios</button>
                 </div>
 
             </form>

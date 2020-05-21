@@ -42,7 +42,7 @@
                 </div>
 
                 <div class="modal-footer">
-                    <button name="cerrar" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    <button name="cerrar" class="btn btn-info" data-dismiss="modal">Cerrar</button>
                     <button type="submit" name="cerrar" class="btn btn-danger">Eliminar</button>
                 </div>
 
