@@ -6,6 +6,7 @@
 @include('admin.showUsuario')
 @include('admin.editUsuario')
 @include('admin.deleteUsuario')
+@include('admin.createUsuario')
 
 <div id="div_principal">
     <h2>Crud Usuarios</h2>
@@ -109,6 +110,10 @@
 
 </div>
 
+<div id="botonCrearUsuario">
+    <button class="btn btn-success" name="modalCrearUsuario" data-toggle="modal">Crear usuario</button>
+</div>
+
 
 @include('layouts.footer')
 
@@ -128,7 +133,7 @@
 
         $.get(urlShow+idUser)
                 .done(function(data){
-                    console.log(data);
+                    //console.log(data);
                     $('#idUsuario').text(data[0][0].id);
                     $('#usuario').text(data[0][0].usuario);
                     $('#rol').text(data[0][0].rol);
@@ -165,7 +170,7 @@
                 }).fail(function(){
                     alert('Error a la hora de hacer la petición');
                 });
-        console.log(' URL '+ urlShow + idUser);
+        //console.log(' URL '+ urlShow + idUser);
     });
 
     $("button[name='modalEditUsuario']").on('click', function() { // MODAL EDITAR
@@ -257,6 +262,44 @@
             });
 
     });
+
+    $("button[name='modalCrearUsuario']").on('click', function() {
+        var idUser = this.value;
+        var urlShow = "{{ url('/crudUsuarios/showCreateUsuario')}}";
+
+        var options = "";
+        var pais = "";
+
+        $.get(urlShow)
+            .done(function(data) {
+
+            //console.log(data);
+
+            $('#createrol').empty(); // Lo vacio primero para borrar los hijos anteriores y no se acumulen
+                for (var i = 0; i < data[0].length; i++){
+                    options += "<option value='"+data[0][i].rol+"'>"+data[0][i].rol+"</option>";
+                    console.log(data[0][i].rol);
+                }
+                
+            $('#createrol').append(options);
+
+
+            $('#createpais').empty(); // Lo vacio primero para borrar los hijos anteriores y no se acumulen
+            for (var j = 0; j < data[1].length; j++) {
+                    pais += "<option value='"+data[1][j]+"'>"+data[1][j]+"</option>";
+            }
+
+            $('#createpais').append(pais);
+
+            $("#createModal").modal('toggle');
+            $('#createModal').modal('show');
+
+            }).fail(function() {
+                alert('No de ha podido cargar la ventana modal de create usuario');
+            });
+    });
+
+
 </script>
 
 

@@ -2,6 +2,7 @@ $(function(){
     $('#formulario_registro_usuarios').on('submit', formulario_registro_usuarios);// Formulario de registros
     $('#formulario_creacion_blog').on('submit', formulario_creacion_blog); // Formulario de creacion del blog
 
+    $('#formCreate').on('submit', formulario_crudUsuarios_usuario);
 
 
 
@@ -24,7 +25,7 @@ function formulario_registro_usuarios(e){
         e.preventDefault();
     }
 
-    console.log(patron_email);
+    //console.log(patron_email);
 
     if (!patron_email.test(email)) {
         alert('El email esta mal escrito.');
@@ -47,6 +48,24 @@ function formulario_creacion_blog(e){
     }
 
     
+}
+
+function formulario_crudUsuarios_usuario(e) {
+    var password = $('#password').val();
+    var password2 = $('#password2').val();
+    var email = $('#createemail').val();
+    var expresion_regular_email = '^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$';
+    var patron_email = new RegExp(expresion_regular_email);
+
+    if (password != password2){
+        alert('Las contraseñas no son iguales');
+        e.preventDefault();
+    }
+
+    if (!patron_email.test(email)) {
+        alert('El email esta mal escrito.');
+        e.preventDefault();
+    }
 }
 
 

@@ -71,6 +71,14 @@ class UsuarioController extends Controller
         return view('usuarios.showUsuario', compact('user'));
     }
 
+    public function modal_create_Usuario() {
+        $rol = Rol::all();
+
+        $paisesArray = ["España", "Francia", "Alemania", "Portugal"];
+
+        return [$rol,$paisesArray];
+    }
+
 
 
     public function modal_show_Usuario() { // carga modal para ver el usuario (tambien para el modal delete)
@@ -346,6 +354,103 @@ class UsuarioController extends Controller
         } else {
 
             return back();
+        }
+
+    }
+
+    // Esta funcion es del registro de usuarios
+    public function post_create_usuario(Request $request)
+    {
+        //$usuario = new User;
+
+        if ($request->input('password') === $request->input('password2')){
+
+            $usuario = new Usuari;
+            $usuarios = $usuario->todosNombresUsuarios();
+            
+            $email = $usuario->todosEmailUsuarios();
+
+            $nombreImagen = null;
+
+
+            $nombre_usuario_repetido = false;
+            $email_usuario_repetido = false;
+
+
+            $rol = Rol::where('rol', '=', 'basico')->first();
+
+            foreach($usuarios as $u){ // Para los nombres de usuarios
+                if($u->usuario === $request->input('usuario')){
+                    $nombre_usuario_repetido = true;
+                }
+            }
+
+            foreach($email as $e){ // Para los emails de usuarios
+                if($e->email === $request->input('email')){
+                    $email_usuario_repetido = true;
+                }
+            }
+
+            if ($nombre_usuario_repetido == false){
+                
+                    if ($email_usuario_repetido == false){
+
+                        $this->validate(request(), [
+                            'usuario' => 'required',
+                            'email' => 'required|email',
+                            'password' => 'required',
+                            'nombre' => 'required',
+                            'apellidos' => 'required',
+                            'fechaNacimiento' => 'nullable|date',
+                            'pais' => 'nullable|string',
+                            'twitter' => 'nullable|string',
+                            'facebook' => 'nullable|string',
+                            'instagram' => 'nullable|string',
+                            'paginaWeb' => 'nullable|string',
+                            'imagenPerfil' => 'nullable|string'
+                        ]);
+
+
+                        // En este IF se crea el fichero en la carpeta publica de imagenes/perfil y se guarda el nombre del fichero para luego integrarlo a la base de datos.
+                        if ($request->file('imagen_usuario') != null){ 
+                            $iPerfil = $request->file('imagen_usuario');
+                            $iExtension = $request->file('imagen_usuario')->getClientOriginalExtension();
+                            $nombreFichero = time() . '.' . $iExtension; // getClientOriginalExtension pilla la extension del fichero subido
+                            Image::make($iPerfil)->resize(100,100)->save(public_path('/imagenes/perfil/'.$nombreFichero));
+                
+                            $nombreImagen = $nombreFichero;
+                        }
+
+
+
+                        $usuario->usuario = $request->input('usuario');
+                        $usuario->password = bcrypt($request->input('password'));
+                        $usuario->nombre = $request->input('nombre');
+                        $usuario->apellidos = $request->input('apellidos');
+                        $usuario->email = $request->input('email');
+                        $usuario->fechaNacimiento = $request->input('fecha_nacimiento');
+                        $usuario->pais = $request->input('pais');
+                        $usuario->twitter = $request->input('twitter');
+                        $usuario->facebook = $request->input('facebook');
+                        $usuario->instagram = $request->input('instagram');
+                        $usuario->paginaWeb = $request->input('paginaWeb');
+                        //$usuario->imagenPerfil = $request->input('imagen_usuario');
+                        $usuario->imagenPerfil = $nombreImagen;
+                        $usuario->rol = $rol->rol;
+                        $usuario->save();
+
+                        return redirect('/login');
+
+                    } else {
+                        return back()->withErrors(['El email ya existe']);
+                    }
+            
+            } else {
+                return back()->withErrors(['El usuario ya existe']);
+            }
+
+        } else {
+            return back()->withErrors(['La contraseña esta mal escrita']);
         }
 
     }

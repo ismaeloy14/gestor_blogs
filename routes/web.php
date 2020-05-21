@@ -26,7 +26,7 @@ Route::get('/logout', 'AuthController@index_logout');
 
 
 // Formulario de registro de usuarios
-Route::post('/registro/createUsuario', 'AuthController@post_create_usuario');
+Route::post('/registro/createUsuario', 'UsuarioController@post_create_usuario');
 
 // Verificando el login
 Route::post('/login/verificando', 'AuthController@post_login_usuario');
@@ -51,19 +51,22 @@ Route::get('/crudUsuarios', 'AuthController@index_crudUsuarios'); // Para ir al 
 // Ventanas modales
 
 Route::get('/crudUsuarios/showUsuario', 'UsuarioController@modal_show_Usuario');
+Route::get('/crudUsuarios/showCreateUsuario', 'UsuarioController@modal_create_Usuario');
 Route::get('/crudUsuarios/editUsuario', 'UsuarioController@modal_edit_usuario');
 Route::get('/crudUsuarios/deleteUsuario', 'UsuarioController@modal_show_Usuario');
 
+/* Crud de usuarios */
+Route::post('/crudUsuarios/createUsuario', 'UsuarioController@post_create_usuario'); // Crear usuario
 Route::put('/crudUsuarios/editUsuario/{id}', 'UsuarioController@modal_UsuarioEdit'); // modificar usuario
 Route::post('/crudUsuarios/deleteUsuario/{id}', 'UsuarioController@modal_UsuarioDelete'); // eliminar usuario
 
-/* Crud de usuarios */
-Route::get('/crudUsuarios/verUsuario/{usuario}', 'UsuarioController@index_UsuarioShow');
+
+/*Route::get('/crudUsuarios/verUsuario/{usuario}', 'UsuarioController@index_UsuarioShow');
 Route::get('/crudUsuarios/editarUsuario/{usuario}', 'UsuarioController@index_UsuarioEdit');
 Route::get('/crudUsuarios/eliminarUsuario/{id}', 'UsuarioController@index_UsuarioDelete');
 
 
-Route::put('/crudUsuarios/editarUsuario/{usuario}', 'UsuarioController@put_UsuarioEdit');
+//Route::put('/crudUsuarios/editarUsuario/{usuario}', 'UsuarioController@put_UsuarioEdit');*/
 
 /* Crud de blogs */
 Route::get('/crudUsuarios/infoBlog/{id}', 'BlogController@index_BlogInfo');
