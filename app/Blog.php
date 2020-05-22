@@ -28,4 +28,8 @@ class Blog extends Model
         }
 
     }
+
+    public function blogID($idBlog) {
+        return DB::table('blogs')->where('id', $idBlog)->first();
+    }
 }

@@ -8,6 +8,11 @@
 @include('admin.deleteUsuario')
 @include('admin.createUsuario')
 
+@include('admin.createBlog')
+@include('admin.showBlog')
+@include('admin.editBlog')
+@include('admin.deleteBlog')
+
 <div id="div_principal">
     <h2>Crud Usuarios</h2>
 
@@ -34,88 +39,46 @@
         
         <tbody>
 
-        
-
-        {{--@foreach ($usuarios_sql as $users)
-        <tr>
-            <td>
-                {{$users->usuario}}
-            </td>
-            <td>
-                {{$users->rol}}
-            </td>
-            <td>
-                <a class="btn btn-info" href="{{url('/crudUsuarios/verUsuario/' . $users->usuario)}}">Ver Perfil</a>
-                <a class="btn btn-primary" href="{{url('/crudUsuarios/editarUsuario/' . $users->usuario)}}">Editar</a>
-                <a class="btn btn-danger" href="{{url('/crudUsuarios/eliminarUsuario/' . $users->id)}}">Eliminar</a>
-            </td>
-            <td>
-                @foreach ($blog_sql as $blog)
-                    @if ($users->id == $blog->idUsuario)
-                        <a class="btn btn-info" href="{{url('/crudUsuarios/infoBlog/' . $blog->id)}}">Ver información</a>
-                        <a class="btn btn-primary" href="{{url('/crudUsuarios/editarBlog/' . $blog->id)}}">Editar</a>
-                        <a class="btn btn-danger" href="{{url('/crudUsuarios/eliminarBlog/' . $blog->id)}}">Eliminar</a>
-                    @endif
-                @endforeach
-                
-            </td>
-        </tr>--}}
-
-        {{-- Pruebas del datatable --}}
-
         @foreach ($users as $u)
         
         <tr>
             
-                @php
-                    $arrayAsocUsuarios["usuario".$u->id] = $u->id;
-                @endphp
-            {{--<td>
-                {{$u->id}}
-            </td>--}}
             <td>{{$u->usuario}}</td>
             <td>{{$u->rol}}</td>
 
-            
-
             <td>
-                <button class="btn btn-info" name="modalShowUsuario" data-toggle="modal" value="<?php echo $arrayAsocUsuarios["usuario".$u->id]; ?>">Ver Perfil</button>
-                <button class="btn btn-primary" name="modalEditUsuario" data-toggle="modal" value="<?php echo $arrayAsocUsuarios["usuario".$u->id]; ?>">Editar</button>
-                <button class="btn btn-danger" name="modalDeleteUsuario" data-toggle="modal" value="<?php echo $arrayAsocUsuarios["usuario".$u->id]; ?>">Eliminar</button>
+                <button class="btn btn-info" name="modalShowUsuario" data-toggle="modal" value="{{$u->id}}">Ver Perfil</button>
+                <button class="btn btn-primary" name="modalEditUsuario" data-toggle="modal" value="{{$u->id}}?>">Editar</button>
+                <button class="btn btn-danger" name="modalDeleteUsuario" data-toggle="modal" value="{{$u->id}}">Eliminar</button>
             </td>
                 
             <td>
                 @foreach ($blogs as $blog)
                     @if ($u->id == $blog->idUsuario)
                     
-                        <button class="btn btn-info">Ver información</button>
-                        <button class="btn btn-primary">Editar</button>
-                        <button class="btn btn-danger">Eliminar</button>
-                    
+                        <button class="btn btn-info" name="modalShowBlog" value="{{$blog->id}}">Ver información</button>
+                        <button class="btn btn-primary" name="modalEditBlog" value="{{$blog->id}}">Editar</button>
+                        <button class="btn btn-danger" name="modalDeleteBlog" value="{{$blog->id}}">Eliminar</button>
                         
                     @endif
+
                 @endforeach
                 
             </td>
         </tr>
-
-
-
-
         @endforeach
         </tbody>
-
-
     </table>
 
 </div>
 
-<div id="botonCrearUsuario">
+<div id="botonCrearUsuarioBlog">
     <button class="btn btn-success" name="modalCrearUsuario" data-toggle="modal">Crear usuario</button>
+    <button class="btn btn-primary" name="modalCreateBlog">Crear blog</button>
 </div>
 
 
-@include('layouts.footer')
+{{--@include('layouts.footer')--}}
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
@@ -125,7 +88,7 @@
     
     // Para ventanas modales
 
-    $("button[name='modalShowUsuario']").on('click', function() {
+    $("button[name='modalShowUsuario']").on('click', function() { // Modal ver usuario
         var idUser = this.value;
         var urlShow = "{{ url('/crudUsuarios/showUsuario?id=' )}}";
 
@@ -173,7 +136,7 @@
         //console.log(' URL '+ urlShow + idUser);
     });
 
-    $("button[name='modalEditUsuario']").on('click', function() { // MODAL EDITAR
+    $("button[name='modalEditUsuario']").on('click', function() { // Modal editar usuario
         var idUser = this.value;
         var urlShow = "{{ url('/crudUsuarios/editUsuario?id=' )}}";
         var urlForm = "{{ url('/crudUsuarios/editUsuario/' )}}";
@@ -185,7 +148,7 @@
 
         $.get(urlShow+idUser)
             .done(function(data) {
-                //console.log(data);
+                console.log(data);
 
                 $('#formEdit').attr("action", urlFormCompleta); // Le añado el atributo action dinámicamente
                 $('#editidUsuario').val(data[0][0].id);
@@ -193,7 +156,7 @@
 
                 $('#editrol').empty(); // Lo vacio primero para borrar los hijos anteriores y no se acumulen
                 for (var i = 0; i < data[1].length; i++){
-                    if (data[1][i].rol == 'basico') {
+                    if (data[1][i].rol == data[0][0].rol) {
                         options += "<option value='"+data[1][i].rol+"' selected>"+data[1][i].rol+"</option>";
                     } else {
                         options += "<option value='"+data[1][i].rol+"'>"+data[1][i].rol+"</option>";
@@ -240,7 +203,7 @@
 
     });
 
-    $("button[name='modalDeleteUsuario']").on('click', function() {
+    $("button[name='modalDeleteUsuario']").on('click', function() { // Modal delete usuario
         var idUser = this.value;
         var urlShow = "{{ url('/crudUsuarios/deleteUsuario?id=' )}}";
         var urlForm = "{{ url('/crudUsuarios/deleteUsuario/' )}}";
@@ -263,7 +226,7 @@
 
     });
 
-    $("button[name='modalCrearUsuario']").on('click', function() {
+    $("button[name='modalCrearUsuario']").on('click', function() { // Modal crear usuario
         var idUser = this.value;
         var urlShow = "{{ url('/crudUsuarios/showCreateUsuario')}}";
 
@@ -297,6 +260,163 @@
             }).fail(function() {
                 alert('No de ha podido cargar la ventana modal de create usuario');
             });
+    });
+
+    // Modales de Blogs \\
+
+    $("button[name='modalCreateBlog']").on('click', function() { // Modal crear blog
+        var urlShow = "{{ url('/crudUsuarios/showCreateBlog')}}";
+
+        var usuarios = "";
+        var categorias = "";
+
+        $.get(urlShow)
+            .done(function(data) {
+            
+                if (data[0].length > 0){
+                    //console.log(data);
+
+                    $('#createBlogUsuario').empty(); // Lo vacio primero para borrar los hijos anteriores y no se acumulen
+                        for (var i = 0; i < data[0].length; i++){
+                            usuarios += "<option value='"+data[0][i]+"'>"+data[0][i]+"</option>";
+                            //console.log(data[0][i]);
+                        }
+                        
+                    $('#createBlogUsuario').append(usuarios);
+
+
+                    $('#createBlogCategoria').empty(); // Lo vacio primero para borrar los hijos anteriores y no se acumulen
+                    for (var j = 0; j < data[1].length; j++) {
+                            categorias += "<option value='"+data[1][j].categoria+"'>"+data[1][j].categoria+"</option>";
+                    }
+
+                    $('#createBlogCategoria').append(categorias);
+
+                    $("#createModalBlog").modal('toggle');
+                    $('#createModalBlog').modal('show');
+
+                } else {
+                    alert('No hay usuarios sin blog.');
+                }
+
+                }).fail(function() {
+                    alert('No de ha podido cargar la ventana modal de create blog');
+                });
+    });
+
+    $("button[name='modalShowBlog']").on('click', function() { // Modal información del blog
+        var idblog = this.value;
+        var urlShow = "{{ url('/crudUsuarios/showBlog?id=' )}}";
+        var urlBlog = "{{ url('/' )}}";
+
+        // Conexion ajax
+
+        $.get(urlShow+idblog)
+                .done(function(data){
+                    //console.log(data);
+                    
+                    $('#showTituloBlog').text(data[1].tituloBlog);
+                    $('#showUsuario').text(data[0].usuario);
+                    $('#showCataegoria').text(data[1].categoria);
+
+                    if (data[1].blogPublico == 0) {
+                        $('#showPublico').text('No es público');
+                    } else {
+                        $('#showPublico').text('Sí es público');
+                    }
+                    
+                    $('#irblog').attr('href', urlBlog+'/'+data[1].tituloBlog);
+
+                    $("#showModalblog").modal('toggle');
+                    $('#showModalblog').modal('show');
+
+                }).fail(function(){
+                    alert('Error a la hora de hacer la petición');
+                });
+        //console.log(' URL '+ urlShow + idblog);
+    });
+
+    $("button[name='modalEditBlog']").on('click', function() { // Modal editar blog
+        var idBlog = this.value;
+        var urlShow = "{{ url('/crudUsuarios/showEditBlog?id=' )}}";
+        var urlForm = "{{ url('/crudUsuarios/editBlog/' )}}";
+        var urlFormCompleta = urlForm+'/'+idBlog;
+
+        var categorias = "";
+        var publico = "";
+
+        $.get(urlShow+idBlog)
+            .done(function(data) {
+                console.log(data);
+
+                $('#formEditBlog').attr("action", urlFormCompleta); // Le añado el atributo action dinámicamente
+
+                $('#edittitulo').val(data[0].tituloBlog);
+                
+                $('#editcategoria').empty();
+
+                for (var j = 0; j < data[1].length; j++) {
+                    if (data[0].categoria == data[1][j].categoria){
+                        categorias += "<option value='"+data[1][j].categoria+"' selected>"+data[1][j].categoria+"</option>";
+                    } else {
+                        categorias += "<option value='"+data[1][j].categoria+"'>"+data[1][j].categoria+"</option>";
+                    }
+
+                }
+                $('#editcategoria').append(categorias);
+
+
+                $('#editpublico').empty(); // Lo vacio primero para borrar los hijos anteriores y no se acumulen
+                var publicoNoPublico = data[0].blogPublico;
+                
+
+                if (data[0].blogPublico == publicoNoPublico) {
+
+                    publico += "<option value='"+data[0].blogPublico+"' selected> Sí es público </option>";
+
+                    if ((publicoNoPublico == 1) && (data[0].blogPublico != publicoNoPublico)) {
+                        publico += "<option value='1'> Sí es público </option>";
+                    } else {
+                        publico += "<option value='0'> No es público </option>";
+                    }
+                }
+                    
+                    //console.log(publico)
+                
+                $('#editpublico').append(publico);
+
+
+                $("#editModalBlog").modal('toggle');
+                $('#editModalBlog').modal('show');
+
+            }).fail(function(){
+                alert('No de ha podido cargar la ventana modal de edit usuario');
+            });
+
+    });
+
+    $("button[name='modalDeleteBlog']").on('click', function() { // Modal delete usuario
+        var idBlog = this.value;
+        var urlShow = "{{ url('/crudUsuarios/showDeleteBlog?id=' )}}";
+        var urlForm = "{{ url('/crudUsuarios/deleteBlog/' )}}";
+        var urlFormCompleta = urlForm+'/'+idBlog;
+
+        $.get(urlShow+idBlog)
+            .done(function(data) {
+                console.log(data);
+                $('#formDeleteBlog').attr("action", urlFormCompleta); // Le añado el atributo action dinámicamente
+                $('#deleteidBlog').text(data[1].id);
+                $('#deletetituloBlog').text(data[1].tituloBlog);
+                $('#deleteBlogUsuario').text(data[0].usuario);
+
+
+                $("#deleteModalBlog").modal('toggle');
+                $('#deleteModalBlog').modal('show');
+
+            }).fail(function(){
+                alert('No de ha podido cargar la ventana modal de delete usuario');
+            });
+
     });
 
 

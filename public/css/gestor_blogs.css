@@ -142,21 +142,6 @@ a{
     font-size: 1.2em;
 }
 
-/* Antiguos botones
-#div_login_registro form{
-    width: 30%;
-    float: left;
-    height: auto;
-    padding: 5px 5px 5px 0;
-    text-align: right;
-    margin-top: 1.2em;
-}
-
-#div_login_registro form button{
-    font-size: 1em;
-    float: left;
-}*/
-
 
 /* END header */
 
@@ -169,13 +154,13 @@ a{
     margin-bottom: 2%;
 }
 
-#botonCrearUsuario {
+#botonCrearUsuarioBlog {
     float: left;
     width: 100%;
     margin-bottom: 5%;
 }
 
-#botonCrearUsuario > button {
+#botonCrearUsuarioBlog > button {
     float: left;
     margin-left: 2em;
 }
@@ -671,6 +656,10 @@ footer > #div_footer_blog_redes > a img {
     width: 40% !important;
     text-align: center !important;
     margin-left: 31%;
+}
+
+#irblog {
+    color: white;
 }
 
 /* END CSS especifico */

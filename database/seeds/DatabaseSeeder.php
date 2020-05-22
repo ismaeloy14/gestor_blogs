@@ -125,7 +125,21 @@ class DatabaseSeeder extends Seeder
             'nombre'            =>  'user_user1',
             'apellidos'         =>  'user1 user1',
             'fechaNacimiento'   =>  '1998-05-14',
-            'imagenPerfil'      =>  null,
+            'imagenPerfil'      =>  'perfil_defecto',
+            'twitter'           =>  null,
+            'facebook'          =>  null,
+            'instagram'         =>  null,
+            'paginaWeb'         =>  null,
+            'rol'               =>  'basico'
+        ),
+        array(
+            'usuario'    =>  'user2',
+            'email'     =>  'user2@gmail.com',
+            'password'          =>  'user2',
+            'nombre'            =>  'user_user2',
+            'apellidos'         =>  'user2 user2',
+            'fechaNacimiento'   =>  '1998-05-14',
+            'imagenPerfil'      =>  'perfil_defecto',
             'twitter'           =>  null,
             'facebook'          =>  null,
             'instagram'         =>  null,
@@ -152,6 +166,12 @@ class DatabaseSeeder extends Seeder
             'idUsuario'    =>  1,
             'blogPublico'  =>  1,
             'categoria'     =>  'Tecnologia'
+        ),
+        array(
+            'tituloBlog'   =>  'Blog3',
+            'idUsuario'    =>  3,
+            'blogPublico'  =>  1,
+            'categoria'    =>  'Tecnologia'
         )
     );
 
@@ -182,6 +202,27 @@ class DatabaseSeeder extends Seeder
             'cuerpoNoticia'     =>  'Noticia de mayo.',
             'fechaNoticia'      =>  '2020-05-01',
             'idBlog'            =>  1,
+            'noticiaPublica'    =>  1
+        ),
+        array(// Noticias del usuario user2
+            'tituloNoticia'     =>  'Noticia1',
+            'cuerpoNoticia'     =>  'Noticia de mayo 1.',
+            'fechaNoticia'      =>  '2020-05-01',
+            'idBlog'            =>  2,
+            'noticiaPublica'    =>  1
+        ),
+        array(
+            'tituloNoticia'     =>  'Noticia2',
+            'cuerpoNoticia'     =>  'Noticia de mayo 2.',
+            'fechaNoticia'      =>  '2020-05-02',
+            'idBlog'            =>  2,
+            'noticiaPublica'    =>  1
+        ),
+        array(
+            'tituloNoticia'     =>  'Noticia3',
+            'cuerpoNoticia'     =>  'Noticia de mayo 3.',
+            'fechaNoticia'      =>  '2020-05-08',
+            'idBlog'            =>  2,
             'noticiaPublica'    =>  1
         )
     );

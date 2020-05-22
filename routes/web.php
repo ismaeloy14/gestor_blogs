@@ -50,28 +50,30 @@ Route::get('/crudUsuarios', 'AuthController@index_crudUsuarios'); // Para ir al 
 
 // Ventanas modales
 
-Route::get('/crudUsuarios/showUsuario', 'UsuarioController@modal_show_Usuario');
-Route::get('/crudUsuarios/showCreateUsuario', 'UsuarioController@modal_create_Usuario');
-Route::get('/crudUsuarios/editUsuario', 'UsuarioController@modal_edit_usuario');
-Route::get('/crudUsuarios/deleteUsuario', 'UsuarioController@modal_show_Usuario');
-
 /* Crud de usuarios */
-Route::post('/crudUsuarios/createUsuario', 'UsuarioController@post_create_usuario'); // Crear usuario
-Route::put('/crudUsuarios/editUsuario/{id}', 'UsuarioController@modal_UsuarioEdit'); // modificar usuario
-Route::post('/crudUsuarios/deleteUsuario/{id}', 'UsuarioController@modal_UsuarioDelete'); // eliminar usuario
+Route::get('/crudUsuarios/showUsuario', 'UsuarioController@modal_show_Usuario'); // Modal show usuario
+Route::get('/crudUsuarios/showCreateUsuario', 'UsuarioController@modal_create_Usuario'); // Modal create usuario
+Route::get('/crudUsuarios/editUsuario', 'UsuarioController@modal_edit_usuario'); // Modal edit usuario
+Route::get('/crudUsuarios/deleteUsuario', 'UsuarioController@modal_show_Usuario'); // Modal delete usuario
 
 
-/*Route::get('/crudUsuarios/verUsuario/{usuario}', 'UsuarioController@index_UsuarioShow');
-Route::get('/crudUsuarios/editarUsuario/{usuario}', 'UsuarioController@index_UsuarioEdit');
-Route::get('/crudUsuarios/eliminarUsuario/{id}', 'UsuarioController@index_UsuarioDelete');
+Route::post('/crudUsuarios/createUsuario', 'UsuarioController@post_create_usuario'); // Crear usuario (admin)
+Route::put('/crudUsuarios/editUsuario/{id}', 'UsuarioController@modal_UsuarioEdit'); // modificar usuario (admin)
+Route::post('/crudUsuarios/deleteUsuario/{id}', 'UsuarioController@modal_UsuarioDelete'); // eliminar usuario (admin)
 
 
-//Route::put('/crudUsuarios/editarUsuario/{usuario}', 'UsuarioController@put_UsuarioEdit');*/
 
 /* Crud de blogs */
-Route::get('/crudUsuarios/infoBlog/{id}', 'BlogController@index_BlogInfo');
-Route::get('/crudUsuarios/editarBlog/{id}', 'BlogController@index_BlogEdit');
-Route::get('/crudUsuarios/eliminarBlog/{id}', 'BlogController@index_BlogDelete');
+Route::get('/crudUsuarios/showCreateBlog', 'BlogController@modal_create_Blog'); // Modal crear blog
+Route::get('/crudUsuarios/showBlog', 'BlogController@modal_show_delete_Blog'); // Modal show blog
+Route::get('/crudUsuarios/showEditBlog', 'BlogController@modal_edit_Blog'); // Modal edit blog
+Route::get('/crudUsuarios/showDeleteBlog', 'BlogController@modal_show_delete_Blog'); // Modal delete blog
+
+Route::post('/crudUsuarios/createBlog', 'BlogController@modal_post_create_blog'); // Crear el blog (admin)
+Route::put('/crudUsuarios/editBlog/{id}', 'BlogController@modal_put_edit_Blog'); // Edita un blog (admin)
+Route::post('/crudUsuarios/deleteBlog/{id}', 'BlogController@modal_post_delete_Blog'); // elimina un blog (admin)
+
+
 
 // Rutas de blogs
 

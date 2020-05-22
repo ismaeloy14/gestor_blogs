@@ -117,7 +117,7 @@ class UsuarioController extends Controller
     }*/ 
 
 
-    public function modal_UsuarioEdit(Request $request, $id_retornado) {
+    public function modal_UsuarioEdit(Request $request, $id_retornado) { // Desde la ventana modal de crudUsuarios
         $conexionUsuario = new Usuari;
 
         $todosUsuarios = $conexionUsuario->todosUsuarios();
@@ -159,6 +159,7 @@ class UsuarioController extends Controller
                     $this->validate(request(), [
                         'usuario' => 'string|required',
                         'email' => 'required|email',
+                        'rol'   =>  'required|string',
                         'nombre' => 'string|required',
                         'apellidos' => 'string|required',
                         'fechaNacimiento' => 'nullable|date',
@@ -171,6 +172,7 @@ class UsuarioController extends Controller
 
                     $users->usuario = $request->input('usuario');
                     $users->email = $request->input('email');
+                    $users->rol = $request->input('rol');
                     $users->nombre = $request->input('nombre');
                     $users->apellidos = $request->input('apellidos');
                     $users->fechaNacimiento = $request->input('fechaNacimiento');
@@ -204,26 +206,31 @@ class UsuarioController extends Controller
         $conexionBlog = new Blog;
         $conexionNoticia = new Noticia;
 
-        $idBlog;
-
         if (session()->get('rol') == 'admin') {
             $blogUsuario = $conexionBlog->blogIDUsuario($id_retornado);
 
         
             if ($blogUsuario != null) {
-                foreach ($blogUsuario as $blog) {
-                    $idBlog = $blog->id;
-                }
+                
+                $noticiasUsuario = $conexionNoticia->noticiaIDblogNormal($blogUsuario->id);
 
-            
-                $noticiasUsuario = $conexionNoticia->noticiaIDblogNormal($idBlog);
+
+
+                //return print_r($noticiasUsuario.' ');
             
                 if ($noticiasUsuario != null) {
                     
 
                     foreach ($noticiasUsuario as $noticia) { // No elimina las noticias
-                        Valoracion::eliminarValoracionesIDNoticia($noticia->id);
-                        Comentario::eliminarComentariosIDNoticia($noticia->id);
+                        $eliminarValoraciones = Valoracion::eliminarValoracionesIDNoticia($noticia->id);
+                        $eliminarComentarios = Comentario::eliminarComentariosIDNoticia($noticia->id);
+
+                        if ($eliminarValoraciones == null) {
+                            break;
+                        }
+                        if ($eliminarComentarios == null) {
+                            break;
+                        }
                     }
         
                     foreach ($noticiasUsuario as $eliminaNoticia) { // Elimina la noticia
@@ -231,11 +238,11 @@ class UsuarioController extends Controller
                     }
 
                     $noticiasUsuario = null;
-
+                    
                 }
 
                 if ($noticiasUsuario == null) {
-                    Blog::findOrFail($idBlog)->delete();
+                    Blog::findOrFail($blogUsuario->id)->delete();
     
                 }
 
@@ -419,6 +426,8 @@ class UsuarioController extends Controller
                             Image::make($iPerfil)->resize(100,100)->save(public_path('/imagenes/perfil/'.$nombreFichero));
                 
                             $nombreImagen = $nombreFichero;
+                        } else {
+                            $nombreImagen = 'perfil_defecto';
                         }
 
 
@@ -458,70 +467,4 @@ class UsuarioController extends Controller
 
 
 
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }

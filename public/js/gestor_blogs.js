@@ -4,6 +4,16 @@ $(function(){
 
     $('#formCreate').on('submit', formulario_crudUsuarios_usuario);
 
+    $('#formCreateBlog').on('submit', formulario_creacion_blog);
+    /*$('#').on('submit', );
+    $('#').on('submit', );
+    $('#').on('submit', );
+    $('#').on('submit', );
+    $('#').on('submit', );
+    $('#').on('submit', );*/
+
+    
+
 
 
 });
@@ -32,18 +42,22 @@ function formulario_registro_usuarios(e){
         e.preventDefault();
     }
 
-    
-
 }
 
 function formulario_creacion_blog(e){
-    var titulo_blog = $('#titulo_blog').val();
+    var titulo_blog = $("input[name='tituloBlog']").val();
+    var publico = $("select[name='publico']").val();
 
     if (titulo_blog.length > 20) {
         alert('Tu titulo es demasiado largo.');
         e.preventDefault();
     } else if (titulo_blog.length < 3) {
         alert('Tu titulo es demasiado corto.');
+        e.preventDefault();
+    }
+
+    if ((publico != 1) && (publico != 0)) {
+        alert('Valor de publico incorrecto')
         e.preventDefault();
     }
 
@@ -67,5 +81,6 @@ function formulario_crudUsuarios_usuario(e) {
         e.preventDefault();
     }
 }
+
 
 

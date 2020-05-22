@@ -16,7 +16,7 @@ class Noticia extends Model
     }
 
     public function noticiaIDblogNormal($idBlog){ // Con ordenacion descendiente
-        DB::table('noticias')->where('idBlog', $idBlog)->get();
+        return DB::table('noticias')->where('idBlog', $idBlog)->get();
     }
 
     public function soloUnaNoticia($idBlog, $tituloNoticia){

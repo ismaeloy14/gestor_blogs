@@ -31,12 +31,6 @@
 
             <label>
                 <span>¿Quieres que sea público?</span>
-                {{--<div>
-
-                    <label><input type="radio" name="publico" value=1 required><span>Sí</span></label>
-                    <label><input type="radio" name="publico" value=0 required><span>No</span></label>
-
-                </div>--}}
 
                 <select name="publico">
                     <option value="1">Público</option>

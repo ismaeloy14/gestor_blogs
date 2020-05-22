@@ -11,7 +11,7 @@
                 <a href="{{url('/'.$b->tituloBlog.'/'.$noticia->tituloNoticia)}}" class="noticiasDivs">
                 @endforeach
                     
-                    <img src="{{asset('imagenes/noticia/'.$noticia->imagenNoticia)}}" alt="Imagen de la noticia">
+                    {{--<img src="{{asset('imagenes/noticia/'.$noticia->imagenNoticia)}}" alt="Imagen de la noticia">--}}
                     <h4>{{$noticia->tituloNoticia}}</h4>
                     
                     @php
