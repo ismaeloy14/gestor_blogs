@@ -31,6 +31,9 @@
                 <div>
                     <a class="btn btn-warning" href="{{url('/editarImagen/'. $user->usuario)}}">Cambiar avatar</a>
                 </div>
+                <div>
+                    <a class="btn btn-dark" href="{{url('/cambiarContrasena/'. $user->usuario)}}">Cambiar contraseña</a>
+                </div>
             </div>
 
             @endif           

@@ -275,6 +275,14 @@ footer{
     box-shadow: 0px 0px 10px 3px rgba(0,0,0,0.75);
 }
 
+#div_registro h4 {
+    width: 100%;
+    height: auto;
+    text-align: center;
+    float: left;
+    margin: 0.5em 0 !important;
+}
+
 #div_registro h2{
     width: 100%;
     height: auto;
@@ -323,13 +331,223 @@ footer{
 }
 
 
-
-
 #div_registro form>div button{
     font-size: 1.2em;
 }
 
 /* END vistra registro */
+
+/* VISTAS de usuario (perfil) */
+
+/* Editar perfil */
+
+#div_editUsuario {
+    border-radius: 5px;
+    background-color: lightblue;
+    width: 50%;
+    float: left;
+    margin: 2.5em 25%;
+
+    /* Sombra */
+    -webkit-box-shadow: 0px 0px 10px 3px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 10px 3px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 10px 3px rgba(0,0,0,0.75);
+}
+
+#div_editUsuario h4 {
+    width: 100%;
+    height: auto;
+    text-align: center;
+    float: left;
+    margin: 0.5em 0 !important;
+}
+
+#div_editUsuario h2{
+    width: 100%;
+    height: auto;
+    text-align: center;
+    float: left;
+    font-size: 3em;
+    margin: 0.5em 0 !important;
+}
+
+#div_editUsuario form{
+    width: 100%;
+    height: auto;
+    float: left;
+    padding-bottom: 3em;
+}
+
+#div_editUsuario form>label{
+    width: 100%;
+    height: auto;
+    float: left;
+    padding-bottom: 10px;
+    font-size: 1.3em;
+}
+
+#div_editUsuario form>label span{
+    width: 30%;
+    height: auto;
+    float: left;
+    text-align: right;
+    padding-right: 0.5em;
+}
+
+#div_editUsuario form>label input{
+    width: 60%;
+    height: auto;
+    float: left;
+    text-align: left;
+}
+
+#div_editUsuario form>div{
+    width: 100%;
+    height: auto;
+    float: left;
+    text-align: center;
+    padding-top: 3em;
+}
+
+/* END editar perfil */
+
+/* Cambiar avatar */
+
+#div_editImagenPerfil {
+    border-radius: 5px;
+    background-color: lightblue;
+    width: 50%;
+    float: left;
+    margin: 2.5em 25%;
+
+    /* Sombra */
+    -webkit-box-shadow: 0px 0px 10px 3px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 10px 3px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 10px 3px rgba(0,0,0,0.75);
+}
+
+#div_editImagenPerfil h4 {
+    width: 100%;
+    height: auto;
+    text-align: center;
+    float: left;
+    margin: 0.5em 0 !important;
+}
+
+#div_editImagenPerfil h2{
+    width: 100%;
+    height: auto;
+    text-align: center;
+    float: left;
+    font-size: 3em;
+    margin: 0.5em 0 !important;
+}
+
+#div_editImagenPerfil form{
+    width: 100%;
+    height: auto;
+    float: left;
+    padding-bottom: 3em;
+}
+
+#div_editImagenPerfil form>label{
+    width: 100%;
+    height: auto;
+    float: left;
+    padding-bottom: 10px;
+    font-size: 1.3em;
+    text-align: center;
+}
+
+#div_editImagenPerfil form>label input{
+    width: 40% !important;
+    text-align: center !important;
+}
+
+
+#div_editImagenPerfil form>div{
+    width: 100%;
+    height: auto;
+    float: left;
+    text-align: center;
+    padding-top: 3em;
+}
+
+/* END cambiar avatar */
+
+/* Cambiar contraseña */
+
+/* END cambiar contraseña */
+
+#div_editContrasena {
+    border-radius: 5px;
+    background-color: lightblue;
+    width: 50%;
+    float: left;
+    margin: 2.5em 25%;
+
+    /* Sombra */
+    -webkit-box-shadow: 0px 0px 10px 3px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 10px 3px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 10px 3px rgba(0,0,0,0.75);
+}
+
+#div_editContrasena h4 {
+    width: 100%;
+    height: auto;
+    text-align: center;
+    float: left;
+    margin: 0.5em 0 !important;
+}
+
+#div_editContrasena h2{
+    width: 100%;
+    height: auto;
+    text-align: center;
+    float: left;
+    font-size: 3em;
+    margin: 0.5em 0 !important;
+}
+
+#div_editContrasena form{
+    width: 100%;
+    height: auto;
+    float: left;
+    padding-bottom: 3em;
+}
+
+#div_editContrasena form>label{
+    width: 100%;
+    height: auto;
+    float: left;
+    padding-bottom: 10px;
+    font-size: 1.3em;
+}
+
+#div_editContrasena form>label span{
+    width: 30%;
+    height: auto;
+    float: left;
+    text-align: right;
+    padding-right: 0.5em;
+}
+
+#div_editContrasena form>label input{
+    width: 60%;
+    height: auto;
+    float: left;
+    text-align: left;
+}
+
+#div_editContrasena form>div{
+    width: 100%;
+    height: auto;
+    float: left;
+    text-align: center;
+    padding-top: 3em;
+}
+
+/* END vistas usuarios (perfil) */
 
 /* Vista creacion blog */
 
@@ -563,6 +781,10 @@ footer #div_footer_blog_autor span{
     margin-left: 1.5em;
 }
 
+footer #div_footer_blog_autor span>a{
+    color: white;
+}
+
 footer > #div_footer_blog_redes > a img {
     width: 50px;
     height: 50px;
@@ -640,7 +862,7 @@ footer > #div_footer_blog_redes > a img {
 
 #botonEditarPerfilImagen > div {
     float: left;
-    width: 50%;
+    width: 33%;
     text-align: center;
 }
 

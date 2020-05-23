@@ -23,22 +23,20 @@ class BlogController extends Controller
     }
 
     public function index_blog($tituloblog) {
-        $consexionblog = new Blog;
+        $conexionblog = new Blog;
         $consexionUsuario = new Usuari;
         $conexionNoticia = new Noticia;
 
-        $blog = $consexionblog->blogNombre($tituloblog);
+        $blog = $conexionblog->blogNombreFirst($tituloblog);
 
-        foreach ($blog as $b) {
-            $usuarioBlogID = $b->idUsuario;
-            $blogID = $b->id;
+        if ($blog == null) {
+            return redirect('/');
+        } else {
+            $usuario = $consexionUsuario->soloUnUsuarioID($blog->idUsuario);
+            $noticias = $conexionNoticia->noticiaIDblog($blog->id); // Viene en formato descendiente, asi las noticias nuevas estaran siempre arriba.
+
+            return view('indexBlogs', compact('blog', 'usuario', 'noticias'));
         }
-        
-        $usuario = $consexionUsuario->soloUnUsuarioID($usuarioBlogID);
-        $noticias = $conexionNoticia->noticiaIDblog($blogID); // Viene en formato descendiente, asi las noticias nuevas estaran siempre arriba.
-
-        return view('indexBlogs', compact('blog', 'usuario', 'noticias'));
-
 
     }
 
@@ -359,47 +357,6 @@ class BlogController extends Controller
             return redirect('/');
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    // RELACIONADO CON NOTICIAS \\
-
-    public function show_Noticia_Completa($tituloBlog, $tituloNoticia) {
-
-        $conexionBlog = new Blog;
-        $conexionNoticia = new Noticia;
-        $conexionUsuario = new Usuari;
-
-        $blog = $conexionBlog->blogNombre($tituloBlog);
-
-        foreach($blog as $b) {
-            $idBlog = $b->id;
-       }
-
-
-        $usuario = $conexionUsuario->soloUnUsuarioID($idBlog);
-        $noticia = $conexionNoticia->soloUnaNoticia($idBlog, $tituloNoticia);
-
-
-        return view('blogs.noticias.showNoticia', compact('blog', 'noticia', 'usuario'));
-
-    }
-
-
-
 
 
 }

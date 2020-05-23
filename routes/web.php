@@ -39,8 +39,12 @@ Route::post('/creacionBlog/validando', 'BlogController@post_createBlog');
 // Páginas para usuarios
 Route::get('/usuario/{usuario}', 'UsuarioController@show_Usuario'); // Lleva al perfil del usuario
 Route::get('/editarUsuario/{usuario}', 'UsuarioController@index_UsuarioEdit'); // Muestra la vista del editar usuario
+Route::get('/cambiarContrasena/{usuario}', 'UsuarioController@index_UsuarioEditContrasena'); // Cambiar contraseña del mismo usuario
+Route::get('/editarImagen/{usuario}', 'UsuarioController@index_UsuarioEditAvatar');
 
 Route::put('/editarUsuario/{usuario}', 'UsuarioController@put_UsuarioEdit'); // Actualiza el usuario
+Route::put('/cambiarContrasena/{usuario}', 'UsuarioController@put_UsuarioEditContrasena'); // Actualiza la contraseña de un usuario
+Route::post('/editarImagen/{usuario}', 'UsuarioController@put_UsuarioEditAvatar'); // Actualiza el avatar / imagen de perfil del usuario
 
 
 
@@ -76,9 +80,10 @@ Route::post('/crudUsuarios/deleteBlog/{id}', 'BlogController@modal_post_delete_B
 
 
 // Rutas de blogs
-
 Route::get('/{tituloBlog}', 'BlogController@index_blog');
-Route::get('/{tituloBlog}/{tituloNoticia}', 'BlogController@show_Noticia_Completa' );
+
+// Rutas noticias
+Route::get('/{tituloBlog}/{tituloNoticia}', 'NoticiaController@show_Noticia_Completa' );
 
 
 

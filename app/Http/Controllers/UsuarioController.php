@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use App\Usuari;
 use App\User;
@@ -13,6 +14,7 @@ use App\Valoracion;
 use App\Notificacion;
 
 use Auth;
+use Image;
 
 class UsuarioController extends Controller
 {
@@ -57,6 +59,33 @@ class UsuarioController extends Controller
 
     }
 
+
+    public function index_UsuarioEditContrasena($usuario_retornado)
+    {
+        $usuario = new Usuari;
+
+        $user = $usuario->soloUnUsuarioFirst($usuario_retornado);
+
+        if (session()->get('usuario') == $user->usuario) {
+            return view('usuarios.editContrasena', array('user' => $user));
+        } else {
+            return redirect('/');
+        }
+    }
+
+    public function index_UsuarioEditAvatar($usuario_retornado)
+    {
+        $usuario = new Usuari;
+
+        $user = $usuario->soloUnUsuarioFirst($usuario_retornado);
+
+        if (session()->get('usuario') == $user->usuario) {
+            return view('usuarios.editAvatar', array('user' => $user));
+        } else {
+            return redirect('/');
+        }
+    }
+
     // Esta funcion es del registro de usuarios
     public function post_create_usuario(Request $request)
     {
@@ -95,11 +124,11 @@ class UsuarioController extends Controller
                     if ($email_usuario_repetido == false){
 
                         $this->validate(request(), [
-                            'usuario' => 'required',
+                            'usuario' => 'string|required',
                             'email' => 'required|email',
                             'password' => 'required',
-                            'nombre' => 'required',
-                            'apellidos' => 'required',
+                            'nombre' => 'string|required',
+                            'apellidos' => 'string|required',
                             'fechaNacimiento' => 'nullable|date',
                             'pais' => 'nullable|string',
                             'twitter' => 'nullable|string',
@@ -235,6 +264,79 @@ class UsuarioController extends Controller
             return back();
         }
 
+    }
+
+    public function put_UsuarioEditContrasena(Request $request, $usuario_retornado)
+    {
+        $conexionUsuario = new Usuari;
+
+        $passwordNewRequest = $request->input('passwordNew');
+        $passwordNew2Request = $request->input('passwordNew2');
+
+        
+        if ($passwordNewRequest == $passwordNew2Request) {
+
+            $usuario = $conexionUsuario->soloUnUsuarioFirst($usuario_retornado);
+            $user = Usuari::findOrFail($usuario->id);
+
+            $this->validate(request(), [
+                'passwordNew'  =>  'required',
+                'passwordNew2'  =>  'required'
+            ]);
+
+            $user->password = bcrypt($passwordNewRequest);
+            $user->save();
+
+            return redirect('/usuario/'.$user->usuario);
+
+        } else {
+            return back()->withErrors(['Las contraseñas introducidas no coinciden']);
+        }
+
+        
+    }
+
+    public function put_UsuarioEditAvatar(Request $request, $usuario_retornado)
+    {
+
+        $conexionUsuario = new Usuari;
+
+        $usuario = $conexionUsuario->soloUnUsuarioFirst($usuario_retornado);
+
+        if (session()->get('usuario') == $usuario->usuario) {
+
+            //return print_r($request->file('imagenUsuario'));
+            $user = Usuari::findOrFail($usuario->id);
+            
+            $this->validate(request(), [
+                'imagenPerfil' => 'nullable|string'
+            ]);
+
+            if ($request->file('imagenUsuario') != null){
+
+                $iPerfil = $request->file('imagenUsuario');
+                $iExtension = $request->file('imagenUsuario')->getClientOriginalExtension();
+                $nombreFichero = time() . '.' . $iExtension; // getClientOriginalExtension pilla la extension del fichero subido
+                Image::make($iPerfil)->resize(100,100)->save(public_path('/imagenes/perfil/'.$nombreFichero));
+    
+                $nombreImagen = $nombreFichero;
+            } else {
+                $nombreImagen = 'perfil_defecto.png';
+            }
+
+            
+            $user->imagenPerfil = $nombreImagen;
+            $user->save();
+
+            session()->put('imagenPerfil', $user->imagenPerfil);
+
+            return redirect('/usuario/'.$user->usuario);
+
+        } else {
+            return redirect('/');
+        }
+
+        
     }
 
 

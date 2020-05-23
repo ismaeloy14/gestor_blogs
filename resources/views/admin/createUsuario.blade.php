@@ -22,7 +22,7 @@
                     </div>
                     <div class="form-group col-sm-12">
                         <label class="col-sm-12 control-label">
-                            <b class="col-sm-12">Rol:</b> <select name="rol" id="createrol" class="col-sm-12"></select>
+                            <b class="col-sm-12">Rol:</b> <select name="rol" id="createrol" class="col-sm-12" required></select>
                         </label>
                     </div>
                     <div class="form-group col-sm-12">

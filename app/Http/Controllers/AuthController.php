@@ -91,11 +91,6 @@ class AuthController extends Controller
     }*/
 
 
-
-
-
-
-
     public function post_login_usuario(Request $request)
     {
         $usuario = new Usuari;

@@ -8,7 +8,7 @@
     <div>
         <h2>Editar Perfil</h2>
 
-                <form action="{{url('/editarUsuario/'.$user->usuario)}}" method="post">
+                <form action="{{url('/editarUsuario/'.$user->usuario)}}" method="post" id="formEditarUsuario">
 
                     {{method_field('PUT')}}
 
@@ -20,22 +20,22 @@
 
                     <label>
                         <span>Usuario </span>
-                        <input type="text" name="usuario" value="{{$user->usuario}}" required>
+                        <input type="text" name="usuario" value="{{$user->usuario}}" id="editarUsuario" required>
                     </label>
 
                     <label>
                         <span>Nombre </span>
-                        <input type="text" name="nombre" value="{{$user->nombre}}" required>
+                        <input type="text" name="nombre" value="{{$user->nombre}}" id="editarNombre" required>
                     </label>
 
                     <label>
                         <span>Apellidos </span>
-                        <input type="text" name="apellidos" value="{{$user->apellidos}}" required>
+                        <input type="text" name="apellidos" value="{{$user->apellidos}}" id="editarApellidos" required>
                     </label>
 
                     <label>
                         <span>Email </span>
-                        <input type="email" name="email" value="{{$user->email}}" id="registro_U_email" required>
+                        <input type="email" name="email" value="{{$user->email}}" id="editarEmail" required>
                     </label>
 
                     <label>
@@ -48,6 +48,7 @@
                         @endif
 
                     </label>
+                    <label>
                         <span>Pais de origen </span>
                         <select name="pais" id="select_pais">
                             <option value="España">España</option>
@@ -78,7 +79,7 @@
                     </label>
 
                     <div>
-                        <button class="btn btn-success">Guardar cambios</button>
+                        <button class="btn btn-success" type="submit">Guardar cambios</button>
                         <a href="{{url('/usuario/'.$user->usuario)}}" class="btn btn-danger">Cancelar</a>
                     </div>
                 </form>

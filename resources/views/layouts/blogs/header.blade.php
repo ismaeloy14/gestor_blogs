@@ -3,19 +3,16 @@
     {{-- HEADER DE BLOGS --}}
     <div id="header_blog">
 
-        @foreach ($blog as $b)
-
             <div id="div_Inicio_Noticia">
                 
                 
-                
-                @if (session()->get('idUsuario') == $b->idUsuario)
+                @if (session()->get('idUsuario') == $blog->idUsuario)
                     <div>
                         <a class="btn btn-info" href="{{url('/')}}">Página principal</a>
                     </div>
 
                     <div>
-                        <a class="btn btn-primary" href="{{url('/'.$b->tituloBlog.'/crearNoticia')}}">Crear noticia</a>
+                        <a class="btn btn-primary" href="{{url('/'.$blog->tituloBlog.'/crearNoticia')}}">Crear noticia</a>
                     </div>
                     
                 @else
@@ -27,8 +24,7 @@
                 
             </div>
             
-            <a href="{{url('/'.$b->tituloBlog)}}"><h1>{{$b->tituloBlog}}</h1></a>
-        @endforeach
+            <a href="{{url('/'.$blog->tituloBlog)}}"><h1>{{$blog->tituloBlog}}</h1></a>
 
         
 

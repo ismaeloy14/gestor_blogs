@@ -7,9 +7,9 @@
 
             @if ($noticia->noticiaPublica == 1)
 
-                @foreach ($blog as $b)
-                <a href="{{url('/'.$b->tituloBlog.'/'.$noticia->tituloNoticia)}}" class="noticiasDivs">
-                @endforeach
+                
+                <a href="{{url('/'.$blog->tituloBlog.'/'.$noticia->tituloNoticia)}}" class="noticiasDivs">
+                
                     
                     {{--<img src="{{asset('imagenes/noticia/'.$noticia->imagenNoticia)}}" alt="Imagen de la noticia">--}}
                     <h4>{{$noticia->tituloNoticia}}</h4>

@@ -51,10 +51,6 @@ class Usuari extends Model
         return $consulta->rol;
     }
 
-    /*public function todasPasswUsuarios() {
-        return DB::table('users')->select('password')->get();
-    }*/
-
     public function todosEmailUsuarios() { // Me devuelve todos los emails pero solo la columna de email
         return DB::table('users')->select('email')->get();
     }

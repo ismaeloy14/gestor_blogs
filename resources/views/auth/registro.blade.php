@@ -18,7 +18,7 @@
 
             <label>
                 <span>Usuario</span>
-                <input type="text" name="usuario" required>
+                <input type="text" name="usuario" id="registro_U_usuario" required>
             </label>
 
             <label>
@@ -33,12 +33,12 @@
 
             <label>
                 <span>Nombre</span>
-                <input type="text" name="nombre" required>
+                <input type="text" name="nombre" id="registro_U_nombre" required>
             </label>
 
             <label>
                 <span>Apellidos</span>
-                <input type="text" name="apellidos" required>
+                <input type="text" name="apellidos" id="registro_U_apellidos" required>
             </label>
 
             <label>

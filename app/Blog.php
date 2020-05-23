@@ -18,6 +18,10 @@ class Blog extends Model
         return DB::table('blogs')->where('tituloBlog', $tituloBlog)->get();
     }
 
+    public function blogNombreFirst($tituloBlog){
+        return DB::table('blogs')->where('tituloBlog', $tituloBlog)->first();
+    }
+
     public function blogIDUsuario($id) {
         $consulta = DB::table('blogs')->where('idUsuario', $id)->first();
 
