@@ -37,18 +37,17 @@ Route::post('/creacionBlog/validando', 'BlogController@post_createBlog');
 
 
 // Páginas para usuarios
-Route::get('/usuario/{usuario}', 'UsuarioController@show_Usuario');
-Route::get('/editarUsuario/{usuario}', 'UsuarioController@index_UsuarioEdit');
+Route::get('/usuario/{usuario}', 'UsuarioController@show_Usuario'); // Lleva al perfil del usuario
+Route::get('/editarUsuario/{usuario}', 'UsuarioController@index_UsuarioEdit'); // Muestra la vista del editar usuario
 
-Route::put('/editarUsuario/{usuario}', 'UsuarioController@put_UsuarioEdit');
+Route::put('/editarUsuario/{usuario}', 'UsuarioController@put_UsuarioEdit'); // Actualiza el usuario
 
 
 
 // Páginas de admin
 Route::get('/crudUsuarios', 'AuthController@index_crudUsuarios'); // Para ir al crud principal
 
-
-// Ventanas modales
+// Ventanas modales ADMIN \\
 
 /* Crud de usuarios */
 Route::get('/crudUsuarios/showUsuario', 'UsuarioController@modal_show_Usuario'); // Modal show usuario
@@ -73,6 +72,7 @@ Route::post('/crudUsuarios/createBlog', 'BlogController@modal_post_create_blog')
 Route::put('/crudUsuarios/editBlog/{id}', 'BlogController@modal_put_edit_Blog'); // Edita un blog (admin)
 Route::post('/crudUsuarios/deleteBlog/{id}', 'BlogController@modal_post_delete_Blog'); // elimina un blog (admin)
 
+// END VENTANAS MODALES ADMIN \\
 
 
 // Rutas de blogs

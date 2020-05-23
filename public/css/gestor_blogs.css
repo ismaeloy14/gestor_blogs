@@ -662,4 +662,9 @@ footer > #div_footer_blog_redes > a img {
     color: white;
 }
 
+#imagen_perfil_show_edit {
+    border-radius: 50%;
+    border: 1px solid black;
+}
+
 /* END CSS especifico */

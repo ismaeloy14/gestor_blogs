@@ -16,39 +16,36 @@ use Auth;
 
 class UsuarioController extends Controller
 {
-    /**
-     * Devuelve la vista del usuario seleccionado
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index_UsuarioShow($usuario_retornado)
-    {
+
+    public function show_Usuario($nombreUsuario) { // Carga el perfil del usuario
+
         $usuario = new Usuari;
+        
+        $user = $usuario->soloUnUsuarioFirst($nombreUsuario);
 
-        $user = $usuario->soloUnUsuario($usuario_retornado);
+        if ($user == null) {
+            return redirect('/');
+        } else {
+            return view('usuarios.showUsuario', compact('user'));
+        }
 
-        //return print_r($user);
-        return view('usuarios.showUsuario', array('user' => $user));
-
+        
     }
 
-
     // Devuelve la vista del modficar perfil del usuario seleccionado
-    /*public function index_UsuarioEdit($usuario_retornado){
+    public function index_UsuarioEdit($usuario_retornado){
         $usuario = new Usuari;
 
-        $user = $usuario->soloUnUsuario($usuario_retornado);
+        $user = $usuario->soloUnUsuarioFirst($usuario_retornado);
 
         $mismoUsuario = false;
 
-        foreach($user as $u){
-            if(session()->get('usuario') == $u->usuario){
-                $mismoUsuario = true;
-            }
+        if(session()->get('usuario') == $user->usuario){
+            $mismoUsuario = true;
         }
 
         // Comprobamos si es el mismo usuario o si es el usuario admin
-        if(($mismoUsuario == true) || (session()->get('rol') == 'admin')){
+        if($mismoUsuario == true){
 
             //return print_r($user);
             return view('usuarios.editUsuario', array('user' => $user));
@@ -58,27 +55,198 @@ class UsuarioController extends Controller
             return redirect('/');
         }
 
-    }*/
-
-
-    public function show_Usuario($nombreUsuario) {
-
-        $usuario = new Usuari;
-        
-
-        $user = $usuario->soloUnUsuario($nombreUsuario);
-
-        return view('usuarios.showUsuario', compact('user'));
     }
 
-    public function modal_create_Usuario() {
+    // Esta funcion es del registro de usuarios
+    public function post_create_usuario(Request $request)
+    {
+        //$usuario = new User;
+
+        if ($request->input('password') === $request->input('password2')){
+
+            $usuario = new Usuari;
+            $usuarios = $usuario->todosNombresUsuarios();
+            
+            $email = $usuario->todosEmailUsuarios();
+
+            $nombreImagen = null;
+
+
+            $nombre_usuario_repetido = false;
+            $email_usuario_repetido = false;
+
+
+            $rol = Rol::where('rol', '=', 'basico')->first();
+
+            foreach($usuarios as $u){ // Para los nombres de usuarios
+                if($u->usuario === $request->input('usuario')){
+                    $nombre_usuario_repetido = true;
+                }
+            }
+
+            foreach($email as $e){ // Para los emails de usuarios
+                if($e->email === $request->input('email')){
+                    $email_usuario_repetido = true;
+                }
+            }
+
+            if ($nombre_usuario_repetido == false){
+                
+                    if ($email_usuario_repetido == false){
+
+                        $this->validate(request(), [
+                            'usuario' => 'required',
+                            'email' => 'required|email',
+                            'password' => 'required',
+                            'nombre' => 'required',
+                            'apellidos' => 'required',
+                            'fechaNacimiento' => 'nullable|date',
+                            'pais' => 'nullable|string',
+                            'twitter' => 'nullable|string',
+                            'facebook' => 'nullable|string',
+                            'instagram' => 'nullable|string',
+                            'paginaWeb' => 'nullable|string',
+                            'imagenPerfil' => 'nullable|string'
+                        ]);
+
+
+                        // En este IF se crea el fichero en la carpeta publica de imagenes/perfil y se guarda el nombre del fichero para luego integrarlo a la base de datos.
+                        if ($request->file('imagen_usuario') != null){ 
+                            $iPerfil = $request->file('imagen_usuario');
+                            $iExtension = $request->file('imagen_usuario')->getClientOriginalExtension();
+                            $nombreFichero = time() . '.' . $iExtension; // getClientOriginalExtension pilla la extension del fichero subido
+                            Image::make($iPerfil)->resize(100,100)->save(public_path('/imagenes/perfil/'.$nombreFichero));
+                
+                            $nombreImagen = $nombreFichero;
+                        } else {
+                            $nombreImagen = 'perfil_defecto.png';
+                        }
+
+
+
+                        $usuario->usuario = $request->input('usuario');
+                        $usuario->password = bcrypt($request->input('password'));
+                        $usuario->nombre = $request->input('nombre');
+                        $usuario->apellidos = $request->input('apellidos');
+                        $usuario->email = $request->input('email');
+                        $usuario->fechaNacimiento = $request->input('fecha_nacimiento');
+                        $usuario->pais = $request->input('pais');
+                        $usuario->twitter = $request->input('twitter');
+                        $usuario->facebook = $request->input('facebook');
+                        $usuario->instagram = $request->input('instagram');
+                        $usuario->paginaWeb = $request->input('paginaWeb');
+                        //$usuario->imagenPerfil = $request->input('imagen_usuario');
+                        $usuario->imagenPerfil = $nombreImagen;
+                        $usuario->rol = $rol->rol;
+                        $usuario->save();
+
+                        return redirect('/login');
+
+                    } else {
+                        return back()->withErrors(['El email ya existe']);
+                    }
+            
+            } else {
+                return back()->withErrors(['El usuario ya existe']);
+            }
+
+        } else {
+            return back()->withErrors(['La contraseña esta mal escrita']);
+        }
+
+    }
+
+    public function put_UsuarioEdit(Request $request, $usuario_retornado) { // Actualizar usuario desde ventana modal
+        $usuario = new Usuari;
+
+        //$todosUsuarios = $usuario->todosUsuarios();
+        $user = $usuario->soloUnUsuarioFirst($usuario_retornado);
+
+        $usuarioRepetido = false;
+        $emailRepetido = false;
+        $mismoUsuario = false;
+
+        $id = null; // Sera la id de nuestro usuario
+
+
+         // Comprueba si el nombre del usuario de esta sesion sea igual al usuario de la base de datos.
+        if(session()->get('usuario') == $user->usuario){
+            $mismoUsuario = true;
+            $id = $user->id; 
+        } else {
+            return redirect('/');
+        }
+
+        $usuarioRepetido = $usuario->soloUnUsuarioFirst($request->input('usuario')); // Null o lleno
+        $emailRepetido = $usuario->soloUnEmailFirst($request->input('email')); // Null o lleno
+
+
+
+        $users = Usuari::findOrFail($id); // Busco el usuario por su id
+
+
+        // Comprobamos si es el mismo usuario o si es el usuario admin
+        if($mismoUsuario == true){
+            if (($usuarioRepetido == null) || ($usuarioRepetido->usuario == $user->usuario)) { // Null == no esta repetido
+                if (($emailRepetido == null) || ($emailRepetido->email == $user->email)) { // Null == no esta repetido
+
+                    $this->validate(request(), [
+                        'usuario' => 'required',
+                        'email' => 'required|email',
+                        'nombre' => 'required',
+                        'apellidos' => 'required',
+                        'fechaNacimiento' => 'nullable|date',
+                        'pais' => 'nullable|string',
+                        //'imagenPerfil' => 'nullable|image',
+                        'twitter'  =>  'nullable|string',
+                        'facebook'  =>  'nullable|string',
+                        'instagram' =>  'nullable|string',
+                        'paginaWeb' =>  'nullable|string'
+                    ]);
+
+                      
+                    $users->usuario = $request->input('usuario');
+                    $users->email = $request->input('email');
+                    $users->nombre = $request->input('nombre');
+                    $users->apellidos = $request->input('apellidos');
+                    $users->fechaNacimiento = $request->input('fechaNacimiento');
+                    $users->pais = $request->input('pais');
+                    $users->twitter = $request->input('twitter');
+                    $users->facebook = $request->input('facebook');
+                    $users->instagram = $request->input('instagram');
+                    $users->paginaWeb = $request->input('paginaWeb');
+                    //$user->imagenPerfil = $request->input('imagenPerfil');
+                    $users->save();
+
+                    session()->put('usuario', $request->input('usuario'));
+
+                    return redirect('/usuario/'.$request->input('usuario'));
+
+                } else {
+                    return back()->withErrors(['El email ya existe']);
+                }
+
+            } else {
+                return back()->withErrors(['El usuario ya existe']);
+            }
+
+        } else {
+
+            return back();
+        }
+
+    }
+
+
+    // VENTANAS MODALES
+
+    public function modal_create_Usuario() { // Modal creación usuario
         $rol = Rol::all();
 
         $paisesArray = ["España", "Francia", "Alemania", "Portugal"];
 
         return [$rol,$paisesArray];
     }
-
 
 
     public function modal_show_Usuario() { // carga modal para ver el usuario (tambien para el modal delete)
@@ -117,7 +285,7 @@ class UsuarioController extends Controller
     }*/ 
 
 
-    public function modal_UsuarioEdit(Request $request, $id_retornado) { // Desde la ventana modal de crudUsuarios
+    public function modal_UsuarioEdit(Request $request, $id_retornado) { // Actualizar usuario desde ventana modal
         $conexionUsuario = new Usuari;
 
         $todosUsuarios = $conexionUsuario->todosUsuarios();
@@ -200,7 +368,7 @@ class UsuarioController extends Controller
 
     }
 
-    public function modal_UsuarioDelete($id_retornado) {
+    public function modal_UsuarioDelete($id_retornado) { // Eliminación del usuario por ventana modal
 
         $conexionUsuario = new Usuari;
         $conexionBlog = new Blog;
@@ -265,204 +433,9 @@ class UsuarioController extends Controller
 
 
 
-    public function put_UsuarioEdit(Request $request, $usuario_retornado) { // Actualizar usuario
-        $usuario = new Usuari;
+    
 
-        $todosUsuarios = $usuario->todosUsuarios();
-        $user = $usuario->soloUnUsuario($usuario_retornado);
-
-        $usuarioRepetido = false;
-        $emailRepetido = false;
-        $mismoUsuario = false;
-
-        $id = null; // Sera la id de nuestro usuario
-
-
-        foreach($user as $u){ // Comprueba si el nombre del usuario de esta sesion sea igual al usuario de la base de datos.
-            if(session()->get('usuario') == $u->usuario){
-                $mismoUsuario = true;
-            }
-
-            $id = $u->id;
-        }
-
-        $users = Usuari::findOrFail($id); // Busco el usuario por su id
-
-
-        // Comprueba si el email y usuario se repiten en la base de datos.
-        foreach($todosUsuarios as $todosU){
-            if ($todosU->usuario === $request->input('usuario')) {
-                if ($todosU->id == session()->get('idUsuario')) {
-
-                    $usuarioRepetido = false;
-             
-                } else if (session()->get('rol') == 'admin') {
-
-                    $usuarioRepetido = false;
-
-                } else {
-
-                    $usuarioRepetido = true;
-                }
-            }
-            if ($todosU->email === $request->input('email')) {
-                if ($todosU->id == session()->get('idUsuario')) {
-
-                    $emailRepetido = false;
-
-                } else if (session()->get('rol') == 'admin') {
-
-                    $emailRepetido = false;
-
-                } else {
-
-                    $emailRepetido = true;
-                }
-                
-            }
-        }
-
-        // Comprobamos si es el mismo usuario o si es el usuario admin
-        if(($mismoUsuario == true) || (session()->get('rol') == 'admin')){
-            if ($usuarioRepetido == false) {
-                if ($emailRepetido == false) {
-
-                    $this->validate(request(), [
-                        'usuario' => 'required',
-                        'email' => 'required|email',
-                        'nombre' => 'required',
-                        'apellidos' => 'required',
-                        'fechaNacimiento' => 'nullable|date',
-                        'pais' => 'nullable|string',
-                        'imagenPerfil' => 'nullable|image'
-                    ]);
-
-                      
-                    $users->usuario = $request->input('usuario');
-                    $users->email = $request->input('email');
-                    $users->nombre = $request->input('nombre');
-                    $users->apellidos = $request->input('apellidos');
-                    $users->fechaNacimiento = $request->input('fechaNacimiento');
-                    $users->pais = $request->input('pais');
-                    $users->imagenPerfil = $request->input('imagenPerfil');
-                    $users->save();
-
-                    return redirect('/');
-
-
-                } else {
-                    return back()->withErrors(['El email ya existe']);
-                }
-
-            } else {
-                return back()->withErrors(['El usuario ya existe']);
-            }
-
-        } else {
-
-            return back();
-        }
-
-    }
-
-    // Esta funcion es del registro de usuarios
-    public function post_create_usuario(Request $request)
-    {
-        //$usuario = new User;
-
-        if ($request->input('password') === $request->input('password2')){
-
-            $usuario = new Usuari;
-            $usuarios = $usuario->todosNombresUsuarios();
-            
-            $email = $usuario->todosEmailUsuarios();
-
-            $nombreImagen = null;
-
-
-            $nombre_usuario_repetido = false;
-            $email_usuario_repetido = false;
-
-
-            $rol = Rol::where('rol', '=', 'basico')->first();
-
-            foreach($usuarios as $u){ // Para los nombres de usuarios
-                if($u->usuario === $request->input('usuario')){
-                    $nombre_usuario_repetido = true;
-                }
-            }
-
-            foreach($email as $e){ // Para los emails de usuarios
-                if($e->email === $request->input('email')){
-                    $email_usuario_repetido = true;
-                }
-            }
-
-            if ($nombre_usuario_repetido == false){
-                
-                    if ($email_usuario_repetido == false){
-
-                        $this->validate(request(), [
-                            'usuario' => 'required',
-                            'email' => 'required|email',
-                            'password' => 'required',
-                            'nombre' => 'required',
-                            'apellidos' => 'required',
-                            'fechaNacimiento' => 'nullable|date',
-                            'pais' => 'nullable|string',
-                            'twitter' => 'nullable|string',
-                            'facebook' => 'nullable|string',
-                            'instagram' => 'nullable|string',
-                            'paginaWeb' => 'nullable|string',
-                            'imagenPerfil' => 'nullable|string'
-                        ]);
-
-
-                        // En este IF se crea el fichero en la carpeta publica de imagenes/perfil y se guarda el nombre del fichero para luego integrarlo a la base de datos.
-                        if ($request->file('imagen_usuario') != null){ 
-                            $iPerfil = $request->file('imagen_usuario');
-                            $iExtension = $request->file('imagen_usuario')->getClientOriginalExtension();
-                            $nombreFichero = time() . '.' . $iExtension; // getClientOriginalExtension pilla la extension del fichero subido
-                            Image::make($iPerfil)->resize(100,100)->save(public_path('/imagenes/perfil/'.$nombreFichero));
-                
-                            $nombreImagen = $nombreFichero;
-                        } else {
-                            $nombreImagen = 'perfil_defecto';
-                        }
-
-
-
-                        $usuario->usuario = $request->input('usuario');
-                        $usuario->password = bcrypt($request->input('password'));
-                        $usuario->nombre = $request->input('nombre');
-                        $usuario->apellidos = $request->input('apellidos');
-                        $usuario->email = $request->input('email');
-                        $usuario->fechaNacimiento = $request->input('fecha_nacimiento');
-                        $usuario->pais = $request->input('pais');
-                        $usuario->twitter = $request->input('twitter');
-                        $usuario->facebook = $request->input('facebook');
-                        $usuario->instagram = $request->input('instagram');
-                        $usuario->paginaWeb = $request->input('paginaWeb');
-                        //$usuario->imagenPerfil = $request->input('imagen_usuario');
-                        $usuario->imagenPerfil = $nombreImagen;
-                        $usuario->rol = $rol->rol;
-                        $usuario->save();
-
-                        return redirect('/login');
-
-                    } else {
-                        return back()->withErrors(['El email ya existe']);
-                    }
-            
-            } else {
-                return back()->withErrors(['El usuario ya existe']);
-            }
-
-        } else {
-            return back()->withErrors(['La contraseña esta mal escrita']);
-        }
-
-    }
+    
 
 
 

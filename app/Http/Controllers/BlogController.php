@@ -132,7 +132,7 @@ class BlogController extends Controller
 
     // MODALES \\
 
-    public function modal_create_Blog() // ejecuta el ajax para el modal
+    public function modal_create_Blog() // ejecuta el ajax para el modal de crear blog
     {
         //$conexionUsuario = new Usuari;
         $conexionBlog = new Blog;
@@ -174,7 +174,7 @@ class BlogController extends Controller
         return [$usuario, $blog];
     }
 
-    public function modal_edit_Blog()
+    public function modal_edit_Blog() // ejecuta el modal para editar blog
     {
         $idBlog = filter_input(INPUT_GET, 'id');
 
@@ -186,7 +186,7 @@ class BlogController extends Controller
 
 
 
-    public function modal_post_create_blog(Request $request) // se ejecuta cuando el admin crea un usuario en el modal
+    public function modal_post_create_blog(Request $request) // se ejecuta cuando el admin crea un blog en el modal
     {
         $conexionUsuario = new Usuari;
         $blog = new Blog;
@@ -232,7 +232,7 @@ class BlogController extends Controller
 
         
                     $blog->tituloBlog = $titulo;
-                    $blog->imagenBlog = 'imagen_blog_defecto';
+                    $blog->imagenBlog = 'imagen_blog_defecto.jpg';
                     $blog->idUsuario = $usuario->id;
                     $blog->blogPublico = $request->input('publico');
                     $blog->categoria = $request->input('categoria');
@@ -248,7 +248,7 @@ class BlogController extends Controller
         }
     }
 
-    public function modal_put_edit_Blog(Request $request, $idBlog_retornado) // se ejecuta cuando el admin actualiza un usuario en el modal
+    public function modal_put_edit_Blog(Request $request, $idBlog_retornado) // se ejecuta cuando el admin actualiza un blog en el modal
     {   //$conexionBlog = new Blog;
         $todosBlogs = Blog::all();
 
@@ -311,7 +311,7 @@ class BlogController extends Controller
 
     }
 
-    public function modal_post_delete_Blog($idBlog_retornado)
+    public function modal_post_delete_Blog($idBlog_retornado) // se ejecuta cuando el admin elimina un blog en el modal
     {
         if (session()->get('rol') == 'admin') {
 

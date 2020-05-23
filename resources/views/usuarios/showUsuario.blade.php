@@ -3,15 +3,9 @@
 @section('body')
     
     <div id="div_showUsuario">
-        @foreach ($user as $user)
-        {{--
-        <div>
-            <img src="" alt="Imagen de perfil" id="imagen_perfil_show_edit">
-        </div>
-        --}}
 
             <div>
-                <img src="{{asset('imagenes/perfil/'.session()->get('imagenPerfil')) }}" alt="Imagen de perfil" id="imagen_perfil_show_edit">
+                <img src="{{asset('imagenes/perfil/'.$user->imagenPerfil) }}" alt="Imagen de perfil" id="imagen_perfil_show_edit">
             </div>
             <span><b>Usuario:</b> {{$user->usuario}}</span>
             <span><b>Rol:</b> {{$user->rol}}</span>
@@ -27,8 +21,9 @@
                 <span><b>Pais de origen:</b> {{$user->pais}}</span>           
             @endif
 
-            {{-- Para comprobar si eres un administrador o eres el propio usuario --}}
-            @if ((session()->get('rol') == 'admin') || (Auth::user()->usuario == $user->usuario))
+            {{-- Para comprobar si eres el propio usuario --}}
+            @if (session()->get('usuario') == $user->usuario)
+            
             <div id="botonEditarPerfilImagen">
                 <div>
                     <a class="btn btn-primary" href="{{url('/editarUsuario/'. $user->usuario)}}">Editar perfil</a>
@@ -38,11 +33,7 @@
                 </div>
             </div>
 
-            @endif
-                
-                
-        @endforeach
-            
+            @endif           
         
 
     </div>

@@ -8,9 +8,7 @@
     <div>
         <h2>Editar Perfil</h2>
 
-            @foreach ($user as $user)
-
-                <form action="{{url('/crudUsuarios/editarUsuario/'.$user->usuario)}}" method="post">
+                <form action="{{url('/editarUsuario/'.$user->usuario)}}" method="post">
 
                     {{method_field('PUT')}}
 
@@ -59,16 +57,31 @@
                         </select>
                     </label>
 
-                    <label id="label_input_image">
-                        <input type="file" name="imagenPerfil" accept="image/*">
+                    <label>
+                        <span>Twitter</span>
+                        <input type="text" name="twitter">
+                    </label>
+
+                    <label>
+                        <span>Facebook</span>
+                        <input type="text" name="facebook">
+                    </label>
+
+                    <label>
+                        <span>Instagram</span>
+                        <input type="text" name="instagram">
+                    </label>
+
+                    <label>
+                        <span>Página Web</span>
+                        <input type="text" name="paginaWeb">
                     </label>
 
                     <div>
                         <button class="btn btn-success">Guardar cambios</button>
+                        <a href="{{url('/usuario/'.$user->usuario)}}" class="btn btn-danger">Cancelar</a>
                     </div>
                 </form>
-
-            @endforeach
         
     </div>
 

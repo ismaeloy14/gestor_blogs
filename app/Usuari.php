@@ -34,8 +34,8 @@ class Usuari extends Model
     }
 
 
-    public function comprobarNombreUsuario($nombre) { // Comprueba si el nombre de usuario existe y si no existe me devuelve null
-        $consulta = DB::table('users')->select('usuario')->where('usuario', $nombre)->first();
+    public function comprobarNombreUsuario($usuario) { // Comprueba si el nombre de usuario existe y si no existe me devuelve null
+        $consulta = DB::table('users')->select('usuario')->where('usuario', $usuario)->first();
 
         if ($consulta == null){
             return null;
@@ -45,8 +45,8 @@ class Usuari extends Model
 
     }
 
-    public function comprobarRol($nombre) { // Me devuelve el rol del usuario que le haya pasado
-        $consulta = DB::table('users')->select('rol')->where('usuario', $nombre)->first();
+    public function comprobarRol($usuario) { // Me devuelve el rol del usuario que le haya pasado
+        $consulta = DB::table('users')->select('rol')->where('usuario', $usuario)->first();
 
         return $consulta->rol;
     }
@@ -57,5 +57,10 @@ class Usuari extends Model
 
     public function todosEmailUsuarios() { // Me devuelve todos los emails pero solo la columna de email
         return DB::table('users')->select('email')->get();
+    }
+
+    public function soloUnEmailFirst($email) // Me devuelve un true o false
+    {
+        return DB::table('users')->where('email', $email)->first();
     }
 }

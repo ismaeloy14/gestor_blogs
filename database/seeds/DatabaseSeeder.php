@@ -73,6 +73,7 @@ class DatabaseSeeder extends Seeder
             $b->idUsuario = $blogs['idUsuario'];
             $b->blogPublico = $blogs['blogPublico'];
             $b->categoria = $blogs['categoria'];
+            $b->imagenBlog = $blogs['imagenBlog'];
             $b->save();
         }
     }
@@ -125,7 +126,7 @@ class DatabaseSeeder extends Seeder
             'nombre'            =>  'user_user1',
             'apellidos'         =>  'user1 user1',
             'fechaNacimiento'   =>  '1998-05-14',
-            'imagenPerfil'      =>  'perfil_defecto',
+            'imagenPerfil'      =>  'perfil_defecto.png',
             'twitter'           =>  null,
             'facebook'          =>  null,
             'instagram'         =>  null,
@@ -139,7 +140,7 @@ class DatabaseSeeder extends Seeder
             'nombre'            =>  'user_user2',
             'apellidos'         =>  'user2 user2',
             'fechaNacimiento'   =>  '1998-05-14',
-            'imagenPerfil'      =>  'perfil_defecto',
+            'imagenPerfil'      =>  'perfil_defecto.png',
             'twitter'           =>  null,
             'facebook'          =>  null,
             'instagram'         =>  null,
@@ -165,13 +166,15 @@ class DatabaseSeeder extends Seeder
             'tituloBlog'   =>  'Blog1',
             'idUsuario'    =>  1,
             'blogPublico'  =>  1,
-            'categoria'     =>  'Tecnologia'
+            'categoria'    =>  'Tecnologia',
+            'imagenBlog'   =>  'imagen_blog_defecto.jpg'
         ),
         array(
             'tituloBlog'   =>  'Blog3',
             'idUsuario'    =>  3,
             'blogPublico'  =>  1,
-            'categoria'    =>  'Tecnologia'
+            'categoria'    =>  'Tecnologia',
+            'imagenBlog'   =>  'imagen_blog_defecto.jpg'
         )
     );
 
