@@ -24,18 +24,116 @@ class BlogController extends Controller
 
     public function index_blog($tituloblog) {
         $conexionblog = new Blog;
-        $consexionUsuario = new Usuari;
+        $conexionUsuario = new Usuari;
         $conexionNoticia = new Noticia;
 
         $blog = $conexionblog->blogNombreFirst($tituloblog);
+        $user = $conexionUsuario->soloUnUsuarioIDFirst($blog->idUsuario);
 
         if ($blog == null) {
             return redirect('/');
-        } else {
-            $usuario = $consexionUsuario->soloUnUsuarioID($blog->idUsuario);
+
+        }  elseif (($blog->blogPublico == 1) || (session()->get('rol') == 'admin')) {
+            $usuario = $conexionUsuario->soloUnUsuarioID($blog->idUsuario);
             $noticias = $conexionNoticia->noticiaIDblog($blog->id); // Viene en formato descendiente, asi las noticias nuevas estaran siempre arriba.
 
             return view('indexBlogs', compact('blog', 'usuario', 'noticias'));
+
+        } elseif (($blog->blogPublico == 0) && (session()->get('usuario') != $user->usuario)) {
+            return redirect('/');
+        }
+
+    }
+
+    public function gestionar_blog($tituloblog)
+    {
+        $conexionBlog = new blog;
+        $conexionUsuario = new Usuari;
+
+        $blog = $conexionBlog->blogNombreFirst($tituloblog);
+        $user = $conexionUsuario->soloUnUsuarioIDFirst($blog->idUsuario);
+
+        if (session()->get('usuario') == $user->usuario) {
+            return view('blogs.gestion.gestionBlogs', compact('blog', 'user'));
+        } else {
+            return redirect('/');
+        }
+    }
+
+    public function edita_Blog($tituloblog)
+    {
+        $conexionBlog = new Blog;
+        $conexionUsuario = new Usuari;
+        $blog = $conexionBlog->blogNombreFirst($tituloblog);
+
+        $categorias = Categoria::all();
+        $user = $conexionUsuario->soloUnUsuarioIDFirst($blog->idUsuario);
+
+        if (session()->get('usuario') == $user->usuario) {
+            return view('blogs.gestion.editarBlog', compact('blog', 'categorias'));
+        } else {
+            return redirect('/');
+        }
+    }
+
+    public function put_edita_Blog(Request $request, $tituloblog, $idBlog)
+    {
+        $blog = Blog::findOrFail($idBlog);
+        $allBlogs = Blog::all();
+        $user = Usuari::findOrFail($blog->idUsuario);
+
+        $titleBlog = $request->input('tituloBlog');
+        $longitud_titulo = strlen($titleBlog);
+
+        if (session()->get('usuario') == $user->usuario) {
+
+            foreach ($allBlogs as $b) {
+                if ($b->tituloBlog == $titleBlog) {
+                    if ($b->tituloBlog == $blog->tituloBlog) {
+                        $tituloValido = true;
+                    } else {
+                        $tituloValido = false;
+                    }
+                } else {
+                    $tituloValido = true;
+                }
+            }
+
+            if ($tituloValido == true){
+
+                if ($longitud_titulo < 3) {
+                    return back()->withErrors(['El título es demasiado corto']);
+                } elseif ($longitud_titulo > 20) {
+                    return back()->withErrors(['El título es demasiado largo']);
+                } else {
+
+                    if (($request->input('publico') != 1) && ($request->input('publico') != 0)){
+
+                        return back()->withErrors(['El valor del menú desplegable público es incorrecto']);
+
+                    } else {
+
+                        $this->validate(request(), [
+                            'tituloBlog' => 'required|string',
+                            'categoria' => 'required|string',
+                            'publico'   =>  'required|string'
+                        ]);
+
+                        $blog->tituloBlog = $titleBlog;
+                        $blog->blogPublico = $request->input('publico');
+                        $blog->categoria = $request->input('categoria');
+                        $blog->save();
+
+                        return redirect(url('/'.$blog->tituloBlog.'/gestionarBlog'));
+
+                    }
+                }
+            } else {
+                return back()->withErrors(['El título nuevo ya existe en otro blog. Introduzca otro.']);
+            }
+
+        } else {
+            return redirect('/');
         }
 
     }
@@ -44,9 +142,12 @@ class BlogController extends Controller
     public function post_createBlog(Request $request)
     {
         $blog = new Blog;
+        $conexionUsuario = new Usuari;
         $todosBlogs = $blog->todosBlogs();
 
         $usuario_logueado = session()->get('usuario');
+
+        $user = $conexionUsuario->soloUnUsuarioFirst($usuario_logueado);
 
         $titulo = $request->input('tituloBlog');
         $longitud_titulo = strlen($titulo);
@@ -56,7 +157,7 @@ class BlogController extends Controller
         $nombreImagen = null;
 
         foreach($todosBlogs as $b){ // Para los nombres de usuarios
-            if($b->idUsuario === $usuario_logueado->id){
+            if($b->idUsuario === $user->id){
                 $existeUsuario = true;
                 break;
             }
@@ -102,11 +203,13 @@ class BlogController extends Controller
                             Image::make($iBlog)->resize(250,100)->save(public_path('/imagenes/blog/'.$nombreFichero));
                 
                             $nombreImagen = $nombreFichero;
+                        } else {
+                            $nombreImagen = 'imagen_blog_defecto.jpg';
                         }
             
                         $blog->tituloBlog = $titulo;
                         $blog->imagenBlog = $nombreImagen;
-                        $blog->idUsuario = $usuario_logueado->id;
+                        $blog->idUsuario = $user->id;
                         $blog->blogPublico = $request->input('publico');
                         $blog->categoria = $request->input('categoria');
                         $blog->save();
@@ -285,7 +388,8 @@ class BlogController extends Controller
 
                         $this->validate(request(), [
                             'tituloBlog' => 'required|string',
-                            'categoria' => 'required|string'
+                            'categoria' => 'required|string',
+                            'publico'   =>  'required|string'
                         ]);
 
                         $blog->tituloBlog = $titulo;

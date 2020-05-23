@@ -21,6 +21,22 @@
                 <span><b>Pais de origen:</b> {{$user->pais}}</span>           
             @endif
 
+            @if ($user->twitter != null)
+                <span><b>Twitter:</b> {{$user->twitter}}</span>           
+            @endif
+
+            @if ($user->facebook != null)
+                <span><b>Facebook:</b> {{$user->facebook}}</span>           
+            @endif
+
+            @if ($user->instagram != null)
+                <span><b>Instagram:</b> {{$user->instagram}}</span>           
+            @endif
+
+            @if ($user->paginaWeb != null)
+                <span><b>Página Web:</b> {{$user->paginaWeb}}</span>           
+            @endif
+
             {{-- Para comprobar si eres el propio usuario --}}
             @if (session()->get('usuario') == $user->usuario)
             
