@@ -12,7 +12,7 @@
                     </div>
 
                     <div>
-                        <a class="btn btn-primary" href="{{url('/'.$blog->tituloBlog.'/crearNoticia')}}">Crear noticia</a>
+                        <a class="btn btn-primary" href="{{url('/'.$blog->tituloBlog.'/gestionarBlog')}}">Gestionar blog</a>
                     </div>
                     
                 @else

@@ -19,15 +19,15 @@
         <h3>Redes sociales del autor</h3>
         
         @if ($u->twitter != null)
-            <a href="https://twitter.com/Ismaeloy14" target="_blank" rel="nofollow"><img src="{{asset('imagenes_redes/twitter.svg')}}" alt="Icono de twitter con enlace al perfil del usuario"></a>
+            <a href="https://twitter.com/Ismaeloy14" target="_blank" rel="nofollow"><img src="{{asset('imagenes_redes/twitter.svg')}}" id="iconoTwitter" alt="Icono de twitter con enlace al perfil del usuario"></a>
         @endif
 
         @if ($u->facebook != null)
-            <a href="https://www.facebook.com/prototype.angulo" target="_blank" rel="nofollow"><img src="{{asset('imagenes_redes/facebook.svg')}}" style="border-radius: 20%;background-color: white" alt="Icono de facebook con enlace al perfil del usuario"></a>
+            <a href="https://www.facebook.com/prototype.angulo" target="_blank" rel="nofollow"><img src="{{asset('imagenes_redes/facebook.svg')}}" id="iconoFacebook" alt="Icono de facebook con enlace al perfil del usuario"></a>
         @endif
 
         @if ($u->instagram != null)
-            <a href="https://www.instagram.com/ismaeloy14/?hl=es" target="_blank" rel="nofollow"><img src="{{asset('imagenes_redes/instagram.svg')}}" alt="Icono de instagram con enlace al perfil del usuario"></a>
+            <a href="https://www.instagram.com/ismaeloy14/?hl=es" target="_blank" rel="nofollow"><img src="{{asset('imagenes_redes/instagram.svg')}}" id="iconoInstagram" alt="Icono de instagram con enlace al perfil del usuario"></a>
         @endif
     </div>
     @endforeach

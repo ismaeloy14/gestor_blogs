@@ -81,6 +81,7 @@ Route::post('/crudUsuarios/deleteBlog/{id}', 'BlogController@modal_post_delete_B
 
 // Rutas de blogs
 Route::get('/{tituloBlog}', 'BlogController@index_blog');
+Route::get('/{tituloBlog}/gestionarblog', 'BlogController@gestionar_blog');
 
 // Rutas noticias
 Route::get('/{tituloBlog}/{tituloNoticia}', 'NoticiaController@show_Noticia_Completa' );
