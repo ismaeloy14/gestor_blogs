@@ -51,7 +51,7 @@ class NoticiaController extends Controller
         $conexionUsuario = new Usuari;
 
         $blog = $conexionBlog->blogNombreFirst($tituloBlog);
-        $noticias = $conexionNoticia->noticiaIDblogNormal($blog->id);
+        $noticias = $conexionNoticia->noticiaIDblog($blog->id); // Formato descendiente ( más viejo -> más nuevo)
         $usuario = $conexionUsuario->soloUnUsuarioIDFirst($blog->idUsuario);
 
         if (session()->get('usuario') == $usuario->usuario) {
@@ -73,6 +73,75 @@ class NoticiaController extends Controller
         $noticia = Noticia::findOrFail($idNoticia);
 
         return [$noticia];
+    }
+
+    // Vista de crear noticia
+
+    public function crearNoticia($tituloBlog)
+    {
+        $conexionBlog = new Blog;
+        $conexionUsuario = new Usuari;
+
+        $blog = $conexionBlog->blogNombreFirst($tituloBlog);
+        $usuario = $conexionUsuario->soloUnUsuarioIDFirst($blog->idUsuario);
+
+        if (session()->get('usuario') == $usuario->usuario) {
+
+            return view('blogs.gestion.noticias.createNoticia', compact('blog', 'usuario'));
+
+        } else {
+            return redirect('/');
+        }
+
+    }
+
+    // Crea la noticia
+
+    public function createNoticia(Request $request, $tituloBlog)
+    {
+        $conexionBlog = new Blog;
+        $conexionUsuario = new Usuari;
+
+        $noticia = new Noticia;
+
+        $blog = $conexionBlog->blogNombreFirst($tituloBlog);
+        $usuario = $conexionUsuario->soloUnUsuarioIDFirst($blog->idUsuario);
+
+        if (session()->get('usuario') == $usuario->usuario) {
+
+            $tituloNoticia = $request->input('tituloNoticia');
+            $longitudTituloNoticia = strlen($tituloNoticia);
+
+            if ($longitudTituloNoticia < 3) {
+                return back()->withErrors(['El título de la notícia es demasiado corto']);
+            } elseif ($longitudTituloNoticia > 50) {
+                return back()->withErrors(['El título de la notícia es demasiado largo']);
+            } else {
+
+                if (($request->input('publico') != 1) && ($request->input('publico') != 0)){
+                    return back()->withErrors(['El valor del menú desplegable publico es incorrecto']);
+                } else {
+                    $this->validate(request(), [
+                        'tituloNoticia' => 'required|string',
+                        'cuerpoNoticia' => 'required|string'
+                    ]);
+
+                    $noticia->tituloNoticia = $tituloNoticia;
+                    $noticia->cuerpoNoticia = $request->input('cuerpoNoticia');
+                    $noticia->fechaNoticia = date("Y-m-d");
+                    $noticia->idBlog = $blog->id;
+                    $noticia->noticiaPublica = $request->input('noticiaPublica');
+                    $noticia->save();
+
+                    return redirect( url('/'.$tituloBlog.'/gestionarBlog/gestionarNoticias') );
+
+                }
+
+            }
+
+        } else {
+            return redirect('/');
+        }
     }
 
     // Eliminar noticia

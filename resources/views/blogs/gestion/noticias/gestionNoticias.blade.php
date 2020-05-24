@@ -15,6 +15,7 @@
     <table id="tabla_crud_Noiticias" class="table">
         <thead>
             <tr>
+                <th>Fecha de creación</th>
                 <th>Notícia</th>
                 <th>Acciones</th>
             </tr>
@@ -26,6 +27,7 @@
                 
             <tr>
 
+                <td>{{$noticia->fechaNoticia}}</td>
                 <td>{{$noticia->tituloNoticia}}</td>
                 <td>
                     <a class="btn btn-info" href="{{url('/'.$blog->tituloBlog.'/'.$noticia->tituloNoticia)}}">Ver noticia</a>

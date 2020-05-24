@@ -11,7 +11,9 @@
         </div>
 
         <div id="cuerpoNoticia">
-            <p>{{$noticia->cuerpoNoticia}}</p>
+            <p id="parrafoCuerpoNoticia">
+                {{$noticia->cuerpoNoticia}}
+            </p>
         </div>
     
 
