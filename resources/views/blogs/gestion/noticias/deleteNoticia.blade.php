@@ -1,41 +1,29 @@
-{{-- VENTANA MODAL DELETE --}}
-<div class="modal fade" id="deleteModalBlog" role="dialog" style="overflow-y: scroll;">
+{{-- VENTANA MODAL DELETE NOTICIA --}}
+<div class="modal fade" id="deleteModalNoticia" role="dialog" style="overflow-y: scroll;">
     <div class="modal-dialog">
         <div id="containerUser" class="modal-content">
 
             <div class="modal-header">
-                <h4 class="modal-title">Eliminar blog</h4>
+                <h4 class="modal-title">Eliminar noticia</h4>
                 
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
 
-            <form id="formDeleteBlog" method="post" class="form-horizontal">
+            <form id="formDeleteNoticia" method="post" class="form-horizontal">
                 <div class="modal-body">
                     {{ csrf_field() }}
-                    {{--<input type="text" name="idUsuario" id="deleteidUsuario" hidden>--}}
 
                     <div>
                         <p class="col-sm-12">
-                            ¿Estas seguro de querer eliminar este blog?
+                            ¿Estas seguro de querer eliminar esta noticia?
                         </p>
                     </div>
 
                     <div>
                         <label class="col-sm-12 control-label">
-                            <b>ID:</b> <span id="deleteidBlog"></span>
-                        </label>
-                    </div>
-                    <div>
-                        <label class="col-sm-12 control-label">
-                            <b>Titulo:</b> <span id="deletetituloBlog"></span>
-                        </label>
-                    </div>
-
-                    <div>
-                        <label class="col-sm-12 control-label">
-                            <b>Responsable:</b> <span id="deleteBlogUsuario"></span>
+                            <b>Titulo:</b> <span id="deletetituloNoticia"></span>
                         </label>
                     </div>
 

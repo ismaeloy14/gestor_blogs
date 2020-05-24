@@ -28,18 +28,17 @@ class BlogController extends Controller
         $conexionNoticia = new Noticia;
 
         $blog = $conexionblog->blogNombreFirst($tituloblog);
-        $user = $conexionUsuario->soloUnUsuarioIDFirst($blog->idUsuario);
+        $usuario = $conexionUsuario->soloUnUsuarioIDFirst($blog->idUsuario);
 
         if ($blog == null) {
             return redirect('/');
 
         }  elseif (($blog->blogPublico == 1) || (session()->get('rol') == 'admin')) {
-            $usuario = $conexionUsuario->soloUnUsuarioID($blog->idUsuario);
             $noticias = $conexionNoticia->noticiaIDblog($blog->id); // Viene en formato descendiente, asi las noticias nuevas estaran siempre arriba.
 
             return view('indexBlogs', compact('blog', 'usuario', 'noticias'));
 
-        } elseif (($blog->blogPublico == 0) && (session()->get('usuario') != $user->usuario)) {
+        } elseif (($blog->blogPublico == 0) && (session()->get('usuario') != $usuario->usuario)) {
             return redirect('/');
         }
 
@@ -51,10 +50,10 @@ class BlogController extends Controller
         $conexionUsuario = new Usuari;
 
         $blog = $conexionBlog->blogNombreFirst($tituloblog);
-        $user = $conexionUsuario->soloUnUsuarioIDFirst($blog->idUsuario);
+        $usuario = $conexionUsuario->soloUnUsuarioIDFirst($blog->idUsuario);
 
-        if (session()->get('usuario') == $user->usuario) {
-            return view('blogs.gestion.gestionBlogs', compact('blog', 'user'));
+        if (session()->get('usuario') == $usuario->usuario) {
+            return view('blogs.gestion.gestionBlogs', compact('blog', 'usuario'));
         } else {
             return redirect('/');
         }
@@ -67,10 +66,10 @@ class BlogController extends Controller
         $blog = $conexionBlog->blogNombreFirst($tituloblog);
 
         $categorias = Categoria::all();
-        $user = $conexionUsuario->soloUnUsuarioIDFirst($blog->idUsuario);
+        $usuario = $conexionUsuario->soloUnUsuarioIDFirst($blog->idUsuario);
 
-        if (session()->get('usuario') == $user->usuario) {
-            return view('blogs.gestion.editarBlog', compact('blog', 'categorias'));
+        if (session()->get('usuario') == $usuario->usuario) {
+            return view('blogs.gestion.editarBlog', compact('blog', 'categorias', 'usuario'));
         } else {
             return redirect('/');
         }
@@ -80,12 +79,12 @@ class BlogController extends Controller
     {
         $blog = Blog::findOrFail($idBlog);
         $allBlogs = Blog::all();
-        $user = Usuari::findOrFail($blog->idUsuario);
+        $usuario = Usuari::findOrFail($blog->idUsuario);
 
         $titleBlog = $request->input('tituloBlog');
         $longitud_titulo = strlen($titleBlog);
 
-        if (session()->get('usuario') == $user->usuario) {
+        if (session()->get('usuario') == $usuario->usuario) {
 
             foreach ($allBlogs as $b) {
                 if ($b->tituloBlog == $titleBlog) {
@@ -434,10 +433,7 @@ class BlogController extends Controller
                     $eliminarValoraciones = Valoracion::eliminarValoracionesIDNoticia($noticia->id);
                     $eliminarComentarios = Comentario::eliminarComentariosIDNoticia($noticia->id);
 
-                    if ($eliminarValoraciones == null) {
-                        break;
-                    }
-                    if ($eliminarComentarios == null) {
+                    if (($eliminarValoraciones == null) && ($eliminarComentarios == null)) {
                         break;
                     }
                 }

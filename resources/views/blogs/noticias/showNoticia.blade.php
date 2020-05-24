@@ -6,17 +6,13 @@
 <div id="noticiacompleta">
 
     
-    @foreach ($noticia as $n)
-    
         <div id="tituloNoticia">
-            <h2>{{$n->tituloNoticia}}</h2>
+            <h2>{{$noticia->tituloNoticia}}</h2>
         </div>
 
         <div id="cuerpoNoticia">
-            <p>{{$n->cuerpoNoticia}}</p>
+            <p>{{$noticia->cuerpoNoticia}}</p>
         </div>
-
-    @endforeach
     
 
 </div>

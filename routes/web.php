@@ -89,6 +89,11 @@ Route::put('/{tituloBlog}/gestionarBlog/editarBlog/{id}', 'BlogController@put_ed
 // Rutas noticias
 Route::get('/{tituloBlog}/{tituloNoticia}', 'NoticiaController@show_Noticia_Completa' );
 
+Route::get('/{tituloBlog}/gestionarBlog/gestionarNoticias', 'NoticiaController@index_gestionarNoticias'); // Abre el crud de noticias
+Route::get('/{tituloBlog}/gestionarBlog/gestionarNoticias/showDeleteNoticia', 'NoticiaController@modal_delete_Noticia'); // Ejecuta la ventana modal
+
+Route::post('/{tituloBlog}/gestionarBlog/gestionarNoticias/deleteNoticia/{id}', 'NoticiaController@delete_Noticia'); // Elimina la noticia
+
 
 
 

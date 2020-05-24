@@ -15,17 +15,18 @@ class Noticia extends Model
         return DB::table('noticias')->where('idBlog', $idBlog)->orderBy('fechaNoticia', 'desc')->get();
     }
 
-    public function noticiaIDblogNormal($idBlog){ // Con ordenacion descendiente
+    public function noticiaIDblogNormal($idBlog){ // Con ordenacion ascendiente
         return DB::table('noticias')->where('idBlog', $idBlog)->get();
     }
 
-    public function soloUnaNoticia($idBlog, $tituloNoticia){
-        return DB::table('noticias')->where('idBlog', $idBlog)->where('tituloNoticia', $tituloNoticia)->get();
+    public function getNoticiaPorIDFirst($idNoticia)
+    {
+        return DB::table('noticias')->where('id', $idNoticia)->first();
     }
 
-
-
-
+    public function soloUnaNoticia($idBlog, $tituloNoticia){ // Para el showNoticia
+        return DB::table('noticias')->where('idBlog', $idBlog)->where('tituloNoticia', $tituloNoticia)->first();
+    }
 
 
 }

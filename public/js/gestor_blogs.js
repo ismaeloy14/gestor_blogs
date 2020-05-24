@@ -21,6 +21,11 @@ $('#tabla_crud_Usuarios').ready(function() {
     $('#tabla_crud_Usuarios').DataTable();
 });
 
+$('#tabla_crud_Noiticias').ready(function() {
+    $('#tabla_crud_Noiticias').DataTable();
+});
+
+
 
 function formulario_registro_usuarios(e){ // Registro
     var password = $('#registro_U_password').val();
