@@ -12,7 +12,10 @@
 
         <div id="cuerpoNoticia">
             <p id="parrafoCuerpoNoticia">
-                {{$noticia->cuerpoNoticia}}
+                @php
+                    echo $noticia->cuerpoNoticia;
+                @endphp
+                
             </p>
         </div>
     
