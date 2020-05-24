@@ -20,7 +20,7 @@
         </label>
 
         <label id="labelCuerpoNoticia">
-            <span>Cuerpo de la notícia</span>
+            {{--<span>Cuerpo de la notícia</span>--}}
             <textarea name="cuerpoNoticia" id="cuerpoNoticia" cols="30" rows="10"></textarea>
         </label>
 
@@ -28,7 +28,7 @@
             <span>¿Notícia púbica?</span>
             <select name="noticiaPublica">
                 <option value="1">Sí</option>
-                <option value="0">no</option>
+                <option value="0">No</option>
             </select>
         </label>
 

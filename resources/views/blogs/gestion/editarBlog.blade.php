@@ -17,12 +17,12 @@
         @endif
     
         <label>
-            <span>Titulo: </span>
+            <span><b>Titulo: </b> </span>
             <input type="text" name="tituloBlog" min="3" max="20" value="{{$blog->tituloBlog}}" required>
         </label>
 
         <label>
-            <span>Categoria: </span>
+            <span><b>Categoria: </b> </span>
             <select name="categoria" required>
                 @foreach ($categorias as $categoria)
 
@@ -37,7 +37,7 @@
         </label>
 
         <label>
-            <span>Publico: </span>
+            <span><b>Público: </b> </span>
             <select name="publico" required>
 
                 @if ($blog->blogPublico == 1)

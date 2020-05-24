@@ -15,15 +15,11 @@
                 @php
                     echo $noticia->cuerpoNoticia;
                 @endphp
-                
             </p>
         </div>
     
 
 </div>
-
-
-
 
 
 

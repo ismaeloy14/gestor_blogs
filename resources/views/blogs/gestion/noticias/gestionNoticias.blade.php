@@ -17,6 +17,7 @@
             <tr>
                 <th>Fecha de creación</th>
                 <th>Notícia</th>
+                <th>Publicada</th>
                 <th>Acciones</th>
             </tr>
         </thead>
@@ -29,6 +30,13 @@
 
                 <td>{{$noticia->fechaNoticia}}</td>
                 <td>{{$noticia->tituloNoticia}}</td>
+                <td>
+                    @if ($noticia->noticiaPublica == 1)
+                        Sí
+                    @else
+                        No
+                    @endif
+                </td>
                 <td>
                     <a class="btn btn-info" href="{{url('/'.$blog->tituloBlog.'/'.$noticia->tituloNoticia)}}">Ver noticia</a>
                     <a class="btn btn-primary" href="{{url('/'.$blog->tituloBlog.'/gestionarBlog/gestionarNoticias/'.$noticia->tituloNoticia)}}">Editar noticia</a>
