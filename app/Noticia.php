@@ -24,7 +24,7 @@ class Noticia extends Model
         return DB::table('noticias')->where('id', $idNoticia)->first();
     }
 
-    public function soloUnaNoticia($idBlog, $tituloNoticia){ // Para el showNoticia
+    public function soloUnaNoticia($idBlog, $tituloNoticia){ // Para el showNoticia (me devuelve 1 noticia)
         return DB::table('noticias')->where('idBlog', $idBlog)->where('tituloNoticia', $tituloNoticia)->first();
     }
 

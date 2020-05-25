@@ -77,7 +77,7 @@ class NoticiaController extends Controller
 
     // Vista de crear noticia
 
-    public function crearNoticia($tituloBlog)
+    public function view_create_Noticia($tituloBlog)
     {
         $conexionBlog = new Blog;
         $conexionUsuario = new Usuari;
@@ -88,6 +88,28 @@ class NoticiaController extends Controller
         if (session()->get('usuario') == $usuario->usuario) {
 
             return view('blogs.gestion.noticias.createNoticia', compact('blog', 'usuario'));
+
+        } else {
+            return redirect('/');
+        }
+
+    }
+
+    // Vista de actualizar noticia
+
+    public function view_update_Noticia($tituloBlog, $tituloNoticia)
+    {
+        $conexionBlog = new Blog;
+        $conexionUsuario = new Usuari;
+        $conexionNoticia = new Noticia;
+
+        $blog = $conexionBlog->blogNombreFirst($tituloBlog);
+        $usuario = $conexionUsuario->soloUnUsuarioIDFirst($blog->idUsuario);
+
+        if (session()->get('usuario') == $usuario->usuario) {
+            $noticia = $conexionNoticia->soloUnaNoticia($blog->id, $tituloNoticia);
+
+            return view('blogs.gestion.noticias.updateNoticia', compact('blog', 'usuario', 'noticia'));
 
         } else {
             return redirect('/');
@@ -129,6 +151,58 @@ class NoticiaController extends Controller
                     $noticia->tituloNoticia = $tituloNoticia;
                     $noticia->cuerpoNoticia = $request->input('cuerpoNoticia');
                     $noticia->fechaNoticia = date("Y-m-d");
+                    $noticia->idBlog = $blog->id;
+                    $noticia->noticiaPublica = $request->input('noticiaPublica');
+                    $noticia->save();
+
+                    return redirect( url('/'.$tituloBlog.'/gestionarBlog/gestionarNoticias') );
+
+                }
+
+            }
+
+        } else {
+            return redirect('/');
+        }
+    }
+
+    // Actualiza la noticia
+
+    public function updateNoticia(Request $request, $tituloBlog, $tituloOriginalNoticia)
+    {
+        $conexionBlog = new Blog;
+        $conexionUsuario = new Usuari;
+
+        $conexionNoticia = new Noticia;
+
+        $blog = $conexionBlog->blogNombreFirst($tituloBlog);
+        $usuario = $conexionUsuario->soloUnUsuarioIDFirst($blog->idUsuario);
+
+        if (session()->get('usuario') == $usuario->usuario) {
+            $buscarNoticia = $conexionNoticia->soloUnaNoticia($blog->id, $tituloOriginalNoticia); // Para buscar la noticia
+
+            $noticia = Noticia::findOrFail($buscarNoticia->id); // Hago esto para poder guardar los datos
+
+            $tituloNoticia = $request->input('tituloNoticia'); // Titulo retornado (nuevo)
+            $longitudTituloNoticia = strlen($tituloNoticia);
+
+            if ($longitudTituloNoticia < 3) {
+                return back()->withErrors(['El título de la notícia es demasiado corto']);
+            } elseif ($longitudTituloNoticia > 50) {
+                return back()->withErrors(['El título de la notícia es demasiado largo']);
+            } else {
+
+                if (($request->input('publico') != 1) && ($request->input('publico') != 0)){
+                    return back()->withErrors(['El valor del menú desplegable publico es incorrecto']);
+                } else {
+                    $this->validate(request(), [
+                        'tituloNoticia' => 'required|string',
+                        'cuerpoNoticia' => 'required|string'
+                    ]);
+
+                    $noticia->tituloNoticia = $tituloNoticia;
+                    $noticia->cuerpoNoticia = $request->input('cuerpoNoticia');
+                    //$noticia->fechaNoticia = date("Y-m-d");
                     $noticia->idBlog = $blog->id;
                     $noticia->noticiaPublica = $request->input('noticiaPublica');
                     $noticia->save();

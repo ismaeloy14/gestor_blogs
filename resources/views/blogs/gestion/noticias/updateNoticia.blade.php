@@ -5,9 +5,10 @@
 
 <div id="createUpdateNoticia">
 
-    <h2>Crear noticia</h2>
+    <h2>Actualizar noticia</h2>
 
-    <form action="{{url('/'.$blog->tituloBlog.'/gestionarBlog/gestionarNoticias/createNoticia')}}" method="post" id="formulario_create_noticia">
+    <form action="{{url('/'.$blog->tituloBlog.'/gestionarBlog/gestionarNoticias/'.$noticia->tituloNoticia)}}" method="post" id="formulario_create_noticia">
+        {{method_field('PUT')}}
         {{ csrf_field() }}
 
         @if ($errors->any())
@@ -16,24 +17,30 @@
 
         <label>
             <span>Título de la notícia: </span>
-            <input type="text" name="tituloNoticia" required>
+            <input type="text" name="tituloNoticia" value="{{$noticia->tituloNoticia}}" required>
         </label>
 
         <label id="labelCuerpoNoticia">
             {{--<span>Cuerpo de la notícia</span>--}}
-            <textarea name="cuerpoNoticia" id="cuerpoNoticia" cols="30" rows="10"></textarea>
+            <textarea name="cuerpoNoticia" id="cuerpoNoticia" cols="30" rows="10">{{$noticia->cuerpoNoticia}}</textarea>
         </label>
 
         <label>
             <span>¿Notícia púbica?</span>
             <select name="noticiaPublica">
-                <option value="1">Sí</option>
-                <option value="0">No</option>
+                @if ($noticia->noticiaPublica == 1)
+                    <option value="1" selected>Sí</option>
+                    <option value="0">No</option>
+                @else
+                    <option value="1">Sí</option>
+                    <option value="0" selected>No</option>
+                @endif
+
             </select>
         </label>
 
         <div>
-            <button type="submit" class="btn btn-success">Crear notícia</button>
+            <button type="submit" class="btn btn-success">Guardar cambios</button>
             <a href="{{url('/'.$blog->tituloBlog.'/gestionarBlog/gestionarNoticias')}}" class="btn btn-danger">Cancelar</a>
         </div>
 
