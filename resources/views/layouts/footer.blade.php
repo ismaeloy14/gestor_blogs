@@ -1,4 +1,4 @@
 
-<footer>
-    Esto es el footer
+<footer id="footerPrincipal">
+    Creado por: Ismael Angulo
 </footer>

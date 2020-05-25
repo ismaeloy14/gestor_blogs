@@ -6,6 +6,7 @@ use App\User;
 use App\Categoria;
 use App\Blog;
 use App\Noticia;
+use App\Comentario;
 
 
 class DatabaseSeeder extends Seeder
@@ -24,6 +25,7 @@ class DatabaseSeeder extends Seeder
         self::seedCategorias();
         self::seedBlogs();
         self::seedNoticias();
+        self::seedComentarios();
     }
 
     private function seedRoles(){
@@ -88,6 +90,18 @@ class DatabaseSeeder extends Seeder
             $n->idBlog = $noticias['idBlog'];
             $n->noticiaPublica = $noticias['noticiaPublica'];
             $n->save();
+        }
+    }
+
+    private function seedComentarios() {
+        DB::table('comentarios')->delete();
+        foreach ($this->arrayComentarios as $comentario) {
+            $c = new Comentario;
+            $c->email = $comentario['email'];
+            $c->idUsuario = $comentario['idUsuario'];
+            $c->idNoticia = $comentario['idNoticia'];
+            $c->comentario = $comentario['comentario'];
+            $c->save();
         }
     }
 
@@ -228,6 +242,123 @@ class DatabaseSeeder extends Seeder
             'idBlog'            =>  2,
             'noticiaPublica'    =>  1
         )
+    );
+
+    private $arrayComentarios = array(
+        array( // Comentarios del usuario admin
+            'email'         =>  null,
+            'idUsuario'     =>  1,
+            'idNoticia'     =>  1,
+            'comentario'    =>  'comentario del administrador numero 1'
+        ),
+        array( // Comentarios del usuario admin (noticia no publica)
+            'email'         =>  null,
+            'idUsuario'     =>  1,
+            'idNoticia'     =>  2,
+            'comentario'    =>  'comentario del administrador numero 2'
+        ),
+        array( // Comentarios del usuario admin
+            'email'         =>  null,
+            'idUsuario'     =>  1,
+            'idNoticia'     =>  3,
+            'comentario'    =>  'comentario del administrador numero 3'
+        ),
+        array( // Comentarios del usuario admin
+            'email'         =>  null,
+            'idUsuario'     =>  1,
+            'idNoticia'     =>  4,
+            'comentario'    =>  'comentario del administrador numero 4'
+        ),
+        array( // Comentarios del usuario admin
+            'email'         =>  null,
+            'idUsuario'     =>  1,
+            'idNoticia'     =>  5,
+            'comentario'    =>  'comentario del administrador numero 5'
+        ),
+        array( // Comentarios del usuario admin
+            'email'         =>  null,
+            'idUsuario'     =>  1,
+            'idNoticia'     =>  6,
+            'comentario'    =>  'comentario del administrador numero 6'
+        ),
+        array( // Comentarios del usuario admin
+            'email'         =>  null,
+            'idUsuario'     =>  1,
+            'idNoticia'     =>  7,
+            'comentario'    =>  'comentario del administrador numero 7'
+        ),
+        array( // Comentarios del usuario user1
+            'email'         =>  null,
+            'idUsuario'     =>  2,
+            'idNoticia'     =>  1,
+            'comentario'    =>  'comentario del user1 numero 1'
+        ),
+        array( // Comentarios del usuario user1
+            'email'         =>  null,
+            'idUsuario'     =>  2,
+            'idNoticia'     =>  2,
+            'comentario'    =>  'comentario del user1 numero 2'
+        ),
+        array( // Comentarios del usuario user1
+            'email'         =>  null,
+            'idUsuario'     =>  2,
+            'idNoticia'     =>  3,
+            'comentario'    =>  'comentario del user1 numero 3'
+        ),
+        array( // Comentarios del usuario user1
+            'email'         =>  null,
+            'idUsuario'     =>  2,
+            'idNoticia'     =>  6,
+            'comentario'    =>  'comentario del user1 numero 4'
+        ),
+        array( // Comentarios user sin registrar
+            'email'         =>  'pepe@gmail.com',
+            'idUsuario'     =>  null,
+            'idNoticia'     =>  1,
+            'comentario'    =>  'comentario pepe@gmail.com (usuario sin registrar)'
+        ),
+        array( // Comentarios user sin registrar
+            'email'         =>  'manolo@gmail.com',
+            'idUsuario'     =>  null,
+            'idNoticia'     =>  4,
+            'comentario'    =>  'comentario manolo@gmail.com (usuario sin registrar)'
+        ),
+        array( // Comentarios user sin registrar
+            'email'         =>  'mayonesa.67@gmail.com',
+            'idUsuario'     =>  null,
+            'idNoticia'     =>  3,
+            'comentario'    =>  'comentario mayonesa.67@gmail.com (usuario sin registrar)'
+        ),
+        array( // Comentarios user sin registrar
+            'email'         =>  'ketchup.67@gmail.com',
+            'idUsuario'     =>  null,
+            'idNoticia'     =>  7,
+            'comentario'    =>  'comentario ketchup.67@gmail.com (usuario sin registrar)'
+        ),
+        array( // Comentarios del usuario user2
+            'email'         =>  null,
+            'idUsuario'     =>  3,
+            'idNoticia'     =>  4,
+            'comentario'    =>  'comentario del user2 numero 1'
+        ),
+        array( // Comentarios del usuario user2
+            'email'         =>  null,
+            'idUsuario'     =>  3,
+            'idNoticia'     =>  1,
+            'comentario'    =>  'comentario del user2 numero 2'
+        ),
+        array( // Comentarios del usuario user2
+            'email'         =>  null,
+            'idUsuario'     =>  3,
+            'idNoticia'     =>  7,
+            'comentario'    =>  'comentario del user2 numero 3'
+        ),
+        array( // Comentarios del usuario user2
+            'email'         =>  null,
+            'idUsuario'     =>  3,
+            'idNoticia'     =>  5,
+            'comentario'    =>  'comentario del user2 numero 4'
+        ),
     );
 
 }

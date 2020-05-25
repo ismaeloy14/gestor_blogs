@@ -10,6 +10,6 @@ class Valoracion extends Model
     protected $table = 'valoraciones';
 
     public static function eliminarValoracionesIDNoticia($idNoticia) {
-        DB::table('valoraciones')->where('idNoticia', $idNoticia)->delete();
+        return DB::table('valoraciones')->where('idNoticia', $idNoticia)->delete();
     }
 }

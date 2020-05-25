@@ -1,4 +1,4 @@
-<footer>
+<footer id="footerBlogs">
     <div id="div_footer_blog_autor">
         <span>
             <b>Autor:</b> {{$usuario->usuario}}

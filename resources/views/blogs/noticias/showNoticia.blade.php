@@ -17,6 +17,59 @@
                 @endphp
             </p>
         </div>
+
+
+        <div id="seccionComentarios">
+            <h3>Comentarios</h3>
+
+            <div id="crearComentario">
+                <form action="" method="post" id="formComentario">
+                    {{ csrf_field() }}
+
+                    @if (session()->get('usuario') != null)
+                        <input type="hidden" name="usuario" value="{{session()->get('usuario')}}" required>
+                        <span><b>Nombre de usuario:</b> {{session()->get('usuario')}}</span>
+                        <label>
+                            <span><b>Tu comentario</b></span>
+                            <textarea name="cuerpoComentario" cols="30" rows="5"></textarea>
+                        </label>
+                        <div>
+                            <button type="submit" class="btn btn-primary">Enviar</button>
+                        </div>
+                    @else
+                        <input type="email" name="email" required>
+                        <label>
+                            <textarea name="cuerpoComentario" cols="30" rows="10"></textarea>
+                        </label>
+                        <div>
+                            <button type="submit" class="btn btn-primary">Enviar</button>
+                        </div>
+                    @endif
+
+                </form>
+
+                @foreach ($comentarios as $comentario)
+                    <hr id="separador">
+                    <div class="comentarios">
+                        @if ($comentario->idUsuario == null)
+                            <span><b>Email:</b> {{$comentario->email}}</span>
+                            <p>{{$comentario->comentario}}</p>
+                        @else
+                            @foreach ($allUsuarios as $user)
+                                @if ($user->id == $comentario->idUsuario)
+                                    <span><b>Usuario:</b> {{$user->usuario}}</span>
+                                    <p>{{$comentario->comentario}}</p>
+                                @endif
+                            @endforeach
+                        @endif
+                    </div>
+                @endforeach
+                
+
+            </div>
+
+
+        </div>
     
 
 </div>

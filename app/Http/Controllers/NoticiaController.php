@@ -23,17 +23,35 @@ class NoticiaController extends Controller
         $blog = $conexionBlog->blogNombreFirst($tituloBlog);
 
 
-        $usuario = $conexionUsuario->soloUnUsuarioIDFirst($blog->idUsuario);
+        $usuario = $conexionUsuario->soloUnUsuarioIDFirst($blog->idUsuario); // usuario registrado
         $noticia = $conexionNoticia->soloUnaNoticia($blog->id, $tituloNoticia);
 
-        //return print($usuario->usuario);
+        $comentarios = Comentario::todosComentariosNoticia($noticia->id);
+        $allUsuarios = Usuari::all();
+
+        /*$comentariosUsuarios = null;
+        $arrayUsuariosComentarios = [];
+        $contador = 0;
+
+
+        foreach ($comentarios as $comentario) {
+            $arrayUsuariosComentarios[$contador] = $conexionUsuario->soloUnUsuarioID($comentario->idUsuario);
+            $contador ++;
+        }
+
+        foreach ($arrayUsuariosComentarios[1] as $array) {
+            return print_r($array->cuerpo);
+        }
+
+        return print_r($arrayUsuariosComentarios);*/
+        
 
         if ($noticia->noticiaPublica == 1) {
-            return view('blogs.noticias.showNoticia', compact('blog', 'noticia', 'usuario'));
+            return view('blogs.noticias.showNoticia', compact('blog', 'noticia', 'usuario', 'comentarios', 'allUsuarios'));
         } else {
 
             if ((session()->get('usuario') == $usuario->usuario) || (session()->get('rol') == 'admin')) {
-                return view('blogs.noticias.showNoticia', compact('blog', 'noticia', 'usuario'));
+                return view('blogs.noticias.showNoticia', compact('blog', 'noticia', 'usuario', 'comentarios', 'allUsuarios'));
             } else {
                 return back();
             }

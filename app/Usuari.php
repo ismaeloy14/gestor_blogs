@@ -25,7 +25,7 @@ class Usuari extends Model
         return DB::table('users')->where('usuario', $usuario)->first();
     }
 
-    public function soloUnUsuarioID($id) { // Me devuelve 1 usuario si le paso una ID
+    public function soloUnUsuarioID($id) { // Me devuelve los usuarios si le paso una ID
         return DB::table('users')->where('id', $id)->get();
     }
 

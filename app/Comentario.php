@@ -9,7 +9,12 @@ class Comentario extends Model
 {
     protected $table = 'comentarios';
 
+    public static function todosComentariosNoticia($idNoticia)
+    {
+        return DB::table('comentarios')->where('idNoticia', $idNoticia)->get();
+    }
+
     public static function eliminarComentariosIDNoticia($idNoticia) {
-        DB::table('comentarios')->where('idNoticia', $idNoticia)->delete();
+        return DB::table('comentarios')->where('idNoticia', $idNoticia)->delete();
     }
 }
