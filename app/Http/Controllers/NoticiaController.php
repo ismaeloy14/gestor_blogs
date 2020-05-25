@@ -28,22 +28,6 @@ class NoticiaController extends Controller
 
         $comentarios = Comentario::todosComentariosNoticia($noticia->id);
         $allUsuarios = Usuari::all();
-
-        /*$comentariosUsuarios = null;
-        $arrayUsuariosComentarios = [];
-        $contador = 0;
-
-
-        foreach ($comentarios as $comentario) {
-            $arrayUsuariosComentarios[$contador] = $conexionUsuario->soloUnUsuarioID($comentario->idUsuario);
-            $contador ++;
-        }
-
-        foreach ($arrayUsuariosComentarios[1] as $array) {
-            return print_r($array->cuerpo);
-        }
-
-        return print_r($arrayUsuariosComentarios);*/
         
 
         if ($noticia->noticiaPublica == 1) {
@@ -59,7 +43,6 @@ class NoticiaController extends Controller
         }        
 
     }
-
 
 
     public function index_gestionarNoticias($tituloBlog)
@@ -79,6 +62,56 @@ class NoticiaController extends Controller
         }
 
 
+
+    }
+
+    // Inserta un comentario en la noticia
+
+    public function post_Comentario(Request $request, $tituloblog_retornado, $tituloNoticia_retornada)
+    {
+        $conexionBlog = new Blog;
+        $conexionNoticia = new Noticia;
+        $conexionUsuario = new Usuari;
+
+        $comentario = new Comentario; // Se usara para insertar los datos
+
+        $blog = $conexionBlog->blogNombreFirst($tituloblog_retornado);
+        $noticia = $conexionNoticia->soloUnaNoticia($blog->id, $tituloNoticia_retornada);
+
+        if ($request->input('usuario') == null) { // Significa que es un usuario no registrado
+
+            $this->validate(request(), [
+                'email' => 'required|string',
+                'cuerpoComentario' => 'required|string'
+            ]);
+
+            
+            $comentario->email = $request->input('email');
+            $comentario->idUsuario = null;
+            $comentario->idNoticia = $noticia->id;
+            $comentario->comentario = $request->input('cuerpoComentario');
+            $comentario->save();
+
+            return redirect(url('/'.$blog->tituloBlog.'/'.$noticia->tituloNoticia));
+            
+        } elseif ($request->input('usuario') != null) { // Significa que hay un usuario logueado
+
+            $usuario = $conexionUsuario->soloUnUsuarioFirst($request->input('usuario'));
+
+            $this->validate(request(), [
+                'usuario' => 'required|string',
+                'cuerpoComentario' => 'required|string'
+            ]);
+
+            $comentario->email = null;
+            $comentario->idUsuario = $usuario->id;
+            $comentario->idNoticia = $noticia->id;
+            $comentario->comentario = $request->input('cuerpoComentario');
+            $comentario->save();
+            
+            return redirect(url('/'.$blog->tituloBlog.'/'.$noticia->tituloNoticia));
+
+        }
 
     }
 

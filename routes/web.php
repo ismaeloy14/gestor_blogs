@@ -88,6 +88,8 @@ Route::put('/{tituloBlog}/gestionarBlog/editarBlog/{id}', 'BlogController@put_ed
 
 // Rutas noticias
 Route::get('/{tituloBlog}/{tituloNoticia}', 'NoticiaController@show_Noticia_Completa' );
+Route::post('/{tituloBlog}/{tituloNoticia}/createComentario', 'NoticiaController@post_Comentario'); // Inserta un comentario en la base de datos
+
 
 Route::get('/{tituloBlog}/gestionarBlog/gestionarNoticias', 'NoticiaController@index_gestionarNoticias'); // Abre el crud de noticias
 Route::get('/{tituloBlog}/gestionarBlog/gestionarNoticias/crearNoticia', 'NoticiaController@view_create_Noticia'); // Redirige a la pagina para crear la noticia
@@ -97,6 +99,8 @@ Route::get('/{tituloBlog}/gestionarBlog/gestionarNoticias/showDeleteNoticia', 'N
 Route::post('/{tituloBlog}/gestionarBlog/gestionarNoticias/createNoticia', 'NoticiaController@createNoticia'); // Crea la noticia
 Route::put('/{tituloBlog}/gestionarBlog/gestionarNoticias/{tituloNoticia}', 'NoticiaController@updateNoticia'); // Actualiza la noticia
 Route::post('/{tituloBlog}/gestionarBlog/gestionarNoticias/deleteNoticia/{id}', 'NoticiaController@delete_Noticia'); // Elimina la noticia
+
+
 
 
 

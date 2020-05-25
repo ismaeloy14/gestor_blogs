@@ -23,23 +23,25 @@
             <h3>Comentarios</h3>
 
             <div id="crearComentario">
-                <form action="" method="post" id="formComentario">
+                <form action="{{url('/'.$blog->tituloBlog.'/'.$noticia->tituloNoticia.'/createComentario')}}" method="post" id="formComentario">
                     {{ csrf_field() }}
 
                     @if (session()->get('usuario') != null)
-                        <input type="hidden" name="usuario" value="{{session()->get('usuario')}}" required>
+                        <input type="hidden" name="usuario" value="{{session()->get('usuario')}}" id="usuarioComentario" required>
                         <span><b>Nombre de usuario:</b> {{session()->get('usuario')}}</span>
                         <label>
                             <span><b>Tu comentario</b></span>
-                            <textarea name="cuerpoComentario" cols="30" rows="5"></textarea>
+                            <textarea name="cuerpoComentario" id="cuerpoComentario" cols="30" rows="5"></textarea>
                         </label>
                         <div>
                             <button type="submit" class="btn btn-primary">Enviar</button>
                         </div>
                     @else
-                        <input type="email" name="email" required>
+                        <span><b>Tu email:</b></span>
+                        <input type="email" name="email" id="emailComentario" required>
+                        <span><b>Tu comentario</b></span>
                         <label>
-                            <textarea name="cuerpoComentario" cols="30" rows="10"></textarea>
+                            <textarea name="cuerpoComentario" id="cuerpoComentario" cols="30" rows="10"></textarea>
                         </label>
                         <div>
                             <button type="submit" class="btn btn-primary">Enviar</button>
@@ -48,7 +50,7 @@
 
                 </form>
 
-                @foreach ($comentarios as $comentario)
+                @foreach ($comentarios as $comentario) {{-- Comentarios --}}
                     <hr id="separador">
                     <div class="comentarios">
                         @if ($comentario->idUsuario == null)

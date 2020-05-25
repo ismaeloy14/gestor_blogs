@@ -8,10 +8,9 @@ $(function(){
     $('#formCreateBlog').on('submit', formulario_creacion_blog);
 
     $('#formCambiarContrasena').on('submit', formulario_cambiar_contrasena);
-    
+
 
     /*$('#').on('submit', );
-    $('#').on('submit', );
     $('#').on('submit', );
     $('#').on('submit', );*/
 
