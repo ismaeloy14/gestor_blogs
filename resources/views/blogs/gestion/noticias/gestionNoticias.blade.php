@@ -69,10 +69,13 @@
 
     $('button[name=modalDeleteNoticia]').on('click', function(){
         var idNoticia = this.value;
-        var urlShow = "{{ url('/'.$blog->tituloBlog.'/gestionarBlog/gestionarNoticias/showDeleteNoticia?id=' )}}";
+        //var urlShow = "{{ url('/'.$blog->tituloBlog.'/gestionarBlog/gestionarNoticias/showDeleteNoticia?id=' )}}";
+        
+        var urlShow = "{{ url('/'.$blog->tituloBlog.'/gestionarBlog/gestionarNoticias/deleteNoticia/show?id=' )}}";
         var urlForm = "{{ url('/'.$blog->tituloBlog.'/gestionarBlog/gestionarNoticias/deleteNoticia/' )}}";
         var urlFormCompleta = urlForm+'/'+idNoticia;
 
+        console.log(urlShow+idNoticia);
         $.get(urlShow+idNoticia)
             .done(function(data) {
                 console.log(data);

@@ -7,7 +7,7 @@ use App\Categoria;
 use App\Blog;
 use App\Noticia;
 use App\Comentario;
-
+use App\Valoracion;
 
 class DatabaseSeeder extends Seeder
 {
@@ -26,6 +26,7 @@ class DatabaseSeeder extends Seeder
         self::seedBlogs();
         self::seedNoticias();
         self::seedComentarios();
+        self::seedValoraciones();
     }
 
     private function seedRoles(){
@@ -102,6 +103,16 @@ class DatabaseSeeder extends Seeder
             $c->idNoticia = $comentario['idNoticia'];
             $c->comentario = $comentario['comentario'];
             $c->save();
+        }
+    }
+
+    private function seedValoraciones() {
+        DB::table('valoraciones')->delete();
+        foreach ($this->arrayValoraciones as $valoracion) {
+            $v = new Valoracion;
+            $v->idNoticia = $valoracion['idNoticia'];
+            $v->valoracionesTotales = $valoracion['valoracionesTotales'];
+            $v->save();
         }
     }
 
@@ -358,6 +369,37 @@ class DatabaseSeeder extends Seeder
             'idUsuario'     =>  3,
             'idNoticia'     =>  5,
             'comentario'    =>  'comentario del user2 numero 4'
+        ),
+    );
+
+    private $arrayValoraciones = array(
+        array(
+            'idNoticia'             =>  1,
+            'valoracionesTotales'   =>  5
+        ),
+        array(
+            'idNoticia'             =>  2,
+            'valoracionesTotales'   =>  3
+        ),
+        array(
+            'idNoticia'             =>  3,
+            'valoracionesTotales'   =>  15
+        ),
+        array(
+            'idNoticia'             =>  4,
+            'valoracionesTotales'   =>  67
+        ),
+        array(
+            'idNoticia'             =>  5,
+            'valoracionesTotales'   =>  23
+        ),
+        array(
+            'idNoticia'             =>  6,
+            'valoracionesTotales'   =>  2
+        ),
+        array(
+            'idNoticia'             =>  7,
+            'valoracionesTotales'   =>  90
         ),
     );
 

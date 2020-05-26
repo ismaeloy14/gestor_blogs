@@ -60,22 +60,22 @@
 
                     <label>
                         <span>Twitter</span>
-                        <input type="text" name="twitter">
+                        <input type="text" value="{{$user->twitter}}" name="twitter">
                     </label>
 
                     <label>
                         <span>Facebook</span>
-                        <input type="text" name="facebook">
+                        <input type="text" value="{{$user->facebook}}" name="facebook">
                     </label>
 
                     <label>
                         <span>Instagram</span>
-                        <input type="text" name="instagram">
+                        <input type="text" value="{{$user->instagram}}" name="instagram">
                     </label>
 
                     <label>
                         <span>Página Web</span>
-                        <input type="text" name="paginaWeb">
+                        <input type="text" value="{{$user->paginaWeb}}" name="paginaWeb">
                     </label>
 
                     <div>

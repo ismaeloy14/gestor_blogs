@@ -18,6 +18,11 @@
             </p>
         </div>
 
+        <div id="puntuacionNoticia">
+            <button type="button" name="botonPuntuacionNoticia" class="btn btn-default btn-sm"><i class="fas fa-thumbs-up"></i></button>
+            <span id="puntuacionTotalNoticia"></span>
+        </div>
+
 
         <div id="seccionComentarios">
             <h3>Comentarios</h3>
@@ -77,11 +82,49 @@
 </div>
 
 
-
-
 @include('layouts.blogs.footer')
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+<script>
+
+    $('#puntuacionTotalNoticia').ready(function() {
+        var urlDeConexion = "{{ url('/'.$blog->tituloBlog.'/'.$noticia->tituloNoticia.'/coger') }}";
+
+        $.get(urlDeConexion)
+            .done(function(data) {
+                //console.log(data);
+
+                $('#puntuacionTotalNoticia').text(data);
+
+            }).fail(function(){
+                alert('No se ha podido hacer la conexion para sumar un punto a la noticia');
+            });
+    });
+
+
+    $('button[name=botonPuntuacionNoticia]').on('click', function(){
+
+        var puntuacionNoticia = $('#puntuacionTotalNoticia').text();
+
+        var urlDeConexion = "{{ url('/'.$blog->tituloBlog.'/'.$noticia->tituloNoticia.'/sumar?puntuacionNoticia=') }}";
+
+        var urlCompleta = urlDeConexion+puntuacionNoticia;
+
+        //console.log(urlCompleta);
+
+        $.get(urlCompleta)
+            .done(function(data) {
+                console.log(data);
+
+                $('#puntuacionTotalNoticia').text(data);
+
+            }).fail(function(){
+                alert('No se ha podido hacer la conexion para sumar un punto a la noticia');
+            });
+
+    });
+</script>
 
 @endsection

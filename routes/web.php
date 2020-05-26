@@ -87,14 +87,17 @@ Route::get('/{tituloBlog}/gestionarBlog/editarBlog', 'BlogController@edita_Blog'
 Route::put('/{tituloBlog}/gestionarBlog/editarBlog/{id}', 'BlogController@put_edita_Blog');
 
 // Rutas noticias
-Route::get('/{tituloBlog}/{tituloNoticia}', 'NoticiaController@show_Noticia_Completa' );
+Route::get('/{tituloBlog}/{tituloNoticia}', 'NoticiaController@show_Noticia_Completa' ); // Carga la vista deshow noticia
 Route::post('/{tituloBlog}/{tituloNoticia}/createComentario', 'NoticiaController@post_Comentario'); // Inserta un comentario en la base de datos
+
+Route::get('/{tituloBlog}/{tituloNoticia}/coger', 'NoticiaController@cogerPuntuacionNoticia'); // conexion ajax para aumentar la puntuación de la noticia
+Route::get('/{tituloBlog}/{tituloNoticia}/sumar', 'NoticiaController@sumaPuntuacionNoticia'); // conexion ajax para aumentar la puntuación de la noticia
 
 
 Route::get('/{tituloBlog}/gestionarBlog/gestionarNoticias', 'NoticiaController@index_gestionarNoticias'); // Abre el crud de noticias
 Route::get('/{tituloBlog}/gestionarBlog/gestionarNoticias/crearNoticia', 'NoticiaController@view_create_Noticia'); // Redirige a la pagina para crear la noticia
 Route::get('/{tituloBlog}/gestionarBlog/gestionarNoticias/{tituloNoticia}', 'NoticiaController@view_update_Noticia'); // Redirige a la pagina para editar la noticia
-Route::get('/{tituloBlog}/gestionarBlog/gestionarNoticias/showDeleteNoticia', 'NoticiaController@modal_delete_Noticia'); // Ejecuta la ventana modal de delete
+Route::get('/{tituloBlog}/gestionarBlog/gestionarNoticias/deleteNoticia/show', 'NoticiaController@modal_delete_Noticia'); // Ejecuta la ventana modal de delete
 
 Route::post('/{tituloBlog}/gestionarBlog/gestionarNoticias/createNoticia', 'NoticiaController@createNoticia'); // Crea la noticia
 Route::put('/{tituloBlog}/gestionarBlog/gestionarNoticias/{tituloNoticia}', 'NoticiaController@updateNoticia'); // Actualiza la noticia

@@ -494,11 +494,9 @@ class UsuarioController extends Controller
                     foreach ($noticiasUsuario as $noticia) { // No elimina las noticias
                         $eliminarValoraciones = Valoracion::eliminarValoracionesIDNoticia($noticia->id);
                         $eliminarComentarios = Comentario::eliminarComentariosIDNoticia($noticia->id);
+                        $eliminarUsuarioComentario = Comentario::eliminarComentariosIDUsuario($id_retornado); // Elimina los comentarios del usuario
 
-                        if ($eliminarValoraciones == null) {
-                            break;
-                        }
-                        if ($eliminarComentarios == null) {
+                        if (($eliminarValoraciones == null) && ($eliminarComentarios == null) && ($eliminarUsuarioComentario == null)) {
                             break;
                         }
                     }
@@ -518,11 +516,10 @@ class UsuarioController extends Controller
 
             }
 
-            Notificacion::eliminarNotificacionesIDUsuario($id_retornado); // Como no se obtiene la id de la notificación, llamo a una función creada por mi.
+            //Notificacion::eliminarNotificacionesIDUsuario($id_retornado); // Como no se obtiene la id de la notificación, llamo a una función creada por mi.
 
             Usuari::findOrFail($id_retornado)->delete();            
             
-
             return redirect('/crudUsuarios');
 
         } else {

@@ -18,7 +18,6 @@ class CreateValoracionesTable extends Migration
             $table->unsignedBigInteger('idNoticia');
             $table->foreign('idNoticia')->references('id')->on('noticias');
             $table->integer('valoracionesTotales')->nullable();
-            $table->decimal('mediaValoraciones')->nullable();
             //$table->timestamps();
         });
     }

@@ -15,6 +15,22 @@ class Comentario extends Model
     }
 
     public static function eliminarComentariosIDNoticia($idNoticia) {
-        return DB::table('comentarios')->where('idNoticia', $idNoticia)->delete();
+        $consulta = DB::table('comentarios')->where('idNoticia', $idNoticia)->delete();
+
+        if ($consulta == null) {
+            return null;
+        } else {
+            return $consulta;
+        }
+    }
+
+    public static function eliminarComentariosIDUsuario($idUsuario) {
+        $consulta = DB::table('comentarios')->where('idUsuario', $idUsuario)->delete();
+
+        if ($consulta == null) {
+            return null;
+        } else {
+            return $consulta;
+        }
     }
 }

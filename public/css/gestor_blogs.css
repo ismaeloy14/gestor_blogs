@@ -841,6 +841,25 @@ footer > #div_footer_blog_redes > a img {
     margin: 2% 10%;
 }
 
+#puntuacionNoticia { /* DIV Boton puntuacion noticia */
+    float: left;
+    text-align: right;
+    font-size: 2em;
+    width: 100%;
+}
+
+#puntuacionNoticia > button { /* Boton puntuacion noticia */
+    float: left;
+    text-align: right;
+    font-size: 1em;
+    margin-left: 10%;
+}
+
+#puntuacionNoticia > button > i{ /* Icono puntuacion noticia */
+    float: left;
+    text-align: right;
+}
+
 /* Seccion comentarios */
 
 #seccionComentarios {
@@ -929,7 +948,7 @@ footer > #div_footer_blog_redes > a img {
     width: 100%;
     text-align: left;
 }
-
+/* End comentarios */
 
 /* END show noticias */
 

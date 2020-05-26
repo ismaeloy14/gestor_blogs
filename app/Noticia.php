@@ -28,5 +28,8 @@ class Noticia extends Model
         return DB::table('noticias')->where('idBlog', $idBlog)->where('tituloNoticia', $tituloNoticia)->first();
     }
 
+    public function ultimaNoticiaIDFirst(){
+        return DB::table('noticias')->orderBy('id', 'desc')->first();
+    }
 
 }

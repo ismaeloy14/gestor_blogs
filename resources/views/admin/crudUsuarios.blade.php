@@ -209,6 +209,7 @@
         var urlForm = "{{ url('/crudUsuarios/deleteUsuario/' )}}";
         var urlFormCompleta = urlForm+'/'+idUser;
 
+        console.log(urlShow+idUser);
         $.get(urlShow+idUser)
             .done(function(data) {
                 $('#formDelete').attr("action", urlFormCompleta); // Le añado el atributo action dinámicamente

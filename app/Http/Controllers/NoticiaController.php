@@ -115,10 +115,59 @@ class NoticiaController extends Controller
 
     }
 
+    // Función que coge los datos de la base de datos de la puntuación de la noticia
+
+    public function cogerPuntuacionNoticia($tituloblog_retornado, $tituloNoticia_retornada)
+    {
+        $conexionBlog = new Blog;
+        $conexionNoticia = new Noticia;
+
+        $blog = $conexionBlog->blogNombreFirst($tituloblog_retornado);
+        $noticia = $conexionNoticia->soloUnaNoticia($blog->id, $tituloNoticia_retornada);
+
+        $valoracion = Valoracion::totalValoracionNoticiaFirst($noticia->id);
+
+        return $valoracion->valoracionesTotales;
+
+    }
+
+    // Función que aumenta la puntuación de la noticia
+
+    public function sumaPuntuacionNoticia($tituloblog_retornado, $tituloNoticia_retornada)
+    {
+        $conexionBlog = new Blog;
+        $conexionNoticia = new Noticia;
+
+        
+
+        $puntuacionNoticia = filter_input(INPUT_GET, 'puntuacionNoticia');
+
+        $blog = $conexionBlog->blogNombreFirst($tituloblog_retornado);
+        $noticia = $conexionNoticia->soloUnaNoticia($blog->id, $tituloNoticia_retornada);
+        $valoracion = Valoracion::totalValoracionNoticiaFirst($noticia->id);
+
+        if ($puntuacionNoticia != null) {
+
+            $puntuacionNoticia ++;
+
+            $insertValoracion = Valoracion::findOrFail($valoracion->id);
+
+            $insertValoracion->valoracionesTotales = $puntuacionNoticia;
+            $insertValoracion->save();
+            
+            return $puntuacionNoticia;
+
+        } else {
+            return back();
+        }
+
+    }
+
     // Ventana modal delete
 
     public function modal_delete_Noticia()
     {
+
         $idNoticia = filter_input(INPUT_GET, 'id');
 
         $noticia = Noticia::findOrFail($idNoticia);
@@ -176,6 +225,7 @@ class NoticiaController extends Controller
         $conexionUsuario = new Usuari;
 
         $noticia = new Noticia;
+        $valoracion = new Valoracion;
 
         $blog = $conexionBlog->blogNombreFirst($tituloBlog);
         $usuario = $conexionUsuario->soloUnUsuarioIDFirst($blog->idUsuario);
@@ -205,6 +255,12 @@ class NoticiaController extends Controller
                     $noticia->idBlog = $blog->id;
                     $noticia->noticiaPublica = $request->input('noticiaPublica');
                     $noticia->save();
+
+                    $ultimaNoticia = $noticia->ultimaNoticiaIDFirst(); // Esto es para sacar la ultima noticia
+
+                    $valoracion->idNoticia = $ultimaNoticia->id;
+                    $valoracion->valoracionesTotales = 0;
+                    $valoracion->save();
 
                     return redirect( url('/'.$tituloBlog.'/gestionarBlog/gestionarNoticias') );
 
