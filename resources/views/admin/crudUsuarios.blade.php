@@ -148,7 +148,7 @@
 
         $.get(urlShow+idUser)
             .done(function(data) {
-                console.log(data);
+                //console.log(data);
 
                 $('#formEdit').attr("action", urlFormCompleta); // Le añado el atributo action dinámicamente
                 $('#editidUsuario').val(data[0][0].id);
@@ -209,7 +209,7 @@
         var urlForm = "{{ url('/crudUsuarios/deleteUsuario/' )}}";
         var urlFormCompleta = urlForm+'/'+idUser;
 
-        console.log(urlShow+idUser);
+        //console.log(urlShow+idUser);
         $.get(urlShow+idUser)
             .done(function(data) {
                 $('#formDelete').attr("action", urlFormCompleta); // Le añado el atributo action dinámicamente
@@ -242,7 +242,7 @@
             $('#createrol').empty(); // Lo vacio primero para borrar los hijos anteriores y no se acumulen
                 for (var i = 0; i < data[0].length; i++){
                     options += "<option value='"+data[0][i].rol+"'>"+data[0][i].rol+"</option>";
-                    console.log(data[0][i].rol);
+                    //console.log(data[0][i].rol);
                 }
                 
             $('#createrol').append(options);
@@ -348,7 +348,7 @@
 
         $.get(urlShow+idBlog)
             .done(function(data) {
-                console.log(data);
+                //console.log(data);
 
                 $('#formEditBlog').attr("action", urlFormCompleta); // Le añado el atributo action dinámicamente
 
@@ -371,15 +371,13 @@
                 var publicoNoPublico = data[0].blogPublico;
                 
 
-                if (data[0].blogPublico == publicoNoPublico) {
-
+                if (data[0].blogPublico == 1) {
                     publico += "<option value='"+data[0].blogPublico+"' selected> Sí es público </option>";
+                    publico += "<option value='0'> No es público </option>";
 
-                    if ((publicoNoPublico == 1) && (data[0].blogPublico != publicoNoPublico)) {
-                        publico += "<option value='1'> Sí es público </option>";
-                    } else {
-                        publico += "<option value='0'> No es público </option>";
-                    }
+                } else {
+                    publico += "<option value='"+data[0].blogPublico+"' selected> No es público </option>";
+                    publico += "<option value='1'> Sí es público </option>";
                 }
                     
                     //console.log(publico)
@@ -404,7 +402,7 @@
 
         $.get(urlShow+idBlog)
             .done(function(data) {
-                console.log(data);
+                //console.log(data);
                 $('#formDeleteBlog').attr("action", urlFormCompleta); // Le añado el atributo action dinámicamente
                 $('#deleteidBlog').text(data[1].id);
                 $('#deletetituloBlog').text(data[1].tituloBlog);
