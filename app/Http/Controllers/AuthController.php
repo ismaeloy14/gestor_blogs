@@ -17,11 +17,6 @@ use Image;
 
 class AuthController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index_login()
     {
         if (session()->get('idUsuario') == null) {
@@ -48,9 +43,9 @@ class AuthController extends Controller
         session()->forget('usuario');
         session()->forget('idUsuario');
         session()->forget('imagenPerfil');
+        session()->forget('blog');
         
         return redirect('/');
-        //return back();
     }
 
     public function index_crudUsuarios(){
@@ -94,6 +89,7 @@ class AuthController extends Controller
     public function post_login_usuario(Request $request)
     {
         $usuario = new Usuari;
+        $conexionBlog = new Blog;
 
         $existeUsuario = $usuario->comprobarNombreUsuario($request->input('usuario'));
         $id_usuario = $usuario->soloUnUsuario($request->input('usuario'));
@@ -116,30 +112,35 @@ class AuthController extends Controller
             );
 
             foreach($id_usuario as $id) {
-                $id_usuer = $id->id;
+                $id_user = $id->id;
                 $imagenPerfil = $id->imagenPerfil;
             }
 
 
             if (Auth::attempt($array_datos_usuarios)) {
                 $rolUsuario = $usuario->comprobarRol($request->input('usuario'));
+                $blog = $conexionBlog->blogIDUsuario($id_user);
 
                 session()->put('rol', $rolUsuario);
                 session()->put('usuario', $request->input('usuario'));
-                session()->put('idUsuario', $id_usuer);
+                session()->put('idUsuario', $id_user);
                 session()->put('imagenPerfil', $imagenPerfil);
 
+                if ($blog == null) {
+                    session()->put('blog', null);
+                } else {
+                    session()->put('blog', $blog->tituloBlog);
+                }
 
-                //session(['rol' => $rolUsuario]);
-                //session(['usuario' => $request->input('usuario')]);
+
                 return redirect('/');
 
             } else {
-                return back()->withErrors(['Contraseña incorrectos']);
+                return back()->withErrors(['Nombre de usuario incorrecto o contraseña incorrecta']);
             }
 
         } else {
-            return back()->withErrors(['Este usuario no existe']);
+            return back()->withErrors(['Nombre de usuario incorrecto o contraseña incorrecta']);
         }
 
 

@@ -138,7 +138,7 @@ class BlogController extends Controller
     }
 
 
-    public function post_createBlog(Request $request)
+    public function post_createBlog(Request $request) // El propio usuario crea el blog
     {
         $blog = new Blog;
         $conexionUsuario = new Usuari;
@@ -212,6 +212,8 @@ class BlogController extends Controller
                         $blog->blogPublico = $request->input('publico');
                         $blog->categoria = $request->input('categoria');
                         $blog->save();
+
+                        session()->put('blog', $titulo); // Le añadimos el titulo del blog al session del usuario que lo ha creado
 
                         return redirect('/');
 
