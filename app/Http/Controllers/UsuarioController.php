@@ -476,52 +476,59 @@ class UsuarioController extends Controller
         $conexionBlog = new Blog;
         $conexionNoticia = new Noticia;
 
-        if (session()->get('rol') == 'admin') {
-            $blogUsuario = $conexionBlog->blogIDUsuario($id_retornado);
+            if (session()->get('rol') == 'admin') {
+                if ($id_retornado == 1) {
+                    return back()->withErrors(['No se puede eliminar el administrador']);
+                    
+                } else {
 
-        
-            if ($blogUsuario != null) {
-                
-                $noticiasUsuario = $conexionNoticia->noticiaIDblogNormal($blogUsuario->id);
+                    $blogUsuario = $conexionBlog->blogIDUsuario($id_retornado);
 
-
-
-                //return print_r($noticiasUsuario.' ');
             
-                if ($noticiasUsuario != null) {
+                if ($blogUsuario != null) {
                     
+                    $noticiasUsuario = $conexionNoticia->noticiaIDblogNormal($blogUsuario->id);
 
-                    foreach ($noticiasUsuario as $noticia) { // No elimina las noticias
-                        $eliminarValoraciones = Valoracion::eliminarValoracionesIDNoticia($noticia->id);
-                        $eliminarComentarios = Comentario::eliminarComentariosIDNoticia($noticia->id);
-                        $eliminarUsuarioComentario = Comentario::eliminarComentariosIDUsuario($id_retornado); // Elimina los comentarios del usuario
 
-                        if (($eliminarValoraciones == null) && ($eliminarComentarios == null) && ($eliminarUsuarioComentario == null)) {
-                            break;
+
+                    //return print_r($noticiasUsuario.' ');
+                
+                    if ($noticiasUsuario != null) {
+                        
+
+                        foreach ($noticiasUsuario as $noticia) { // No elimina las noticias
+                            $eliminarValoraciones = Valoracion::eliminarValoracionesIDNoticia($noticia->id);
+                            $eliminarComentarios = Comentario::eliminarComentariosIDNoticia($noticia->id);
+                            $eliminarUsuarioComentario = Comentario::eliminarComentariosIDUsuario($id_retornado); // Elimina los comentarios del usuario
+
+                            if (($eliminarValoraciones == null) && ($eliminarComentarios == null) && ($eliminarUsuarioComentario == null)) {
+                                break;
+                            }
                         }
+            
+                        foreach ($noticiasUsuario as $eliminaNoticia) { // Elimina la noticia
+                            Noticia::findOrFail($eliminaNoticia->id)->delete();
+                        }
+
+                        $noticiasUsuario = null;
+                        
                     }
+
+                    if ($noticiasUsuario == null) {
+                        Blog::findOrFail($blogUsuario->id)->delete();
         
-                    foreach ($noticiasUsuario as $eliminaNoticia) { // Elimina la noticia
-                        Noticia::findOrFail($eliminaNoticia->id)->delete();
                     }
 
-                    $noticiasUsuario = null;
-                    
                 }
 
-                if ($noticiasUsuario == null) {
-                    Blog::findOrFail($blogUsuario->id)->delete();
-    
-                }
+                //Notificacion::eliminarNotificacionesIDUsuario($id_retornado); // Como no se obtiene la id de la notificación, llamo a una función creada por mi.
+
+                Usuari::findOrFail($id_retornado)->delete();            
+                
+                return redirect('/crudUsuarios');
 
             }
-
-            //Notificacion::eliminarNotificacionesIDUsuario($id_retornado); // Como no se obtiene la id de la notificación, llamo a una función creada por mi.
-
-            Usuari::findOrFail($id_retornado)->delete();            
-            
-            return redirect('/crudUsuarios');
-
+                
         } else {
             return back();
         }

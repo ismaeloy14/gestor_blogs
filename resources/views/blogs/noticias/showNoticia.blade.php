@@ -46,7 +46,7 @@
                         <input type="email" name="email" id="emailComentario" required>
                         <span><b>Tu comentario</b></span>
                         <label>
-                            <textarea name="cuerpoComentario" id="cuerpoComentario" cols="30" rows="10"></textarea>
+                            <textarea name="cuerpoComentario" id="cuerpoComentario" cols="30" rows="5"></textarea>
                         </label>
                         <div>
                             <button type="submit" class="btn btn-primary">Enviar</button>
