@@ -171,6 +171,34 @@ class DatabaseSeeder extends Seeder
             'instagram'         =>  null,
             'paginaWeb'         =>  null,
             'rol'               =>  'basico'
+        ),
+        array(
+            'usuario'    =>  'user3',
+            'email'     =>  'user3@gmail.com',
+            'password'          =>  'user3',
+            'nombre'            =>  'user_user3',
+            'apellidos'         =>  'user3 user3',
+            'fechaNacimiento'   =>  '1980-10-01',
+            'imagenPerfil'      =>  'perfil_defecto.png',
+            'twitter'           =>  null,
+            'facebook'          =>  null,
+            'instagram'         =>  null,
+            'paginaWeb'         =>  null,
+            'rol'               =>  'basico'
+        ),
+        array(
+            'usuario'    =>  'user4',
+            'email'     =>  'user4@gmail.com',
+            'password'          =>  'user4',
+            'nombre'            =>  'user_user4',
+            'apellidos'         =>  'user4 user4',
+            'fechaNacimiento'   =>  '2000-01-05',
+            'imagenPerfil'      =>  'perfil_defecto.png',
+            'twitter'           =>  null,
+            'facebook'          =>  null,
+            'instagram'         =>  null,
+            'paginaWeb'         =>  null,
+            'rol'               =>  'basico'
         )
     );
 
@@ -199,6 +227,20 @@ class DatabaseSeeder extends Seeder
             'idUsuario'    =>  3,
             'blogPublico'  =>  1,
             'categoria'    =>  'Tecnologia',
+            'imagenBlog'   =>  'imagen_blog_defecto.jpg'
+        ),
+        array(
+            'tituloBlog'   =>  'User3 Blog',
+            'idUsuario'    =>  4,
+            'blogPublico'  =>  1,
+            'categoria'    =>  'Moda',
+            'imagenBlog'   =>  'imagen_blog_defecto.jpg'
+        ),
+        array(
+            'tituloBlog'   =>  'Blog4',
+            'idUsuario'    =>  5,
+            'blogPublico'  =>  1,
+            'categoria'    =>  'Arqueologia',
             'imagenBlog'   =>  'imagen_blog_defecto.jpg'
         )
     );
@@ -251,6 +293,83 @@ class DatabaseSeeder extends Seeder
             'cuerpoNoticia'     =>  'Noticia de mayo 3.',
             'fechaNoticia'      =>  '2020-05-08',
             'idBlog'            =>  2,
+            'noticiaPublica'    =>  1
+        ),
+        array(// Noticias del usuario user3
+            'tituloNoticia'     =>  'Noticia1',
+            'cuerpoNoticia'     =>  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi fringilla aliquam turpis. Nullam odio erat, sollicitudin eget orci quis, dapibus suscipit libero. Donec volutpat magna quis ipsum porta porta. Sed nulla velit, iaculis at imperdiet sit amet, sagittis a magna. Integer malesuada lectus sed nisl fringilla, ut porta erat eleifend. In blandit malesuada aliquet. Nunc eget mi urna. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam elementum eget sapien mattis sollicitudin. Aliquam commodo nunc sapien, sed feugiat mi elementum et. Praesent laoreet quam urna, at auctor sapien eleifend et. Aenean elit nulla, lacinia nec diam eget, dignissim lacinia urna. Vivamus dolor magna, porta a eleifend sed, iaculis sed neque.',
+            'fechaNoticia'      =>  '2020-02-15',
+            'idBlog'            =>  3,
+            'noticiaPublica'    =>  1
+        ),
+        array(
+            'tituloNoticia'     =>  'Noticia2',
+            'cuerpoNoticia'     =>  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi fringilla aliquam turpis. Nullam odio erat, sollicitudin eget orci quis, dapibus suscipit libero. Donec volutpat magna quis ipsum porta porta. Sed nulla velit, iaculis at imperdiet sit amet, sagittis a magna. Integer malesuada lectus sed nisl fringilla, ut porta erat eleifend. In blandit malesuada aliquet. Nunc eget mi urna. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam elementum eget sapien mattis sollicitudin. Aliquam commodo nunc sapien, sed feugiat mi elementum et. Praesent laoreet quam urna, at auctor sapien eleifend et. Aenean elit nulla, lacinia nec diam eget, dignissim lacinia urna. Vivamus dolor magna, porta a eleifend sed, iaculis sed neque.',
+            'fechaNoticia'      =>  '2020-02-18',
+            'idBlog'            =>  3,
+            'noticiaPublica'    =>  1
+        ),
+        array(
+            'tituloNoticia'     =>  'Noticia3',
+            'cuerpoNoticia'     =>  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi fringilla aliquam turpis. Nullam odio erat, sollicitudin eget orci quis, dapibus suscipit libero. Donec volutpat magna quis ipsum porta porta. Sed nulla velit, iaculis at imperdiet sit amet, sagittis a magna. Integer malesuada lectus sed nisl fringilla, ut porta erat eleifend. In blandit malesuada aliquet. Nunc eget mi urna. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam elementum eget sapien mattis sollicitudin. Aliquam commodo nunc sapien, sed feugiat mi elementum et. Praesent laoreet quam urna, at auctor sapien eleifend et. Aenean elit nulla, lacinia nec diam eget, dignissim lacinia urna. Vivamus dolor magna, porta a eleifend sed, iaculis sed neque.',
+            'fechaNoticia'      =>  '2020-02-20',
+            'idBlog'            =>  3,
+            'noticiaPublica'    =>  1
+        ),
+        array(
+            'tituloNoticia'     =>  'Noticia4',
+            'cuerpoNoticia'     =>  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi fringilla aliquam turpis. Nullam odio erat, sollicitudin eget orci quis, dapibus suscipit libero. Donec volutpat magna quis ipsum porta porta. Sed nulla velit, iaculis at imperdiet sit amet, sagittis a magna. Integer malesuada lectus sed nisl fringilla, ut porta erat eleifend. In blandit malesuada aliquet. Nunc eget mi urna. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam elementum eget sapien mattis sollicitudin. Aliquam commodo nunc sapien, sed feugiat mi elementum et. Praesent laoreet quam urna, at auctor sapien eleifend et. Aenean elit nulla, lacinia nec diam eget, dignissim lacinia urna. Vivamus dolor magna, porta a eleifend sed, iaculis sed neque.',
+            'fechaNoticia'      =>  '2020-02-21',
+            'idBlog'            =>  3,
+            'noticiaPublica'    =>  1
+        ),
+        array(
+            'tituloNoticia'     =>  'Noticia5',
+            'cuerpoNoticia'     =>  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi fringilla aliquam turpis. Nullam odio erat, sollicitudin eget orci quis, dapibus suscipit libero. Donec volutpat magna quis ipsum porta porta. Sed nulla velit, iaculis at imperdiet sit amet, sagittis a magna. Integer malesuada lectus sed nisl fringilla, ut porta erat eleifend. In blandit malesuada aliquet. Nunc eget mi urna. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam elementum eget sapien mattis sollicitudin. Aliquam commodo nunc sapien, sed feugiat mi elementum et. Praesent laoreet quam urna, at auctor sapien eleifend et. Aenean elit nulla, lacinia nec diam eget, dignissim lacinia urna. Vivamus dolor magna, porta a eleifend sed, iaculis sed neque.',
+            'fechaNoticia'      =>  '2020-02-21',
+            'idBlog'            =>  3,
+            'noticiaPublica'    =>  1
+        ),
+        array(
+            'tituloNoticia'     =>  'Noticia6',
+            'cuerpoNoticia'     =>  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi fringilla aliquam turpis. Nullam odio erat, sollicitudin eget orci quis, dapibus suscipit libero. Donec volutpat magna quis ipsum porta porta. Sed nulla velit, iaculis at imperdiet sit amet, sagittis a magna. Integer malesuada lectus sed nisl fringilla, ut porta erat eleifend. In blandit malesuada aliquet. Nunc eget mi urna. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam elementum eget sapien mattis sollicitudin. Aliquam commodo nunc sapien, sed feugiat mi elementum et. Praesent laoreet quam urna, at auctor sapien eleifend et. Aenean elit nulla, lacinia nec diam eget, dignissim lacinia urna. Vivamus dolor magna, porta a eleifend sed, iaculis sed neque.',
+            'fechaNoticia'      =>  '2020-02-25',
+            'idBlog'            =>  3,
+            'noticiaPublica'    =>  1
+        ),
+        array(// Noticias del usuario user4
+            'tituloNoticia'     =>  'Noticia1',
+            'cuerpoNoticia'     =>  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi fringilla aliquam turpis. Nullam odio erat, sollicitudin eget orci quis, dapibus suscipit libero. Donec volutpat magna quis ipsum porta porta. Sed nulla velit, iaculis at imperdiet sit amet, sagittis a magna. Integer malesuada lectus sed nisl fringilla, ut porta erat eleifend. In blandit malesuada aliquet. Nunc eget mi urna. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam elementum eget sapien mattis sollicitudin. Aliquam commodo nunc sapien, sed feugiat mi elementum et. Praesent laoreet quam urna, at auctor sapien eleifend et. Aenean elit nulla, lacinia nec diam eget, dignissim lacinia urna. Vivamus dolor magna, porta a eleifend sed, iaculis sed neque.',
+            'fechaNoticia'      =>  '2020-03-02',
+            'idBlog'            =>  4,
+            'noticiaPublica'    =>  1
+        ),
+        array(
+            'tituloNoticia'     =>  'Noticia2',
+            'cuerpoNoticia'     =>  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi fringilla aliquam turpis. Nullam odio erat, sollicitudin eget orci quis, dapibus suscipit libero. Donec volutpat magna quis ipsum porta porta. Sed nulla velit, iaculis at imperdiet sit amet, sagittis a magna. Integer malesuada lectus sed nisl fringilla, ut porta erat eleifend. In blandit malesuada aliquet. Nunc eget mi urna. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam elementum eget sapien mattis sollicitudin. Aliquam commodo nunc sapien, sed feugiat mi elementum et. Praesent laoreet quam urna, at auctor sapien eleifend et. Aenean elit nulla, lacinia nec diam eget, dignissim lacinia urna. Vivamus dolor magna, porta a eleifend sed, iaculis sed neque.',
+            'fechaNoticia'      =>  '2020-03-03',
+            'idBlog'            =>  4,
+            'noticiaPublica'    =>  1
+        ),
+        array(
+            'tituloNoticia'     =>  'Noticia3',
+            'cuerpoNoticia'     =>  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi fringilla aliquam turpis. Nullam odio erat, sollicitudin eget orci quis, dapibus suscipit libero. Donec volutpat magna quis ipsum porta porta. Sed nulla velit, iaculis at imperdiet sit amet, sagittis a magna. Integer malesuada lectus sed nisl fringilla, ut porta erat eleifend. In blandit malesuada aliquet. Nunc eget mi urna. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam elementum eget sapien mattis sollicitudin. Aliquam commodo nunc sapien, sed feugiat mi elementum et. Praesent laoreet quam urna, at auctor sapien eleifend et. Aenean elit nulla, lacinia nec diam eget, dignissim lacinia urna. Vivamus dolor magna, porta a eleifend sed, iaculis sed neque.',
+            'fechaNoticia'      =>  '2020-03-08',
+            'idBlog'            =>  4,
+            'noticiaPublica'    =>  1
+        ),
+        array(
+            'tituloNoticia'     =>  'Noticia4',
+            'cuerpoNoticia'     =>  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi fringilla aliquam turpis. Nullam odio erat, sollicitudin eget orci quis, dapibus suscipit libero. Donec volutpat magna quis ipsum porta porta. Sed nulla velit, iaculis at imperdiet sit amet, sagittis a magna. Integer malesuada lectus sed nisl fringilla, ut porta erat eleifend. In blandit malesuada aliquet. Nunc eget mi urna. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam elementum eget sapien mattis sollicitudin. Aliquam commodo nunc sapien, sed feugiat mi elementum et. Praesent laoreet quam urna, at auctor sapien eleifend et. Aenean elit nulla, lacinia nec diam eget, dignissim lacinia urna. Vivamus dolor magna, porta a eleifend sed, iaculis sed neque.',
+            'fechaNoticia'      =>  '2020-03-09',
+            'idBlog'            =>  4,
+            'noticiaPublica'    =>  1
+        ),
+        array(
+            'tituloNoticia'     =>  'Noticia5',
+            'cuerpoNoticia'     =>  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi fringilla aliquam turpis. Nullam odio erat, sollicitudin eget orci quis, dapibus suscipit libero. Donec volutpat magna quis ipsum porta porta. Sed nulla velit, iaculis at imperdiet sit amet, sagittis a magna. Integer malesuada lectus sed nisl fringilla, ut porta erat eleifend. In blandit malesuada aliquet. Nunc eget mi urna. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam elementum eget sapien mattis sollicitudin. Aliquam commodo nunc sapien, sed feugiat mi elementum et. Praesent laoreet quam urna, at auctor sapien eleifend et. Aenean elit nulla, lacinia nec diam eget, dignissim lacinia urna. Vivamus dolor magna, porta a eleifend sed, iaculis sed neque.',
+            'fechaNoticia'      =>  '2020-03-12',
+            'idBlog'            =>  4,
             'noticiaPublica'    =>  1
         )
     );
@@ -400,6 +519,50 @@ class DatabaseSeeder extends Seeder
         array(
             'idNoticia'             =>  7,
             'valoracionesTotales'   =>  90
+        ),
+        array(
+            'idNoticia'             =>  8,
+            'valoracionesTotales'   =>  5
+        ),
+        array(
+            'idNoticia'             =>  9,
+            'valoracionesTotales'   =>  90
+        ),
+        array(
+            'idNoticia'             =>  10,
+            'valoracionesTotales'   =>  11
+        ),
+        array(
+            'idNoticia'             =>  11,
+            'valoracionesTotales'   =>  2
+        ),
+        array(
+            'idNoticia'             =>  12,
+            'valoracionesTotales'   =>  8
+        ),
+        array(
+            'idNoticia'             =>  13,
+            'valoracionesTotales'   =>  38
+        ),
+        array(
+            'idNoticia'             =>  14,
+            'valoracionesTotales'   =>  140
+        ),
+        array(
+            'idNoticia'             =>  15,
+            'valoracionesTotales'   =>  24
+        ),
+        array(
+            'idNoticia'             =>  16,
+            'valoracionesTotales'   =>  14
+        ),
+        array(
+            'idNoticia'             =>  17,
+            'valoracionesTotales'   =>  62
+        ),
+        array(
+            'idNoticia'             =>  18,
+            'valoracionesTotales'   =>  81
         ),
     );
 
