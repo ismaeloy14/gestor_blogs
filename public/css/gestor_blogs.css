@@ -168,16 +168,31 @@ a{
     margin-bottom: 2%;
 }
 
-#botonCrearUsuarioBlog {
+#botonCrearUsuarioBlog, #botonCrearCategorias {
     float: left;
     width: 100%;
     margin-bottom: 5%;
+    margin-top: 1%;
 }
 
-#botonCrearUsuarioBlog > button {
+#botonCrearUsuarioBlog > button, #botonCrearUsuarioBlog > a, #botonCrearCategorias > button {
     float: left;
-    margin-left: 2em;
+    margin: 0 0 1em 2em;
 }
+/*
+#botonesGestionarCategorias {
+    float: left;
+    width: 50%;
+    margin-bottom: 5%;
+    margin-top: 1%;
+    text-align: right;
+}
+
+
+#botonesGestionarCategorias > button {
+    margin: 0 2em 1em 0;
+}*/
+
 
 #footerPrincipal {
     text-align: center;

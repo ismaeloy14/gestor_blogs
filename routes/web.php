@@ -50,6 +50,7 @@ Route::post('/editarImagen/{usuario}', 'UsuarioController@put_UsuarioEditAvatar'
 
 // Páginas de admin
 Route::get('/crudUsuarios', 'AuthController@index_crudUsuarios'); // Para ir al crud principal
+Route::get('/crudUsuarios/administrarCategorias', 'CategoriaController@index_administrarCategorias');
 
 // Ventanas modales ADMIN \\
 
@@ -75,6 +76,16 @@ Route::get('/crudUsuarios/showDeleteBlog', 'BlogController@modal_show_delete_Blo
 Route::post('/crudUsuarios/createBlog', 'BlogController@modal_post_create_blog'); // Crear el blog (admin)
 Route::put('/crudUsuarios/editBlog/{id}', 'BlogController@modal_put_edit_Blog'); // Edita un blog (admin)
 Route::post('/crudUsuarios/deleteBlog/{id}', 'BlogController@modal_post_delete_Blog'); // elimina un blog (admin)
+
+/* Crud de categorias */
+
+Route::get('/crudUsuarios/administrarCategorias/showCreateCategoria', 'CategoriaController@modal_createCategorias'); // Modal de crear categoria
+Route::get('/crudUsuarios/administrarCategorias/showEditCategoria', 'CategoriaController@modal_editCategorias'); // Modal de editar categoria
+Route::get('/crudUsuarios/administrarCategorias/showDeleteCategoria', 'CategoriaController@modal_deleteCategorias'); // Modal de eliminar categoria
+
+Route::post('/crudUsuarios/administrarCategorias/createCategoria', 'CategoriaController@modal_post_createCategoria'); // Crea categoria
+Route::put('/crudUsuarios/administrarCategorias/editCategoria/{categoriaOriginal}', 'CategoriaController@modal_put_editCategoria'); // Edita categoria
+Route::post('/crudUsuarios/administrarCategorias/deleteCategoria/{categoriaOriginal}', 'CategoriaController@modal_post_deleteCategoria');// Elimina categoria
 
 // END VENTANAS MODALES ADMIN \\
 

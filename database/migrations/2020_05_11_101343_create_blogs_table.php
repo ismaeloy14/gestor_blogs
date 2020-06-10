@@ -21,8 +21,8 @@ class CreateBlogsTable extends Migration
             $table->unsignedBigInteger('idUsuario');
             $table->foreign('idUsuario')->references('id')->on('users');
             $table->boolean('blogPublico');
-            $table->string('categoria');
-            $table->foreign('categoria')->references('categoria')->on('categorias');
+            $table->string('categoria')->nullable();
+            $table->foreign('categoria')->references('categoria')->on('categorias')->onUpdate('cascade');
             $table->timestamps();
         });
     }

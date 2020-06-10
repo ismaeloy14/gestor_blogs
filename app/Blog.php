@@ -36,4 +36,9 @@ class Blog extends Model
     public function blogID($idBlog) {
         return DB::table('blogs')->where('id', $idBlog)->first();
     }
+
+    public function blogUpdateToNoCategoria($categoriaOriginal) // Actualiza las categorias a son categoria
+    {
+        DB::table('blogs')->where('categoria', $categoriaOriginal)->update(['categoria' => 'Sin categoria']);
+    }
 }

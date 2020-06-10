@@ -14,4 +14,18 @@ class Categoria extends Model
     public function todasCategorias(){
         return DB::table('categorias')->get();
     }
+
+    public function unaCategoria($nombreCategoria)
+    {
+        return DB::table('categorias')->where('categoria', $nombreCategoria)->first();
+    }
+
+    public function updateCategoria($nombreCategoria, $nuevoNombreCategoria) {
+        DB::table('categorias')->where('categoria', $nombreCategoria)->update(['categoria' => $nuevoNombreCategoria]);
+    }
+
+    public function deleteCategoria($nombreCategoria)
+    {
+        DB::table('categorias')->where('categoria', $nombreCategoria)->delete();
+    }
 }

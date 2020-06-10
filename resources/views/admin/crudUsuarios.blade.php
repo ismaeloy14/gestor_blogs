@@ -14,12 +14,7 @@
 @include('admin.deleteBlog')
 
 <div id="div_principal">
-    <h2>Crud Usuarios</h2>
-
-
-    @php
-        $arrayAsocUsuarios = array();
-    @endphp
+    <h2>Administrar Usuarios</h2>
     
     @if ($errors->any())
         <h4>{{$errors->first()}}</h4>
@@ -75,6 +70,7 @@
 <div id="botonCrearUsuarioBlog">
     <button class="btn btn-success" name="modalCrearUsuario" data-toggle="modal">Crear usuario</button>
     <button class="btn btn-primary" name="modalCreateBlog">Crear blog</button>
+    <a class="btn btn-info" href="{{url('/crudUsuarios/administrarCategorias')}}">Administrar categorias</a>
 </div>
 
 
@@ -86,7 +82,7 @@
 
 <script>
     
-    // Para ventanas modales
+    // Para ventanas modales usuarios
 
     $("button[name='modalShowUsuario']").on('click', function() { // Modal ver usuario
         var idUser = this.value;

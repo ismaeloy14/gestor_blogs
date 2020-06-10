@@ -18,7 +18,7 @@
                 @endif
 
             <div>
-                <a class="btn btn-warning" href="{{url('/crudUsuarios')}}">Gestionar Usuarios</a> 
+                <a class="btn btn-warning" href="{{url('/crudUsuarios')}}">Administración</a> 
             </div>
 
             @elseif (session()->get('rol') == 'basico')

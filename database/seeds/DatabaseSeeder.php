@@ -204,6 +204,9 @@ class DatabaseSeeder extends Seeder
 
     private $arrayCategorias = array(
         array(
+            'categoria' =>  'Sin categoria'
+        ),
+        array(
             'categoria' =>  'Tecnologia'
         ),
         array(

@@ -24,6 +24,10 @@ $('#tabla_crud_Noiticias').ready(function() {
     $('#tabla_crud_Noiticias').DataTable();
 });
 
+$('#tabla_Categorias').ready(function() {
+    $('#tabla_Categorias').DataTable();
+});
+
 
 
 function formulario_registro_usuarios(e){ // Registro
