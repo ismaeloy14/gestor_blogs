@@ -22,19 +22,27 @@
             @endif
 
             @if ($user->twitter != null)
-                <span><b>Twitter:</b> <a href="{{$user->twitter}}">{{$user->twitter}}</a> </span>           
+                <span><b>Twitter:</b> 
+                    <a href="{{$user->twitter}}" target="_blank">Tu perfil Twitter</a> 
+                </span>           
             @endif
 
             @if ($user->facebook != null)
-                <span><b>Facebook:</b> <a href="{{$user->facebook}}">{{$user->facebook}}</a></span>           
+                <span>
+                    <b>Facebook:</b> 
+                    <a href="{{$user->facebook}}" target="_blank">Tu perfil Facebook</a>
+                </span>           
             @endif
 
             @if ($user->instagram != null)
-                <span><b>Instagram:</b> <a href="{{$user->instagram}}">{{$user->instagram}}</a></span>           
+                <span>
+                    <b>Instagram:</b> 
+                    <a href="{{$user->instagram}}" target="_blank">Tu perfil Instagram</a>
+                </span>           
             @endif
 
             @if ($user->paginaWeb != null)
-                <span><b>Página Web:</b> <a href="{{$user->paginaWeb}}">{{$user->paginaWeb}}</a></span>           
+                <span><b>Página Web:</b> <a href="{{$user->paginaWeb}}" target="_blank">{{$user->paginaWeb}}</a></span>           
             @endif
 
             {{-- Para comprobar si eres el propio usuario --}}

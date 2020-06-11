@@ -60,17 +60,17 @@
 
                     <label>
                         <span>Twitter</span>
-                        <input type="text" value="{{$user->twitter}}" name="twitter">
+                        <input type="text" value="<?php echo substr($user->twitter, 8, 100000); ?>" name="twitter" id="editarTwitter" placeholder="Ejemplo: www.twitter.com/perfil">
                     </label>
 
                     <label>
                         <span>Facebook</span>
-                        <input type="text" value="{{$user->facebook}}" name="facebook">
+                        <input type="text" value="<?php echo substr($user->facebook, 8, 100000); ?>" name="facebook" id="editarFacebook" placeholder="Ejemplo: www.facebook.com/perfil">
                     </label>
 
                     <label>
                         <span>Instagram</span>
-                        <input type="text" value="{{$user->instagram}}" name="instagram">
+                        <input type="text" value="<?php echo substr($user->instagram, 8, 100000); ?>" name="instagram" id="editarInstagram" placeholder="Ejemplo: www.instagram.com/perfil">
                     </label>
 
                     <label>

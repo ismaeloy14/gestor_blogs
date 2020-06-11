@@ -160,9 +160,9 @@ class UsuarioController extends Controller
                         $usuario->email = $request->input('email');
                         $usuario->fechaNacimiento = $request->input('fecha_nacimiento');
                         $usuario->pais = $request->input('pais');
-                        $usuario->twitter = $request->input('twitter');
-                        $usuario->facebook = $request->input('facebook');
-                        $usuario->instagram = $request->input('instagram');
+                        $usuario->twitter = 'https://'.$request->input('twitter');
+                        $usuario->facebook = 'https://'.$request->input('facebook');
+                        $usuario->instagram = 'https://'.$request->input('instagram');
                         $usuario->paginaWeb = $request->input('paginaWeb');
                         //$usuario->imagenPerfil = $request->input('imagen_usuario');
                         $usuario->imagenPerfil = $nombreImagen;
@@ -185,7 +185,7 @@ class UsuarioController extends Controller
 
     }
 
-    public function put_UsuarioEdit(Request $request, $usuario_retornado) { // Actualizar usuario desde ventana modal
+    public function put_UsuarioEdit(Request $request, $usuario_retornado) { // Actualizar usuario
         $usuario = new Usuari;
 
         //$todosUsuarios = $usuario->todosUsuarios();
@@ -240,9 +240,28 @@ class UsuarioController extends Controller
                     $users->apellidos = $request->input('apellidos');
                     $users->fechaNacimiento = $request->input('fechaNacimiento');
                     $users->pais = $request->input('pais');
-                    $users->twitter = $request->input('twitter');
-                    $users->facebook = $request->input('facebook');
-                    $users->instagram = $request->input('instagram');
+
+                    if ($request->input('twitter') != null) {
+                        $users->twitter = 'https://'.$request->input('twitter');
+                    } else {
+                        $users->twitter = null;
+                    }
+
+                    if ($request->input('facebook') != null) {
+                        $users->facebook = 'https://'.$request->input('facebook');
+                    } else {
+                        $users->facebook = null;
+                    }
+
+                    if ($request->input('instagram') != null) {
+                        $users->instagram = 'https://'.$request->input('instagram');
+                    } else {
+                        $users->instagram = null;
+                    }
+
+                    /*$users->twitter = 'https://'.$request->input('twitter');
+                    $users->facebook = 'https://'.$request->input('facebook');
+                    $users->instagram = 'https://'.$request->input('instagram');*/
                     $users->paginaWeb = $request->input('paginaWeb');
                     //$user->imagenPerfil = $request->input('imagenPerfil');
                     $users->save();
@@ -266,7 +285,7 @@ class UsuarioController extends Controller
 
     }
 
-    public function put_UsuarioEditContrasena(Request $request, $usuario_retornado)
+    public function put_UsuarioEditContrasena(Request $request, $usuario_retornado) // El usuario cambia su contraseña
     {
         $conexionUsuario = new Usuari;
 
@@ -279,15 +298,20 @@ class UsuarioController extends Controller
             $usuario = $conexionUsuario->soloUnUsuarioFirst($usuario_retornado);
             $user = Usuari::findOrFail($usuario->id);
 
-            $this->validate(request(), [
-                'passwordNew'  =>  'required',
-                'passwordNew2'  =>  'required'
-            ]);
+            if ($user->usuario == $passwordNewRequest) {
+                return back()->withErrors(['Contraseña no válida']);
+            } else {
 
-            $user->password = bcrypt($passwordNewRequest);
-            $user->save();
-
-            return redirect('/usuario/'.$user->usuario);
+                $this->validate(request(), [
+                    'passwordNew'  =>  'required',
+                    'passwordNew2'  =>  'required'
+                ]);
+    
+                $user->password = bcrypt($passwordNewRequest);
+                $user->save();
+    
+                return redirect('/usuario/'.$user->usuario);
+            }
 
         } else {
             return back()->withErrors(['Las contraseñas introducidas no coinciden']);
@@ -447,9 +471,25 @@ class UsuarioController extends Controller
                     $users->apellidos = $request->input('apellidos');
                     $users->fechaNacimiento = $request->input('fechaNacimiento');
                     $users->pais = $request->input('pais');
-                    $users->twitter = $request->input('twitter');
-                    $users->facebook = $request->input('facebook');
-                    $users->instagram = $request->input('instagram');
+
+                    if ($request->input('twitter') != null) {
+                        $users->twitter = 'https://'.$request->input('twitter');
+                    } else {
+                        $users->twitter = null;
+                    }
+
+                    if ($request->input('facebook') != null) {
+                        $users->facebook = 'https://'.$request->input('facebook');
+                    } else {
+                        $users->facebook = null;
+                    }
+
+                    if ($request->input('instagram') != null) {
+                        $users->instagram = 'https://'.$request->input('instagram');
+                    } else {
+                        $users->instagram = null;
+                    }
+
                     $users->paginaWeb = $request->input('paginaWeb');
                     $users->save();
 

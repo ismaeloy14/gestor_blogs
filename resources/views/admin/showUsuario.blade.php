@@ -57,25 +57,25 @@
 
                 <div>
                     <label class="col-sm-12 control-label">
-                        <b>Twitter:</b> <a id="twitter"></a>
+                        <b>Twitter:</b> <a id="twitter" target="_blank"></a>
                     </label>
                 </div>
 
                 <div>
                     <label class="col-sm-12 control-label">
-                        <b>Facebook:</b> <a id="facebook"></a>
+                        <b>Facebook:</b> <a id="facebook" target="_blank"></a>
                     </label>
                 </div>
 
                 <div>
                     <label class="col-sm-12 control-label">
-                        <b>Instagram:</b> <a id="instagram"></a>
+                        <b>Instagram:</b> <a id="instagram" target="_blank"></a>
                     </label>
                 </div>
 
                 <div>
                     <label class="col-sm-12 control-label">
-                        <b>Página web:</b> <a id="paginaWeb"></a>
+                        <b>Página web:</b> <a id="paginaWeb" target="_blank"></a>
                     </label>
                 </div>
 

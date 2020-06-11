@@ -184,9 +184,18 @@
                 //console.log(pais);
                 $('#editpais').append(pais);
 
-                $('#edittwitter').val(data[0][0].twitter);
-                $('#editfacebook').val(data[0][0].facebook);
-                $('#editinstagram').val(data[0][0].instagram);
+                if (data[0][0].twitter != null) {
+                    $('#edittwitter').val(data[0][0].twitter.substr(8,10000));
+                }
+
+                if (data[0][0].facebook != null) {
+                    $('#editfacebook').val(data[0][0].facebook.substr(8,10000));
+                }
+
+                if (data[0][0].instagram != null) {
+                    $('#editinstagram').val(data[0][0].instagram.substr(8,10000));
+                }
+                
                 $('#editpaginaWeb').val(data[0][0].paginaWeb);
 
 
@@ -237,7 +246,11 @@
 
             $('#createrol').empty(); // Lo vacio primero para borrar los hijos anteriores y no se acumulen
                 for (var i = 0; i < data[0].length; i++){
-                    options += "<option value='"+data[0][i].rol+"'>"+data[0][i].rol+"</option>";
+                    if (data[0][i].rol == 'basico') {
+                        options += "<option value='"+data[0][i].rol+"' selected>"+data[0][i].rol+"</option>";
+                    } else {
+                        options += "<option value='"+data[0][i].rol+"'>"+data[0][i].rol+"</option>";
+                    }
                     //console.log(data[0][i].rol);
                 }
                 

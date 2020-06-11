@@ -23,7 +23,7 @@
 
             <label>
                 <span>Contraseña</span>
-                <input type="password" name="password" id="registro_U_password" required>
+                <input type="password" name="password" id="registro_U_password" min="6" required>
             </label>
 
             <label>
@@ -63,17 +63,17 @@
 
             <label>
                 <span>Twitter</span>
-                <input type="text" name="twitter">
+                <input type="text" name="twitter" id="registro_U_twitter" placeholder="Ejemplo: www.twitter.com/perfil">
             </label>
 
             <label>
                 <span>Facebook</span>
-                <input type="text" name="facebook">
+                <input type="text" name="facebook" id="registro_U_facebook" placeholder="Ejemplo: www.facebook.com/perfil">
             </label>
 
             <label>
                 <span>Instagram</span>
-                <input type="text" name="instagram">
+                <input type="text" name="instagram" id="registro_U_instagram" placeholder="Ejemplo: www.instagram.com/perfil">
             </label>
 
             <label>

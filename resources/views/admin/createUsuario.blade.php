@@ -64,19 +64,19 @@
 
                     <div class="form-group col-sm-12">
                         <label class="col-sm-12 control-label">
-                            <b class="col-sm-12">Twitter:</b> <input type="text" name="twitter" id="createtwitter" class="col-sm-12">
+                            <b class="col-sm-12">Twitter:</b> <input type="text" name="twitter" id="createtwitter" class="col-sm-12" placeholder="Ejemplo: www.twitter.com/perfil">
                         </label>
                     </div>
 
                     <div class="form-group col-sm-12">
                         <label class="col-sm-12 control-label">
-                            <b class="col-sm-12">Facebook:</b> <input type="text" name="facebook" id="createfacebook" class="col-sm-12">
+                            <b class="col-sm-12">Facebook:</b> <input type="text" name="facebook" id="createfacebook" class="col-sm-12" placeholder="Ejemplo: www.facebook.com/perfil">
                         </label>
                     </div>
 
                     <div class="form-group col-sm-12">
                         <label class="col-sm-12 control-label">
-                            <b class="col-sm-12">Instagram:</b> <input type="text" name="instagram" id="createinstagram" class="col-sm-12">
+                            <b class="col-sm-12">Instagram:</b> <input type="text" name="instagram" id="createinstagram" class="col-sm-12" placeholder="Ejemplo: www.instagram.com/perfil">
                         </label>
                     </div>
 
