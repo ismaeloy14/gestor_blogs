@@ -36,6 +36,9 @@ function formulario_registro_usuarios(e){ // Registro
     var usuario = $('#registro_U_usuario').val();
     var nombre = $('#registro_U_nombre').val();
     var apellidos = $('#registro_U_apellidos').val();
+    //var politica = $('#registro_U_checkboxPolitica').prop();
+    //var pais = $('#select_pais').val();
+    //var pais = document.getElementById('select_pais').value;
 
     // Expresiones regulares
 
@@ -61,8 +64,7 @@ function formulario_registro_usuarios(e){ // Registro
 
     /*console.log(twitter);
     console.log(facebook);
-    console.log(instagram);
-    e.preventDefault();*/
+    console.log(instagram);*/
 
 
     if (password == null) {
@@ -140,6 +142,11 @@ function formulario_registro_usuarios(e){ // Registro
             alert('La URL de tu perfil de instagram esta mal escrita.');
             e.preventDefault();
         }
+    }
+
+    if ($('#registro_U_checkboxPolitica').prop('checked') != true) {
+        alert('Acepta la política de privacidad');
+        e.preventDefault();
     }
 
 }

@@ -39,6 +39,7 @@ class UsuarioController extends Controller
         $usuario = new Usuari;
 
         $user = $usuario->soloUnUsuarioFirst($usuario_retornado);
+        $arrayPaises = ['España', 'Argentina', 'México', 'Colombia'];
 
         $mismoUsuario = false;
 
@@ -50,7 +51,7 @@ class UsuarioController extends Controller
         if($mismoUsuario == true){
 
             //return print_r($user);
-            return view('usuarios.editUsuario', array('user' => $user));
+            return view('usuarios.editUsuario', compact('user', 'arrayPaises'));
 
         } else {
 
@@ -87,7 +88,7 @@ class UsuarioController extends Controller
     }
 
     // Esta funcion es del registro de usuarios
-    public function post_create_usuario(Request $request)
+    public function post_create_usuario(Request $request) // También es para añadir usuarios via admin
     {
         //$usuario = new User;
 
@@ -159,10 +160,41 @@ class UsuarioController extends Controller
                         $usuario->apellidos = $request->input('apellidos');
                         $usuario->email = $request->input('email');
                         $usuario->fechaNacimiento = $request->input('fecha_nacimiento');
-                        $usuario->pais = $request->input('pais');
-                        $usuario->twitter = 'https://'.$request->input('twitter');
+                        //$usuario->pais = $request->input('pais');
+
+                        if ($request->input('pais') != 'España') {
+                            if ($request->input('pais') != 'Argentina') { 
+                                if ($request->input('pais') != 'México') {
+                                    if ($request->input('pais') != 'Colombia') {
+                                        $usuario->pais = null;
+                                    } else {
+                                        $usuario->pais = $request->input('pais');
+                                    }
+                                } else {
+                                    $usuario->pais = $request->input('pais');
+                                }
+                            } else {
+                                $usuario->pais = $request->input('pais');
+                            }
+                        } else {
+                            $usuario->pais = $request->input('pais');
+                        }
+
+                        if ($request->input('twitter') != null) {
+                            $users->twitter = 'https://'.$request->input('twitter');
+                        }
+    
+                        if ($request->input('facebook') != null) {
+                            $users->facebook = 'https://'.$request->input('facebook');
+                        }
+    
+                        if ($request->input('instagram') != null) {
+                            $users->instagram = 'https://'.$request->input('instagram');
+                        }
+
+                        /*$usuario->twitter = 'https://'.$request->input('twitter');
                         $usuario->facebook = 'https://'.$request->input('facebook');
-                        $usuario->instagram = 'https://'.$request->input('instagram');
+                        $usuario->instagram = 'https://'.$request->input('instagram');*/
                         $usuario->paginaWeb = $request->input('paginaWeb');
                         //$usuario->imagenPerfil = $request->input('imagen_usuario');
                         $usuario->imagenPerfil = $nombreImagen;
@@ -239,7 +271,25 @@ class UsuarioController extends Controller
                     $users->nombre = $request->input('nombre');
                     $users->apellidos = $request->input('apellidos');
                     $users->fechaNacimiento = $request->input('fechaNacimiento');
-                    $users->pais = $request->input('pais');
+                    //$users->pais = $request->input('pais');
+
+                    if ($request->input('pais') != 'España') {
+                        if ($request->input('pais') != 'Argentina') { 
+                            if ($request->input('pais') != 'México') {
+                                if ($request->input('pais') != 'Colombia') {
+                                    $users->pais = null;
+                                } else {
+                                    $users->pais = $request->input('pais');
+                                }
+                            } else {
+                                $users->pais = $request->input('pais');
+                            }
+                        } else {
+                            $users->pais = $request->input('pais');
+                        }
+                    } else {
+                        $users->pais = $request->input('pais');
+                    }
 
                     if ($request->input('twitter') != null) {
                         $users->twitter = 'https://'.$request->input('twitter');
@@ -369,7 +419,7 @@ class UsuarioController extends Controller
     public function modal_create_Usuario() { // Modal creación usuario
         $rol = Rol::all();
 
-        $paisesArray = ["España", "Francia", "Alemania", "Portugal"];
+        $paisesArray = ["España", "Argentina", "México", "Colombia"];
 
         return [$rol,$paisesArray];
     }
@@ -470,7 +520,25 @@ class UsuarioController extends Controller
                     $users->nombre = $request->input('nombre');
                     $users->apellidos = $request->input('apellidos');
                     $users->fechaNacimiento = $request->input('fechaNacimiento');
-                    $users->pais = $request->input('pais');
+                    //$users->pais = $request->input('pais');
+
+                    if ($request->input('pais') != 'España') {
+                        if ($request->input('pais') != 'Argentina') { 
+                            if ($request->input('pais') != 'México') {
+                                if ($request->input('pais') != 'Colombia') {
+                                    $users->pais = null;
+                                } else {
+                                    $users->pais = $request->input('pais');
+                                }
+                            } else {
+                                $users->pais = $request->input('pais');
+                            }
+                        } else {
+                            $users->pais = $request->input('pais');
+                        }
+                    } else {
+                        $users->pais = $request->input('pais');
+                    }
 
                     if ($request->input('twitter') != null) {
                         $users->twitter = 'https://'.$request->input('twitter');

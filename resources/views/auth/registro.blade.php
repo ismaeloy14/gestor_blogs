@@ -54,10 +54,11 @@
             <label>
                 <span>País</span>
                 <select name="pais" id="select_pais">
+                    <option value="null" selected>Selecciona un pais</option>
                     <option value="España">España</option>
-                    <option value="Francia">Francia</option>
-                    <option value="Alemania">Alemania</option>
-                    <option value="Portugal">Portugal</option>
+                    <option value="Argentina">Argentina</option>
+                    <option value="México">México</option>
+                    <option value="Colombia">Colombia</option>
                 </select>
             </label>
 
@@ -83,6 +84,12 @@
 
             <label id="label_input_image">
                 <input type="file" name="imagen_usuario" accept="image/*">
+            </label>
+
+            <label id="label_checkbox_politica">
+                <div>
+                    <input type="checkbox" id="registro_U_checkboxPolitica" required><span>Acepto la <a href="{{url('/politicaDePrivacidad')}}" target="_blank">política de privacidad</a></span>
+                </div>
             </label>
 
             <div>

@@ -140,7 +140,7 @@
 
         var options = "";
         var pais = "";
-        var paisesArray = ["España", "Francia", "Alemania", "Portugal"];
+        var paisesArray = ["España", "Argentina", "México", "Colombia"];
 
         $.get(urlShow+idUser)
             .done(function(data) {
@@ -171,12 +171,20 @@
                 }
 
                 $('#editpais').empty(); // Lo vacio primero para borrar los hijos anteriores y no se acumulen
+                var unavez = 0;
                 for (var j = 0; j < 4; j++) {
                     if (data[0][0].pais  == paisesArray[j]) {
                         pais += "<option value='"+paisesArray[j]+"' selected>"+paisesArray[j]+"</option>";
                     } else if (data[0][0].pais == null) {
                         //console.log("ha entrado en null de paises");
-                        pais += "<option value='"+paisesArray[j]+"'>"+paisesArray[j]+"</option>";
+                        if (unavez == 0) {
+                            pais += "<option value='null' selected>Selecciona un pais</option>";
+                            pais += "<option value='"+paisesArray[j]+"'>"+paisesArray[j]+"</option>";
+                            unavez++;
+                        } else {
+                            pais += "<option value='"+paisesArray[j]+"'>"+paisesArray[j]+"</option>";
+                        }
+                        
                     } else {
                         pais += "<option value='"+paisesArray[j]+"'>"+paisesArray[j]+"</option>";
                     }
@@ -258,7 +266,12 @@
 
 
             $('#createpais').empty(); // Lo vacio primero para borrar los hijos anteriores y no se acumulen
+            var unavez = 0;
             for (var j = 0; j < data[1].length; j++) {
+                if (unavez == 0) {
+                    pais += "<option value='null' selected>Selecciona un pais</option>";
+                    unavez++;
+                }
                     pais += "<option value='"+data[1][j]+"'>"+data[1][j]+"</option>";
             }
 

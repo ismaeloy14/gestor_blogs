@@ -48,6 +48,11 @@ class AuthController extends Controller
         return redirect('/');
     }
 
+    public function index_politicaPrivacidad()
+    {
+        return view('leyes.politicaDePrivacidad');
+    }
+
     public function index_crudUsuarios(){
         /*$users = new Usuari;
         $blogs = new Blog;

@@ -50,12 +50,27 @@
                     </label>
                     <label>
                         <span>Pais de origen </span>
-                        <select name="pais" id="select_pais">
-                            <option value="España">España</option>
-                            <option value="Francia">Francia</option>
-                            <option value="Alemania">Alemania</option>
-                            <option value="Portugal">Portugal</option>
-                        </select>
+                        @if ($user->pais == null)
+                            <select name="pais" id="select_pais">
+                                <option value="null" selected>Selecciona un pais</option>
+                                <option value="{{$arrayPaises[0]}}">{{$arrayPaises[0]}}</option>
+                                <option value="{{$arrayPaises[1]}}">{{$arrayPaises[1]}}</option>
+                                <option value="{{$arrayPaises[2]}}">{{$arrayPaises[2]}}</option>
+                                <option value="{{$arrayPaises[3]}}">{{$arrayPaises[3]}}</option>
+                            </select>
+                        @else
+                            <select name="pais" id="select_pais">
+                                <option value="null">Selecciona un pais</option>
+                                @for ($i = 0; $i < count($arrayPaises); $i++)
+                                    @if ($user->pais == $arrayPaises[$i])
+                                        <option value="{{$arrayPaises[$i]}}" selected>{{$arrayPaises[$i]}}</option>
+                                    @else
+                                        <option value="{{$arrayPaises[$i]}}">{{$arrayPaises[$i]}}</option>
+                                    @endif
+                                @endfor
+                            </select>
+                        @endif
+                        
                     </label>
 
                     <label>

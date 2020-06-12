@@ -22,6 +22,7 @@ Route::get('/', 'IndexController@index');
 Route::get('/login', 'AuthController@index_login');
 Route::get('/registro', 'AuthController@index_registro');
 Route::get('/logout', 'AuthController@index_logout');
+Route::get('/politicaDePrivacidad', 'AuthController@index_politicaPrivacidad');
 
 
 
