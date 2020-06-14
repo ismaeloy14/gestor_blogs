@@ -79,7 +79,7 @@
 
             <label>
                 <span>Tu página web</span>
-                <input type="text" name="paginaWeb">
+                <input type="text" name="paginaWeb" id="registro_U_web">
             </label>
 
             <label id="label_input_image">

@@ -90,7 +90,7 @@
 
                     <label>
                         <span>Página Web</span>
-                        <input type="text" value="{{$user->paginaWeb}}" name="paginaWeb">
+                        <input type="text" value="<?php echo substr($user->paginaWeb, 8, 100000); ?>" name="paginaWeb" id="editarWeb">
                     </label>
 
                     <div>

@@ -38,7 +38,7 @@
                     <div class="form-group col-sm-12">
                         <label class="col-sm-12 control-label">
                             <b class="col-sm-12">Público:</b> 
-                                <select name="publico" class="col-sm-12">
+                                <select name="publico" id="publico" class="col-sm-12">
                                     <option value="1">Público</option>
                                     <option value="0">No público</option>
                                 </select>

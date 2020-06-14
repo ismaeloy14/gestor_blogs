@@ -18,7 +18,7 @@
     
         <label>
             <span><b>Titulo: </b> </span>
-            <input type="text" name="tituloBlog" min="3" max="20" value="{{$blog->tituloBlog}}" required>
+            <input type="text" name="tituloBlog" id="titulo_blog" min="3" max="20" value="{{$blog->tituloBlog}}" required>
         </label>
 
         <label>
@@ -38,7 +38,7 @@
 
         <label>
             <span><b>Público: </b> </span>
-            <select name="publico" required>
+            <select name="publico" id="publico" required>
 
                 @if ($blog->blogPublico == 1)
                     <option value="1" selected>Público</option>

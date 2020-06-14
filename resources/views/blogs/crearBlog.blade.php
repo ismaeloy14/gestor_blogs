@@ -32,7 +32,7 @@
             <label>
                 <span>¿Quieres que sea público?</span>
 
-                <select name="publico">
+                <select name="publico" id="publico">
                     <option value="1">Público</option>
                     <option value="0">No público</option>
                 </select>

@@ -203,10 +203,11 @@
                 if (data[0][0].instagram != null) {
                     $('#editinstagram').val(data[0][0].instagram.substr(8,10000));
                 }
+
+                if (data[0][0].paginaWeb != null) {
+                    $('#editpaginaWeb').val(data[0][0].paginaWeb.substr(8,10000));
+                }
                 
-                $('#editpaginaWeb').val(data[0][0].paginaWeb);
-
-
                 $("#editModal").modal('toggle');
                 $('#editModal').modal('show');
 

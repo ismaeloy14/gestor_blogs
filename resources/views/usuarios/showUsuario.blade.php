@@ -42,7 +42,7 @@
             @endif
 
             @if ($user->paginaWeb != null)
-                <span><b>Página Web:</b> <a href="{{$user->paginaWeb}}" target="_blank">{{$user->paginaWeb}}</a></span>           
+                <span><b>Página Web:</b> <a href="{{$user->paginaWeb}}" target="_blank"><?php echo substr($user->paginaWeb, 8, 100000); ?></a></span>           
             @endif
 
             {{-- Para comprobar si eres el propio usuario --}}

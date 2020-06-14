@@ -181,21 +181,25 @@ class UsuarioController extends Controller
                         }
 
                         if ($request->input('twitter') != null) {
-                            $users->twitter = 'https://'.$request->input('twitter');
+                            $usuario->twitter = 'https://'.$request->input('twitter');
                         }
     
                         if ($request->input('facebook') != null) {
-                            $users->facebook = 'https://'.$request->input('facebook');
+                            $usuario->facebook = 'https://'.$request->input('facebook');
                         }
     
                         if ($request->input('instagram') != null) {
-                            $users->instagram = 'https://'.$request->input('instagram');
+                            $usuario->instagram = 'https://'.$request->input('instagram');
                         }
 
                         /*$usuario->twitter = 'https://'.$request->input('twitter');
                         $usuario->facebook = 'https://'.$request->input('facebook');
-                        $usuario->instagram = 'https://'.$request->input('instagram');*/
-                        $usuario->paginaWeb = $request->input('paginaWeb');
+                        $usuario->instagram = 'https://'.$request->input('instagram');
+                        $usuario->paginaWeb = $request->input('paginaWeb');*/
+                        if ($request->input('paginaWeb') != null) {
+                            $usuario->paginaWeb = 'https://'.$request->input('paginaWeb');
+                        }
+
                         //$usuario->imagenPerfil = $request->input('imagen_usuario');
                         $usuario->imagenPerfil = $nombreImagen;
                         $usuario->rol = $rol->rol;
@@ -217,7 +221,7 @@ class UsuarioController extends Controller
 
     }
 
-    public function put_UsuarioEdit(Request $request, $usuario_retornado) { // Actualizar usuario
+    public function put_UsuarioEdit(Request $request, $usuario_retornado) { // El usuario cambia sus datos usuario
         $usuario = new Usuari;
 
         //$todosUsuarios = $usuario->todosUsuarios();
@@ -311,8 +315,13 @@ class UsuarioController extends Controller
 
                     /*$users->twitter = 'https://'.$request->input('twitter');
                     $users->facebook = 'https://'.$request->input('facebook');
-                    $users->instagram = 'https://'.$request->input('instagram');*/
-                    $users->paginaWeb = $request->input('paginaWeb');
+                    $users->instagram = 'https://'.$request->input('instagram');
+                    $users->paginaWeb = $request->input('paginaWeb');*/
+                    if ($request->input('paginaWeb') != null) {
+                        $users->paginaWeb = 'https://'.$request->input('paginaWeb');
+                    } else {
+                        $users->paginaWeb = null;
+                    }
                     //$user->imagenPerfil = $request->input('imagenPerfil');
                     $users->save();
 
@@ -558,7 +567,13 @@ class UsuarioController extends Controller
                         $users->instagram = null;
                     }
 
-                    $users->paginaWeb = $request->input('paginaWeb');
+                    if ($request->input('paginaWeb') != null) {
+                        $users->paginaWeb = 'https://'.$request->input('paginaWeb');
+                    } else {
+                        $users->paginaWeb = null;
+                    }
+
+                    //$users->paginaWeb = $request->input('paginaWeb');
                     $users->save();
 
                     return redirect('/crudUsuarios');

@@ -7,7 +7,7 @@
 
     <h2>Actualizar noticia</h2>
 
-    <form action="{{url('/'.$blog->tituloBlog.'/gestionarBlog/gestionarNoticias/'.$noticia->tituloNoticia)}}" method="post" id="formulario_create_noticia">
+    <form action="{{url('/'.$blog->tituloBlog.'/gestionarBlog/gestionarNoticias/'.$noticia->tituloNoticia)}}" method="post" id="formulario_create_edit_noticia">
         {{method_field('PUT')}}
         {{ csrf_field() }}
 
@@ -17,7 +17,7 @@
 
         <label>
             <span>Título de la notícia: </span>
-            <input type="text" name="tituloNoticia" value="{{$noticia->tituloNoticia}}" required>
+            <input type="text" name="tituloNoticia" id="tituloNoticia" value="{{$noticia->tituloNoticia}}" required>
         </label>
 
         <label id="labelCuerpoNoticia">
@@ -27,7 +27,7 @@
 
         <label>
             <span>¿Notícia púbica?</span>
-            <select name="noticiaPublica">
+            <select name="noticiaPublica" id="noticiaPublica">
                 @if ($noticia->noticiaPublica == 1)
                     <option value="1" selected>Sí</option>
                     <option value="0">No</option>

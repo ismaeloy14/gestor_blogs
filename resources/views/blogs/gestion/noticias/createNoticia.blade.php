@@ -7,7 +7,7 @@
 
     <h2>Crear noticia</h2>
 
-    <form action="{{url('/'.$blog->tituloBlog.'/gestionarBlog/gestionarNoticias/createNoticia')}}" method="post" id="formulario_create_noticia">
+    <form action="{{url('/'.$blog->tituloBlog.'/gestionarBlog/gestionarNoticias/createNoticia')}}" method="post" id="formulario_create_edit_noticia">
         {{ csrf_field() }}
 
         @if ($errors->any())
@@ -16,7 +16,7 @@
 
         <label>
             <span>Título de la notícia: </span>
-            <input type="text" name="tituloNoticia" required>
+            <input type="text" name="tituloNoticia" id="tituloNoticia" required>
         </label>
 
         <label id="labelCuerpoNoticia">
@@ -26,7 +26,7 @@
 
         <label>
             <span>¿Notícia púbica?</span>
-            <select name="noticiaPublica">
+            <select name="noticiaPublica" id="noticiaPublica">
                 <option value="1">Sí</option>
                 <option value="0">No</option>
             </select>
